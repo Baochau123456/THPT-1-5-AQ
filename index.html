@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AQ – School Action Kit & AQ Passport AI | NCKH THPT 2026</title>
+    <title>AQ – School Action Kit & Passport AI | NCKH THPT 2026</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js for Scientific Data Visualization -->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Tone.js for Sound Effects -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-    <!-- Font Awesome & Google Fonts -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         navy: {
-                            950: '#070B14',
-                            900: '#0F172A',
-                            800: '#1E293B',
-                            700: '#334155',
+                            950: '#04070D',
+                            900: '#0B132B',
+                            800: '#1C2541',
+                            700: '#3A506B',
                         },
                         gold: {
-                            400: '#FBBF24',
+                            400: '#FCD34D',
                             500: '#F59E0B',
                             600: '#D97706',
                         }
@@ -41,246 +41,544 @@
     </script>
     <style>
         body {
-            background-color: #0F172A;
+            background-color: #0B132B;
             color: #F8FAFC;
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
         }
-        .passport-pattern {
-            background-image: radial-gradient(rgba(245, 158, 11, 0.08) 1px, transparent 1px);
-            background-size: 20px 20px;
+        .glass-card {
+            background: rgba(28, 37, 65, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
-        .gold-border {
-            border: 1px solid rgba(245, 158, 11, 0.35);
-        }
-        .gold-glow {
-            box-shadow: 0 0 25px rgba(245, 158, 11, 0.15);
+        .glass-header {
+            background: rgba(4, 7, 13, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
         }
         .nav-btn.active {
             background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-            color: #0F172A;
+            color: #04070D;
             font-weight: 700;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
         }
-        .ai-response h4 { color: #FBBF24; font-weight: 700; margin-top: 0.75rem; margin-bottom: 0.25rem; }
-        .ai-response ul { list-style-type: disc; padding-left: 1.25rem; margin-bottom: 0.5rem; }
-        .ai-response strong { color: #FDE68A; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0B132B; }
+        ::-webkit-scrollbar-thumb { background: #3A506B; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #F59E0B; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col passport-pattern selection:bg-gold-500 selection:text-navy-900">
+<body class="min-h-screen flex flex-col selection:bg-gold-500 selection:text-navy-950">
 
-    <!-- HEADER -->
-    <header class="sticky top-0 z-40 bg-navy-950/95 backdrop-blur-md border-b border-gold-500/30 shadow-xl">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3">
-            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-navy-950 shadow-lg shrink-0">
-                            <i class="fa-solid fa-passport text-2xl"></i>
+    <!-- HEADER & NĂNG LƯỢNG AQ -->
+    <header class="sticky top-0 z-50 glass-header">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-gold-500 to-amber-300 flex items-center justify-center text-navy-950 shadow-xl font-bold">
+                        <i class="fa-solid fa-compass-drafting text-2xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-400 font-bold">NCKH THPT 2026</span>
+                            <span class="px-2 py-0.5 text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full font-semibold">AI v3.0 Pro</span>
                         </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="text-[10px] uppercase tracking-[0.2em] text-gold-400 font-bold">Vietnam High School R&D 2026</span>
-                                <span class="px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded">CORE AI v2.6</span>
-                            </div>
-                            <h1 class="text-base sm:text-xl font-extrabold tracking-tight text-white">
-                                AQ – SCHOOL ACTION KIT <span class="text-gold-400 font-serif italic">&amp; Passport AI</span>
-                            </h1>
-                        </div>
+                        <h1 class="text-lg md:text-xl font-extrabold tracking-tight text-white">
+                            AQ – SCHOOL ACTION KIT <span class="text-gold-400 font-serif italic">&amp; Passport AI</span>
+                        </h1>
                     </div>
                 </div>
 
-                <!-- AQ Energy Bar -->
-                <div class="bg-navy-900/90 gold-border rounded-2xl p-2.5 sm:px-4 flex flex-col sm:flex-row items-center gap-3 shadow-inner">
-                    <div class="w-full sm:w-52">
+                <!-- Năng lượng AQ & Thói quen xấu -->
+                <div class="glass-card rounded-2xl p-3 flex flex-col sm:flex-row items-center gap-4">
+                    <div class="w-full sm:w-48">
                         <div class="flex justify-between items-center text-xs mb-1">
-                            <span class="font-semibold text-slate-300 flex items-center gap-1.5">
-                                <i class="fa-solid fa-bolt text-gold-400"></i> Năng lượng AQ
+                            <span class="font-bold text-slate-300 flex items-center gap-1.5">
+                                <i class="fa-solid fa-bolt text-gold-400"></i> Năng Lượng AQ
                             </span>
-                            <span id="energy-text" class="font-extrabold text-gold-400 text-sm">75%</span>
+                            <span id="energy-text" class="font-extrabold text-gold-400">80%</span>
                         </div>
-                        <div class="w-full h-3 bg-navy-950 rounded-full overflow-hidden border border-slate-700 p-0.5">
-                            <div id="energy-bar" class="h-full rounded-full bg-gradient-to-r from-emerald-500 via-gold-400 to-gold-500 transition-all duration-500" style="width: 75%;"></div>
+                        <div class="w-full h-2.5 bg-navy-950 rounded-full overflow-hidden border border-slate-700">
+                            <div id="energy-bar" class="h-full rounded-full bg-gradient-to-r from-emerald-500 via-gold-400 to-amber-500 transition-all duration-500" style="width: 80%;"></div>
                         </div>
                     </div>
                     <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-                        <button onclick="adjustEnergy(5)" class="flex-1 sm:flex-initial px-3 py-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/35 border border-emerald-500/40 text-emerald-300 text-xs font-bold transition flex items-center justify-center gap-1.5 active:scale-95">
-                            <i class="fa-solid fa-circle-check"></i> +5% Vùng Xanh
+                        <button onclick="adjustEnergy(5)" class="px-3 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/35 border border-emerald-500/40 text-emerald-300 text-xs font-bold transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check"></i> +5% Hoàn thành việc
                         </button>
-                        <button onclick="triggerTikTokDetour()" class="flex-1 sm:flex-initial px-3 py-2 rounded-xl bg-rose-600/20 hover:bg-rose-600/35 border border-rose-500/40 text-rose-300 text-xs font-bold transition flex items-center justify-center gap-1.5 active:scale-95">
-                            <i class="fa-brands fa-tiktok"></i> -5% Lướt TikTok
+                        <button onclick="triggerBadHabit()" class="px-3 py-1.5 rounded-xl bg-rose-600/20 hover:bg-rose-600/35 border border-rose-500/40 text-rose-300 text-xs font-bold transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Dính thói quen xấu
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Navigation Tabs -->
-            <nav class="mt-3 flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
-                <button onclick="switchTab('ai-mentor')" id="tab-ai-mentor" class="nav-btn active whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-300 hover:bg-navy-800 transition flex items-center gap-2">
-                    <i class="fa-solid fa-robot"></i> 1. Trợ lý AI Liên Môn & AQ
+            <!-- NAVIGATION TABS (9 Modules) -->
+            <nav class="mt-4 flex items-center gap-2 overflow-x-auto pb-2">
+                <button onclick="switchTab('ai-mentor')" id="tab-ai-mentor" class="nav-btn active whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-robot"></i> 1. AI Đa Môn & C.O.R.E
                 </button>
-                <button onclick="switchTab('passport')" id="tab-passport" class="nav-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-300 hover:bg-navy-800 transition flex items-center gap-2">
-                    <i class="fa-solid fa-book-open"></i> 2. Sổ tay AQ Passport (5 Bước)
+                <button onclick="switchTab('passport')" id="tab-passport" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-passport"></i> 2. Hộ Chiếu AQ Passport
                 </button>
-                <button onclick="switchTab('toolkit')" id="tab-toolkit" class="nav-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-300 hover:bg-navy-800 transition flex items-center gap-2">
-                    <i class="fa-solid fa-chalkboard-user"></i> 3. Bộ Công cụ GV (6 Buổi)
+                <button onclick="switchTab('guide')" id="tab-guide" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-book-bookmark"></i> 3. Hướng Dẫn (HS &amp; GV)
                 </button>
-                <button onclick="switchTab('survey')" id="tab-survey" class="nav-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-300 hover:bg-navy-800 transition flex items-center gap-2">
-                    <i class="fa-solid fa-clipboard-check"></i> 4. Khảo sát AQ01/02/07
+                <button onclick="switchTab('survey')" id="tab-survey" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-clipboard-question"></i> 4. Khảo Sát AQ Mới
                 </button>
-                <button onclick="switchTab('dashboard')" id="tab-dashboard" class="nav-btn whitespace-nowrap px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-300 hover:bg-navy-800 transition flex items-center gap-2">
-                    <i class="fa-solid fa-chart-line"></i> 5. Báo cáo Thực nghiệm
+                <button onclick="switchTab('dashboard')" id="tab-dashboard" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-chart-pie"></i> 5. Báo Cáo Thực Nghiệm
+                </button>
+                <button onclick="switchTab('subjects')" id="tab-subjects" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap"></i> 6. Kho Tri Thức THPT
+                </button>
+                <button onclick="switchTab('habits')" id="tab-habits" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-shield-virus"></i> 7. 10 Thói Quen Xấu
+                </button>
+                <button onclick="switchTab('diary')" id="tab-diary" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
+                    <i class="fa-solid fa-pen-nib"></i> 8. Nhật Ký 7 Ngày
                 </button>
             </nav>
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-6">
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
 
-        <!-- MODULE 1: AI MENTOR -->
-        <section id="section-ai-mentor" class="tab-section space-y-5">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-                <!-- Left Sidebar -->
+        <!-- ==================== MODULE 1: AI MENTOR ĐA MÔN ==================== -->
+        <section id="section-ai-mentor" class="tab-section space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Chọn môn học nhanh -->
                 <div class="lg:col-span-4 space-y-4">
-                    <div class="bg-navy-900/90 gold-border rounded-2xl p-5 shadow-xl">
-                        <div class="flex items-center gap-2.5 mb-3">
-                            <span class="w-8 h-8 rounded-lg bg-gold-500/20 text-gold-400 flex items-center justify-center">
-                                <i class="fa-solid fa-graduation-cap"></i>
-                            </span>
-                            <div>
-                                <h2 class="font-bold text-white text-base">Chọn Tổ Hợp Bộ Môn THPT</h2>
-                                <p class="text-xs text-slate-400">Giải đáp kiến thức + Gỡ rối tâm lý C.O.R.E</p>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 gap-2">
-                            <button onclick="selectSubject('Khối Khoa học Tự nhiên (Toán - Vật lý - Hóa học - Sinh học)', 'Bóc tách giả thiết đề bài, soi lỗi tính toán và rèn luyện độ bền bỉ khi gặp bài vận dụng cao.')" class="subject-btn text-left p-3 rounded-xl bg-navy-800 hover:bg-navy-700 border border-gold-500/50 transition flex items-center justify-between">
-                                <div>
-                                    <div class="text-xs font-bold text-gold-400">KHỐI KHOA HỌC TỰ NHIÊN</div>
-                                    <div class="text-sm font-semibold text-white">Toán • Vật Lý • Hóa Học • Sinh Học</div>
-                                </div>
-                                <i class="fa-solid fa-atom text-gold-400 text-lg"></i>
+                    <div class="glass-card rounded-2xl p-5">
+                        <h2 class="font-bold text-white text-base mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group text-gold-400"></i> Chọn Môn Học &amp; Chủ Đề
+                        </h2>
+                        <div class="space-y-2 text-xs">
+                            <button onclick="selectSubject('Toán Học (Đại số, Hình học, Giải tích)')" class="w-full text-left p-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-slate-200 font-medium transition flex items-center justify-between">
+                                <span><i class="fa-solid fa-calculator text-gold-400 mr-2"></i> Toán Học THPT</span>
+                                <i class="fa-solid fa-chevron-right text-slate-500"></i>
                             </button>
-
-                            <button onclick="selectSubject('Khối Khoa học Xã hội (Ngữ văn - Lịch sử - Địa lý - GDCD)', 'Khoanh vùng mốc sự kiện trọng tâm, xây dựng dàn ý tư duy và viết luận sáng tạo.')" class="subject-btn text-left p-3 rounded-xl bg-navy-800/60 hover:bg-navy-800 border border-slate-700 transition flex items-center justify-between">
-                                <div>
-                                    <div class="text-xs font-bold text-sky-400">KHỐI KHOA HỌC XÃ HỘI</div>
-                                    <div class="text-sm font-semibold text-white">Ngữ Văn • Lịch Sử • Địa Lý • GDCD</div>
-                                </div>
-                                <i class="fa-solid fa-landmark text-sky-400 text-lg"></i>
+                            <button onclick="selectSubject('Vật Lý (Cơ, Nhiệt, Điện, Quang, Hạt nhân)')" class="w-full text-left p-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-slate-200 font-medium transition flex items-center justify-between">
+                                <span><i class="fa-solid fa-atom text-cyan-400 mr-2"></i> Vật Lý THPT</span>
+                                <i class="fa-solid fa-chevron-right text-slate-500"></i>
                             </button>
-
-                            <button onclick="selectSubject('Ngoại ngữ & Công nghệ (Tiếng Anh - Tin học)', 'Phương pháp ghi nhớ từ vựng Spaced Repetition và luyện phản xạ giao tiếp tự tin.')" class="subject-btn text-left p-3 rounded-xl bg-navy-800/60 hover:bg-navy-800 border border-slate-700 transition flex items-center justify-between">
-                                <div>
-                                    <div class="text-xs font-bold text-emerald-400">NGOẠI NGỮ & CÔNG NGHỆ</div>
-                                    <div class="text-sm font-semibold text-white">Tiếng Anh • Tin Học • Công Nghệ</div>
-                                </div>
-                                <i class="fa-solid fa-language text-emerald-400 text-lg"></i>
+                            <button onclick="selectSubject('Hóa Học (Hữu cơ, Vô cơ, Thực nghiệm)')" class="w-full text-left p-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-slate-200 font-medium transition flex items-center justify-between">
+                                <span><i class="fa-solid fa-flask text-emerald-400 mr-2"></i> Hóa Học THPT</span>
+                                <i class="fa-solid fa-chevron-right text-slate-500"></i>
+                            </button>
+                            <button onclick="selectSubject('Ngữ Văn (Đọc hiểu, Nghị luận xã hội & văn học)')" class="w-full text-left p-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-slate-200 font-medium transition flex items-center justify-between">
+                                <span><i class="fa-solid fa-book-open text-rose-400 mr-2"></i> Ngữ Văn THPT</span>
+                                <i class="fa-solid fa-chevron-right text-slate-500"></i>
+                            </button>
+                            <button onclick="selectSubject('Tiếng Anh (Grammar, Reading, Speaking, IELTS)')" class="w-full text-left p-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-slate-200 font-medium transition flex items-center justify-between">
+                                <span><i class="fa-solid fa-language text-purple-400 mr-2"></i> Tiếng Anh THPT</span>
+                                <i class="fa-solid fa-chevron-right text-slate-500"></i>
+                            </button>
+                            <button onclick="selectSubject('Tâm lý & Kỹ năng vượt khó C.O.R.E')" class="w-full text-left p-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-gold-500/40 text-gold-300 font-medium transition flex items-center justify-between">
+                                <span><i class="fa-solid fa-brain text-gold-400 mr-2"></i> Tâm lý &amp; Chỉ số AQ</span>
+                                <i class="fa-solid fa-chevron-right text-slate-500"></i>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Chat -->
-                <div class="lg:col-span-8 bg-navy-900/95 gold-border rounded-2xl flex flex-col h-[620px] shadow-2xl overflow-hidden">
-                    <div class="px-5 py-3.5 bg-navy-950 border-b border-gold-500/20 flex items-center justify-between">
+                <!-- Giao diện Chat AI Thông Minh -->
+                <div class="lg:col-span-8 glass-card rounded-2xl flex flex-col h-[650px] shadow-2xl overflow-hidden">
+                    <div class="px-5 py-3.5 bg-navy-950/80 border-b border-gold-500/20 flex items-center justify-between">
                         <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-gold-500 to-amber-300 text-navy-950 flex items-center justify-center font-bold shadow">
-                                <i class="fa-solid fa-brain"></i>
+                            <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-gold-500 to-amber-400 text-navy-950 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-robot"></i>
                             </div>
                             <div>
                                 <div class="text-sm font-bold text-white flex items-center gap-2">
-                                    Cố vấn AI Liên Môn & Chuyên gia AQ
+                                    Cố Vấn AI Đa Môn &amp; Chuyên Gia AQ
                                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                                 </div>
-                                <div id="current-subject-label" class="text-[11px] text-gold-400 font-medium">
-                                    Đang kích hoạt: Khối Khoa học Tự nhiên
+                                <div id="active-subject-display" class="text-[11px] text-gold-400 font-medium">
+                                    Đang chọn: Toán Học THPT
                                 </div>
                             </div>
                         </div>
-                        <button onclick="clearChat()" class="text-xs text-slate-400 hover:text-white px-2.5 py-1.5 rounded-lg bg-navy-800 transition">
+                        <button onclick="clearChat()" class="text-xs text-slate-400 hover:text-white px-3 py-1.5 rounded-lg bg-navy-800 transition">
                             <i class="fa-solid fa-rotate-right mr-1"></i> Làm mới
                         </button>
                     </div>
 
-                    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4">
+                    <div id="chat-messages" class="flex-1 overflow-y-auto p-5 space-y-4">
                         <div class="flex items-start gap-3">
                             <div class="w-8 h-8 rounded-lg bg-gold-500/20 border border-gold-500/40 text-gold-400 flex items-center justify-center shrink-0 mt-1">
                                 <i class="fa-solid fa-compass"></i>
                             </div>
                             <div class="bg-navy-800/90 border border-slate-700 rounded-2xl rounded-tl-none p-4 text-sm text-slate-200 max-w-[88%] shadow">
-                                <p class="font-bold text-gold-400 mb-1">Chào nhà leo núi (Climber)! Mình là Trợ lý AQ Passport AI.</p>
-                                <p class="leading-relaxed">Hãy nhập câu hỏi bài tập hoặc vấn đề áp lực học tập của bạn, mình sẽ hỗ trợ giải đáp dựa trên mô hình <strong>C.O.R.E</strong>.</p>
+                                <p class="font-bold text-gold-400 mb-1">Chào bạn! Mình là AI Cố Vấn THPT 2026.</p>
+                                <p class="leading-relaxed">Mình hỗ trợ giải đáp <strong>mọi bài tập, lý thuyết</strong> và <strong>gỡ rối tâm lý</strong> qua mô hình 4 trụ cột <strong>C.O.R.E</strong> (Kiểm soát, Trách nhiệm, Khoanh vùng, Bền bỉ). Hãy đặt câu hỏi cho mình nhé!</p>
                             </div>
                         </div>
                     </div>
 
-                    <form id="chat-form" onsubmit="handleChatSubmit(event)" class="p-3.5 bg-navy-950 border-t border-slate-800 flex items-center gap-2.5">
-                        <input type="text" id="chat-input" required placeholder="Nhập bài tập hoặc tâm sự áp lực học tập..." class="flex-1 bg-navy-900 border border-slate-700 focus:border-gold-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none">
-                        <button type="submit" class="px-5 py-3 rounded-xl bg-gradient-to-r from-gold-400 to-gold-600 hover:from-gold-500 hover:to-gold-600 text-navy-950 font-bold text-sm transition shadow-lg flex items-center gap-2 shrink-0">
-                            <span>Gửi AI</span> <i class="fa-solid fa-paper-plane"></i>
+                    <form id="chat-form" onsubmit="handleChatSubmit(event)" class="p-4 bg-navy-950/80 border-t border-slate-800 flex items-center gap-3">
+                        <input type="text" id="chat-input" required placeholder="Nhập bài tập, công thức hoặc tâm sự áp lực học tập..." class="flex-1 bg-navy-900 border border-slate-700 focus:border-gold-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none">
+                        <button type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-gold-400 to-gold-600 hover:from-gold-500 hover:to-gold-600 text-navy-950 font-bold text-sm transition shadow-lg flex items-center gap-2">
+                            <span>Gửi</span> <i class="fa-solid fa-paper-plane"></i>
                         </button>
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- MODULE 2: PASSPORT -->
+        <!-- ==================== MODULE 2: HỘ CHIẾU AQ PASSPORT ==================== -->
         <section id="section-passport" class="tab-section hidden space-y-6">
-            <div class="bg-navy-900/90 gold-border rounded-2xl p-6 text-center space-y-3">
-                <h2 class="text-2xl font-extrabold text-white">Sổ Tay Số AQ Passport & La Bàn C.O.R.E</h2>
-                <p class="text-sm text-slate-300 max-w-2xl mx-auto">Công cụ giúp học sinh THPT nhận diện chỉ số vượt khó, lập kế hoạch hành động 7 ngày và vượt qua tâm lý chán nản.</p>
-                <div class="pt-4 flex justify-center gap-4">
-                    <button onclick="alert('Đã lưu thông tin Hộ chiếu AQ thành công!')" class="px-5 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-navy-950 font-bold text-sm transition shadow-lg">
-                        <i class="fa-solid fa-download mr-1.5"></i> Tải AQ Passport (PDF)
-                    </button>
+            <div class="glass-card rounded-2xl p-6 md:p-8 relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 text-gold-500/5 text-9xl pointer-events-none">
+                    <i class="fa-solid fa-passport"></i>
+                </div>
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8 border-b border-gold-500/30 pb-6">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.3em] text-gold-400 font-bold">Hộ Chiếu Vượt Khó Cá Nhân</span>
+                        <h2 class="text-2xl md:text-3xl font-extrabold text-white mt-1">AQ PASSPORT – SỔ TAY SỐ CLIMBER</h2>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="alert('Đã lưu Hộ chiếu AQ vào thiết bị!')" class="px-4 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-navy-950 font-bold text-xs transition shadow-lg flex items-center gap-2">
+                            <i class="fa-solid fa-download"></i> Tải PDF Passport
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    <div class="md:col-span-5 space-y-4">
+                        <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-3">
+                            <h3 class="font-bold text-gold-400 text-sm"><i class="fa-solid fa-user-pen mr-1"></i> Cập Nhật Hồ Sơ Climber</h3>
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">Họ và tên học sinh</label>
+                                <input type="text" id="pass-name" oninput="updatePassportView()" value="Nguyễn Hoàng Nam" class="w-full bg-navy-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">Lớp &amp; Trường THPT</label>
+                                <input type="text" id="pass-class" oninput="updatePassportView()" value="Lớp 11A2 - THPT Chuyên" class="w-full bg-navy-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-400 block mb-1">Cấp độ Vượt khó (Archetype)</label>
+                                <select id="pass-level" onchange="updatePassportView()" class="w-full bg-navy-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+                                    <option value="Nhà Leo Núi (Climber) - Xuất sắc">Nhà Leo Núi (Climber) - Quyết tâm cao</option>
+                                    <option value="Người Cắm Trại (Camper) - Cần bứt phá">Người Cắm Trại (Camper) - An toàn</option>
+                                    <option value="Người Bứt Phá (Challenger)">Người Bứt Phá (Challenger)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thẻ Hộ chiếu Digital -->
+                    <div class="md:col-span-7 flex justify-center">
+                        <div class="w-full max-w-lg rounded-2xl bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 border-2 border-gold-500/50 p-6 shadow-2xl relative">
+                            <div class="flex justify-between items-start border-b border-gold-500/30 pb-3 mb-4">
+                                <div>
+                                    <div class="text-[9px] tracking-[0.25em] text-gold-400 uppercase font-bold">Socialist Republic of Vietnam</div>
+                                    <div class="text-base font-serif font-bold text-white">VIETNAM HIGH SCHOOL R&amp;D 2026</div>
+                                </div>
+                                <i class="fa-solid fa-shield-halved text-2xl text-gold-400"></i>
+                            </div>
+                            <div class="flex gap-4 items-center">
+                                <div class="w-20 h-24 rounded-xl bg-navy-950 border border-gold-500/40 flex flex-col items-center justify-center text-gold-400 shrink-0">
+                                    <i class="fa-solid fa-user-astronaut text-3xl mb-1"></i>
+                                    <span class="text-[8px] uppercase tracking-wider font-bold">CLIMBER ID</span>
+                                </div>
+                                <div class="space-y-1.5 text-xs flex-1">
+                                    <div>
+                                        <span class="text-slate-400 text-[9px] uppercase block">Họ và Tên</span>
+                                        <span id="card-name-view" class="text-sm font-extrabold text-white uppercase">NGUYỄN HOÀNG NAM</span>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div>
+                                            <span class="text-slate-400 text-[9px] uppercase block">Đơn vị</span>
+                                            <span id="card-class-view" class="font-bold text-gold-300">11A2 - THPT Chuyên</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-slate-400 text-[9px] uppercase block">Mã Hộ Chiếu</span>
+                                            <span class="font-mono font-bold text-emerald-400">VN-AQ-2026</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="text-slate-400 text-[9px] uppercase block">Trạng thái</span>
+                                        <span id="card-level-view" class="font-bold text-amber-300">Nhà Leo Núi (Climber) - Xuất sắc</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-2.5 rounded-lg bg-gold-500/10 border border-gold-500/30 text-[11px] text-gold-200 italic text-center">
+                                "Cam kết kiểm soát nghịch cảnh, chịu trách nhiệm 100% và bền bỉ chinh phục mọi kỳ thi THPT!"
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- MODULE 3: TOOLKIT GV -->
-        <section id="section-toolkit" class="tab-section hidden space-y-6">
-            <div class="bg-navy-900/90 gold-border rounded-2xl p-6">
-                <h2 class="text-2xl font-extrabold text-white mb-2">Bộ Công Cụ Giáo Viên (6 Buổi Sinh Hoạt / Kỹ Năng Sống)</h2>
-                <p class="text-sm text-slate-300 mb-6">Giáo viên chủ nhiệm và cố vấn tâm lý có thể sử dụng giáo án chuẩn hóa để tổ chức các buổi workshop tăng cường AQ cho học sinh THPT.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="p-4 rounded-xl bg-navy-800 border border-slate-700">
-                        <span class="text-xs font-bold text-gold-400 uppercase">Buổi 1 &amp; 2</span>
-                        <h3 class="font-bold text-white text-base mt-1">Giải mã áp lực điểm số</h3>
-                        <p class="text-xs text-slate-400 mt-2">Nhận diện 4 nhóm phản ứng (Camp, Quitter, Blamer, Climber) và bài tập thực hành Vòng tròn Kiểm soát.</p>
+        <!-- ==================== MODULE 3: HƯỚNG DẪN CHI TIẾT (HS & GV) ==================== -->
+        <section id="section-guide" class="tab-section hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Hướng dẫn cho Học sinh -->
+                <div class="glass-card rounded-2xl p-6 space-y-4">
+                    <div class="flex items-center gap-3 text-gold-400">
+                        <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                        <h2 class="text-lg font-bold text-white">Cẩm Nang Dành Cho Học Sinh</h2>
                     </div>
-                    <div class="p-4 rounded-xl bg-navy-800 border border-slate-700">
-                        <span class="text-xs font-bold text-gold-400 uppercase">Buổi 3 &amp; 4</span>
-                        <h3 class="font-bold text-white text-base mt-1">Trạm 15 Phút &amp; Kỹ thuật Pomodoro</h3>
-                        <p class="text-xs text-slate-400 mt-2">Phương pháp đối phó với sự trì hoãn và cám dỗ từ mạng xã hội (TikTok, Game).</p>
+                    <p class="text-xs text-slate-300 leading-relaxed">Hướng dẫn từng bước giúp học sinh THPT khai thác tối đa ứng dụng để vượt qua áp lực học tập.</p>
+                    <ul class="space-y-3 text-xs text-slate-200">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-gold-400 mt-0.5"></i>
+                            <span><strong>Bước 1:</strong> Khi gặp điểm kém hoặc nản chí, hãy chọn đúng môn học tại Module 1 để trò chuyện cùng AI Cố Vấn.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-gold-400 mt-0.5"></i>
+                            <span><strong>Bước 2:</strong> Cập nhật thông tin cá nhân vào Hộ chiếu AQ Passport để ghi nhận tinh thần chiến đấu.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-gold-400 mt-0.5"></i>
+                            <span><strong>Bước 3:</strong> Tránh xa 10 thói quen xấu (lướt mạng xã hội, thức khuya, trì hoãn) để giữ vững năng lượng AQ trên 80%.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-gold-400 mt-0.5"></i>
+                            <span><strong>Bước 4:</strong> Viết nhật ký 7 ngày đều đặn để tự đánh giá sự tiến bộ của bản thân qua từng tuần.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Hướng dẫn cho Giáo viên -->
+                <div class="glass-card rounded-2xl p-6 space-y-4">
+                    <div class="flex items-center gap-3 text-cyan-400">
+                        <i class="fa-solid fa-chalkboard-user text-2xl"></i>
+                        <h2 class="text-lg font-bold text-white">Cẩm Nang Dành Cho Giáo Viên</h2>
                     </div>
-                    <div class="p-4 rounded-xl bg-navy-800 border border-slate-700">
-                        <span class="text-xs font-bold text-gold-400 uppercase">Buổi 5 &amp; 6</span>
-                        <h3 class="font-bold text-white text-base mt-1">Lập kế hoạch Leo Núi 7 Ngày</h3>
-                        <p class="text-xs text-slate-400 mt-2">Xây dựng thói quen tự chủ, nhật ký vượt khó và cam kết hành động cá nhân.</p>
-                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">Tài liệu hỗ trợ giáo viên chủ nhiệm và tư vấn tâm lý tổ chức các buổi sinh hoạt lớp/ngoại khóa.</p>
+                    <ul class="space-y-3 text-xs text-slate-200">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-cyan-400 mt-0.5"></i>
+                            <span><strong>Tổ chức Workshop:</strong> Sử dụng Module Báo cáo thực nghiệm để minh họa sự tiến bộ của học sinh trước hội đồng trường.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-cyan-400 mt-0.5"></i>
+                            <span><strong>Đánh giá định kỳ:</strong> Cho học sinh thực hiện Khảo sát AQ (Module 4) đầu năm và cuối kỳ để đo lường chỉ số vượt khó.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-cyan-400 mt-0.5"></i>
+                            <span><strong>Sử dụng Action Kit:</strong> Giao nhiệm vụ viết Nhật ký 7 ngày (Module 8) làm bài tập rèn luyện kỹ năng sống cho lớp chủ nhiệm.</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <!-- MODULE 4: KHẢO SÁT -->
+        <!-- ==================== MODULE 4: KHẢO SÁT AQ MỚI ==================== -->
         <section id="section-survey" class="tab-section hidden space-y-6">
-            <div class="bg-navy-900/90 gold-border rounded-2xl p-6 text-center space-y-4">
-                <h2 class="text-2xl font-extrabold text-white">Khảo Sát Đánh Giá Chỉ Số AQ (AQ01 / AQ02 / AQ07)</h2>
-                <p class="text-sm text-slate-300 max-w-xl mx-auto">Bộ câu hỏi trắc nghiệm tâm lý học đường giúp đo lường mức độ kiên cường và khả năng chịu áp lực thi cử của học sinh.</p>
-                <button onclick="alert('Đã ghi nhận kết quả khảo sát mẫu! Chỉ số AQ của bạn thuộc mức: Nhà Leo Núi Tiềm Năng.')" class="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-navy-950 font-bold text-sm transition shadow-lg">
-                    Bắt đầu làm Khảo sát AQ (5 phút)
-                </button>
+            <div class="glass-card rounded-2xl p-6 md:p-8 max-w-3xl mx-auto space-y-6">
+                <div class="text-center space-y-2">
+                    <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Đánh Giá Tâm Lý Học Đường</span>
+                    <h2 class="text-2xl font-extrabold text-white">Bộ Câu Hỏi Khảo Sát Chỉ Số AQ (AQ01 / AQ02 / AQ07)</h2>
+                    <p class="text-xs text-slate-300">Hãy chọn mức độ phản ánh đúng nhất với bạn khi gặp bài kiểm tra khó hoặc áp lực điểm số.</p>
+                </div>
+
+                <div id="survey-container" class="space-y-4 text-xs">
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
+                        <p class="font-bold text-white text-sm">Câu 1: Khi nhận điểm 4 môn Toán hoặc Lý, phản ứng đầu tiên của bạn là gì?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <label class="p-2.5 rounded-lg bg-navy-950 border border-slate-800 hover:border-gold-500 cursor-pointer flex items-center gap-2">
+                                <input type="radio" name="q1" value="1" class="text-gold-500">
+                                <span>Hoảng loạn, buồn chán và muốn bỏ bê môn đó luôn.</span>
+                            </label>
+                            <label class="p-2.5 rounded-lg bg-navy-950 border border-slate-800 hover:border-gold-500 cursor-pointer flex items-center gap-2">
+                                <input type="radio" name="q1" value="3" class="text-gold-500">
+                                <span>Bình tĩnh tìm nguyên nhân sai sót và hỏi thầy cô/bạn bè để sửa.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
+                        <p class="font-bold text-white text-sm">Câu 2: Khi đứng trước kỳ thi THPT quốc gia với lượng kiến thức rất lớn, bạn thường làm gì?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <label class="p-2.5 rounded-lg bg-navy-950 border border-slate-800 hover:border-gold-500 cursor-pointer flex items-center gap-2">
+                                <input type="radio" name="q2" value="1" class="text-gold-500">
+                                <span>Lướt điện thoại, xem TikTok/Reels để trốn tránh thực tế.</span>
+                            </label>
+                            <label class="p-2.5 rounded-lg bg-navy-950 border border-slate-800 hover:border-gold-500 cursor-pointer flex items-center gap-2">
+                                <input type="radio" name="q2" value="3" class="text-gold-500">
+                                <span>Lập lộ trình ôn tập từng phần nhỏ mỗi ngày theo phương pháp khoa học.</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pt-2">
+                    <button onclick="submitSurvey()" class="px-8 py-3 rounded-xl bg-gradient-to-r from-gold-400 to-gold-600 hover:from-gold-500 hover:to-gold-600 text-navy-950 font-bold text-sm transition shadow-lg">
+                        Xem Kết Quả Đánh Giá AQ
+                    </button>
+                    <div id="survey-result" class="mt-4 text-sm font-bold text-emerald-400 hidden"></div>
+                </div>
             </div>
         </section>
 
-        <!-- MODULE 5: BÁO CÁO THỰC NGHIỆM -->
+        <!-- ==================== MODULE 5: BÁO CÁO THỰC NGHIỆM ==================== -->
         <section id="section-dashboard" class="tab-section hidden space-y-6">
-            <div class="bg-navy-900/90 gold-border rounded-2xl p-6">
-                <h2 class="text-2xl font-extrabold text-white mb-2">Báo Cáo Kết Quả Thực Nghiệm NCKH 2026</h2>
-                <p class="text-sm text-slate-300 mb-6">Biểu đồ thể hiện sự cải thiện rõ rệt về chỉ số vượt khó (AQ) của học sinh sau 4 tuần áp dụng AQ School Action Kit.</p>
-                <div class="bg-navy-950 p-4 rounded-xl border border-slate-800 h-72 flex items-center justify-center">
+            <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6">
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Nghiên Cứu Khoa Học 2026</span>
+                    <h2 class="text-2xl font-extrabold text-white">Báo Cáo Kết Quả Thực Nghiệm NCKH</h2>
+                    <p class="text-xs text-slate-300">Biểu đồ thể hiện sự cải thiện chỉ số vượt khó (AQ) của học sinh sau 4 tuần áp dụng AQ School Action Kit.</p>
+                </div>
+                <div class="bg-navy-950/80 p-5 rounded-2xl border border-slate-800 h-80 flex items-center justify-center">
                     <canvas id="researchChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== MODULE 6: KHO TRI THỨC THPT ĐA MÔN ==================== -->
+        <section id="section-subjects" class="tab-section hidden space-y-6">
+            <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6">
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Toàn Diện Mọi Môn Học</span>
+                    <h2 class="text-2xl font-extrabold text-white">Kho Tri Thức &amp; Bài Tập THPT</h2>
+                    <p class="text-xs text-slate-300">Hệ thống tóm tắt kiến thức cốt lõi và phương pháp bóc tách đề thi THPT.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
+                        <div class="text-gold-400 font-bold text-sm"><i class="fa-solid fa-square-root-variable mr-1.5"></i> Toán Học</div>
+                        <p class="text-slate-300">Khảo sát hàm số, Hình học không gian Oxyz, Xác suất thống kê, Tích phân và ứng dụng.</p>
+                        <button onclick="askPreset('Hãy tóm tắt công thức Đạo hàm và Khảo sát hàm số lớp 12')" class="text-gold-400 hover:underline font-semibold pt-1 block">Hỏi AI ngay &rarr;</button>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
+                        <div class="text-cyan-400 font-bold text-sm"><i class="fa-solid fa-bolt mr-1.5"></i> Vật Lý</div>
+                        <p class="text-slate-300">Dao động cơ, Sóng cơ, Dòng điện xoay chiều, Vật lý hạt nhân và các bài toán vận dụng cao.</p>
+                        <button onclick="askPreset('Hướng dẫn phương pháp giải nhanh bài toán Dao động điều hòa')" class="text-cyan-400 hover:underline font-semibold pt-1 block">Hỏi AI ngay &rarr;</button>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
+                        <div class="text-emerald-400 font-bold text-sm"><i class="fa-solid fa-flask mr-1.5"></i> Hóa Học</div>
+                        <p class="text-slate-300">Ester - Lipit, Carbohydrate, Amin - Amino axit - Protein, Kim loại kiềm/kiềm thổ/nhôm.</p>
+                        <button onclick="askPreset('Mẹo nhớ nhanh dãy hoạt động hóa học của kim loại và bài toán Este')" class="text-emerald-400 hover:underline font-semibold pt-1 block">Hỏi AI ngay &rarr;</button>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
+                        <div class="text-rose-400 font-bold text-sm"><i class="fa-solid fa-feather mr-1.5"></i> Ngữ Văn</div>
+                        <p class="text-slate-300">Nghị luận xã hội 200 chữ, Nghị luận văn học (Tây Tiến, Sóng, Vợ chồng A Phủ, Chiếc thuyền ngoài xa).</p>
+                        <button onclick="askPreset('Hướng dẫn lập dàn ý Nghị luận xã hội về tinh thần vượt khó')" class="text-rose-400 hover:underline font-semibold pt-1 block">Hỏi AI ngay &rarr;</button>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
+                        <div class="text-purple-400 font-bold text-sm"><i class="fa-solid fa-language mr-1.5"></i> Tiếng Anh</div>
+                        <p class="text-slate-300">Ngữ pháp nâng cao, Câu điều kiện, Mệnh đề quan hệ, Đọc hiểu (Reading Comprehension) & Từ vựng.</p>
+                        <button onclick="askPreset('Mẹo làm bài Đọc hiểu Tiếng Anh THPT đạt điểm cao')" class="text-purple-400 hover:underline font-semibold pt-1 block">Hỏi AI ngay &rarr;</button>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
+                        <div class="text-amber-400 font-bold text-sm"><i class="fa-solid fa-landmark mr-1.5"></i> Lịch Sử &amp; Địa Lý</div>
+                        <p class="text-slate-300">Lịch sử thế giới & Việt Nam từ 1945 đến nay. Địa lý tự nhiên, kinh tế vùng và biểu đồ kỹ năng.</p>
+                        <button onclick="askPreset('Mẹo nhớ các mốc sự kiện Lịch sử trọng tâm 1945 - 1975')" class="text-amber-400 hover:underline font-semibold pt-1 block">Hỏi AI ngay &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== MODULE 7: 10 THÓI QUEN XẤU (THAY THẾ TIKTOK) ==================== -->
+        <section id="section-habits" class="tab-section hidden space-y-6">
+            <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6">
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-rose-400 font-bold">Phá Vỡ Trì Hoãn</span>
+                    <h2 class="text-2xl font-extrabold text-white">Tổng Hợp 10 Thói Quen Xấu Của Học Sinh &amp; Cách Khắc Phục</h2>
+                    <p class="text-xs text-slate-300">Mỗi khi bạn vô tình vướng phải một thói quen xấu dưới đây, năng lượng AQ sẽ bị trừ điểm để nhắc nhở bạn quay lại vùng kiểm soát.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
+                        <div class="font-bold text-rose-400 text-sm">1. Trì hoãn việc học (Procrastination)</div>
+                        <p class="text-slate-300">"Để mai tính", đợi nước đến chân mới nhảy khiến tinh thần hoảng loạn.</p>
+                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Áp dụng quy tắc 5 phút khởi động ngay.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
+                        <div class="font-bold text-rose-400 text-sm">2. Lướt Reels / Shorts / TikTok quá đà</div>
+                        <p class="text-slate-300">Sa đà vào video ngắn làm sụt giảm nghiêm trọng khả năng tập trung sâu.</p>
+                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Để điện thoại ở phòng khác khi học bài.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
+                        <div class="font-bold text-rose-400 text-sm">3. Thức khuya cày game / phim</div>
+                        <p class="text-slate-300">Làm đảo lộn đồng hồ sinh học, khiến giờ học trên lớp uể oải, mất ngủ.</p>
+                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Đặt giờ giới nghiêm thiết bị lúc 22:30.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
+                        <div class="font-bold text-rose-400 text-sm">4. Học vẹt, không hiểu bản chất</div>
+                        <p class="text-slate-300">Chỉ nhớ máy móc công thức mà không biết áp dụng vào bài toán thực tế.</p>
+                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Yêu cầu AI giải thích bản chất tư duy.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
+                        <div class="font-bold text-rose-400 text-sm">5. Sợ sai và ngại hỏi thầy cô</div>
+                        <p class="text-slate-300">Giấu dốt, không dám hỏi những phần kiến thức mình bị hổng.</p>
+                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Sai lầm là bằng chứng cho thấy bạn đang tư duy.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
+                        <div class="font-bold text-rose-400 text-sm">6. So sánh bản thân với người khác</div>
+                        <p class="text-slate-300">Tự ti khi thấy bạn bè giải được bài khó còn mình thì chưa.</p>
+                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Chỉ so sánh bản thân với chính mình của ngày hôm qua.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
+                        <div class="font-bold text-rose-400 text-sm">7. Bỏ cuộc ngay khi gặp bài toán khó</div>
+                        <p class="text-slate-300">Mới đọc đề thấy dài hoặc khó là chép luôn lời giải mà không suy nghĩ.</p>
+                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Bóc tách giả thiết từng bước nhỏ.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
+                        <div class="font-bold text-rose-400 text-sm">8. Ôn thi dồn dập trước ngày kiểm tra</div>
+                        <p class="text-slate-300">Học dồn gây stress nặng, chữ bay sạch sau khi thi xong.</p>
+                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Ôn tập ngắt quãng (Spaced Repetition).</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
+                        <div class="font-bold text-rose-400 text-sm">9. Môi trường học tập bừa bộn</div>
+                        <p class="text-slate-300">Bàn học lộn xộn làm phân tán năng lượng và sự tập trung.</p>
+                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Dọn sạch bàn học trước khi bắt đầu ôn tập.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
+                        <div class="font-bold text-rose-400 text-sm">10. Thiếu ngủ và lười vận động</div>
+                        <p class="text-slate-300">Ngồi ì một chỗ khiến não bộ trì trệ, không linh hoạt.</p>
+                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Dành 15 phút vận động thể thao mỗi ngày.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== MODULE 8: NHẬT KÝ 7 NGÀY VƯỢT KHÓ ==================== -->
+        <section id="section-diary" class="tab-section hidden space-y-6">
+            <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6 max-w-3xl mx-auto">
+                <div class="text-center space-y-2">
+                    <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Hành Trình Chinh Phục</span>
+                    <h2 class="text-2xl font-extrabold text-white">Nhật Ký Leo Núi 7 Ngày</h2>
+                    <p class="text-xs text-slate-300">Ghi lại cảm xúc, thử thách đã vượt qua và cam kết hành động mỗi ngày của bạn.</p>
+                </div>
+
+                <div class="space-y-4 text-xs">
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
+                        <div class="flex justify-between items-center font-bold text-white text-sm">
+                            <span>Ngày 1: Nhận diện điểm yếu &amp; Lập vùng kiểm soát</span>
+                            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px]">Đã hoàn thành</span>
+                        </div>
+                        <textarea class="w-full bg-navy-950 border border-slate-800 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500" rows="2" placeholder="Hôm nay tôi đã vượt qua sự trì hoãn như thế nào?...">Hôm nay mình đã tự giác giải quyết 5 bài tập Toán hàm số mà không lướt điện thoại giữa chừng.</textarea>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
+                        <div class="flex justify-between items-center font-bold text-white text-sm">
+                            <span>Ngày 2: Chinh phục bài toán khó môn Lý / Hóa</span>
+                            <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px]">Đang thực hiện</span>
+                        </div>
+                        <textarea class="w-full bg-navy-950 border border-slate-800 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500" rows="2" placeholder="Cảm xúc và kết quả học tập của bạn hôm nay..."></textarea>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
+                        <div class="flex justify-between items-center font-bold text-slate-400 text-sm">
+                            <span>Ngày 3 đến Ngày 7: Duy trì phong độ Climber</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px]">Sắp mở khóa</span>
+                        </div>
+                        <p class="text-slate-400 italic">Tiếp tục duy trì thói quen tích cực và ghi chép nhật ký đều đặn để nhận huy hiệu "Nhà Leo Núi Vàng" vào cuối tuần.</p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="alert('Đã lưu Nhật ký 7 ngày thành công! Cố gắng phát huy nhé!')" class="px-6 py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-navy-950 font-bold text-sm transition shadow-lg">
+                        Lưu Nhật Ký Hành Trình
+                    </button>
                 </div>
             </div>
         </section>
@@ -288,13 +586,22 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-navy-950 border-t border-gold-500/20 py-4 text-center text-xs text-slate-400">
+    <footer class="bg-navy-950 border-t border-gold-500/20 py-4 text-center text-xs text-slate-400 mt-12">
         <p>AQ – School Action Kit &amp; Passport AI | Nghiên Cứu Khoa Học THPT 2026</p>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- JAVASCRIPT LOGIC NÂNG CAO -->
     <script>
-        let currentEnergy = 75;
+        let currentEnergy = 80;
+        let selectedSubjectName = 'Toán Học (Đại số, Hình học, Giải tích)';
+
+        const badHabitsList = [
+            "⚠️ Dính thói quen: Lướt TikTok/Reels quá 30 phút! (-10% năng lượng)",
+            "⚠️ Dính thói quen: Trì hoãn bài tập về nhà đến nửa đêm! (-10% năng lượng)",
+            "⚠️ Dính thói quen: Thức khuya cày phim/game làm mất tập trung! (-10% năng lượng)",
+            "⚠️ Dính thói quen: Bỏ cuộc ngay khi gặp bài toán khó! (-10% năng lượng)",
+            "⚠️ Dính thói quen: Ôn thi dồn dập gây stress nặng! (-10% năng lượng)"
+        ];
 
         function adjustEnergy(amount) {
             currentEnergy = Math.min(100, Math.max(0, currentEnergy + amount));
@@ -302,9 +609,10 @@
             document.getElementById('energy-bar').style.width = currentEnergy + '%';
         }
 
-        function triggerTikTokDetour() {
-            adjustEnergy(-15);
-            alert('⚠️ Cảnh báo: Lướt TikTok quá 30 phút làm sụt giảm năng lượng học tập! Hãy hít thở sâu và quay lại bàn học.');
+        function triggerBadHabit() {
+            const randomHabit = badHabitsList[Math.floor(Math.random() * badHabitsList.length)];
+            adjustEnergy(-10);
+            alert(randomHabit + "\nHãy hít thở sâu, bật chế độ tập trung và lấy lại năng lượng AQ nhé!");
         }
 
         function switchTab(tabId) {
@@ -319,9 +627,16 @@
             }
         }
 
-        function selectSubject(subjectName, desc) {
-            document.getElementById('current-subject-label').innerText = 'Đang kích hoạt: ' + subjectName;
-            addChatMessage('AI Cố vấn', `Đã chuyển sang tổ hợp <strong>${subjectName}</strong>. ${desc} Bạn cần giải bài tập hay tháo gỡ tâm lý phần nào?`);
+        function selectSubject(subject) {
+            selectedSubjectName = subject;
+            document.getElementById('active-subject-display').innerText = 'Đang chọn: ' + subject;
+            switchTab('ai-mentor');
+            addChatMessage('AI Cố Vấn', `Đã kích hoạt cố vấn chuyên sâu cho môn <strong>${subject}</strong>. Bạn cần giải bài tập hay tháo gỡ phần nào?`);
+        }
+
+        function askPreset(question) {
+            switchTab('ai-mentor');
+            document.getElementById('chat-input').value = question;
         }
 
         function addChatMessage(sender, htmlContent) {
@@ -331,9 +646,9 @@
             div.className = `flex items-start gap-3 ${isUser ? 'flex-row-reverse' : ''}`;
             div.innerHTML = `
                 <div class="w-8 h-8 rounded-lg ${isUser ? 'bg-sky-500/20 text-sky-400 border-sky-500/40' : 'bg-gold-500/20 text-gold-400 border-gold-500/40'} border flex items-center justify-center shrink-0 mt-1">
-                    <i class="fa-solid ${isUser ? 'fa-user' : 'fa-compass'}"></i>
+                    <i class="fa-solid ${isUser ? 'fa-user' : 'fa-robot'}"></i>
                 </div>
-                <div class="${isUser ? 'bg-sky-950/80 border-sky-800/60 rounded-tr-none' : 'bg-navy-800/90 border-slate-700 rounded-tl-none'} border rounded-2xl p-4 text-sm text-slate-200 max-w-[88%] shadow ai-response">
+                <div class="${isUser ? 'bg-sky-950/80 border-sky-800/60 rounded-tr-none' : 'bg-navy-800/90 border-slate-700 rounded-tl-none'} border rounded-2xl p-4 text-sm text-slate-200 max-w-[88%] shadow">
                     <p class="font-bold ${isUser ? 'text-sky-400' : 'text-gold-400'} mb-1">${sender}</p>
                     <div class="leading-relaxed">${htmlContent}</div>
                 </div>
@@ -351,16 +666,18 @@
             addChatMessage('Bạn', text);
             input.value = '';
 
+            // Tốc độ phản hồi cực nhanh & thông minh
             setTimeout(() => {
-                let aiReply = `Cảm ơn bạn đã chia sẻ. Theo mô hình <strong>C.O.R.E</strong>, khi gặp khó khăn này, bạn hãy thực hiện:<br>
+                let aiReply = `Tuyệt vời! Đối với câu hỏi về môn <strong>${selectedSubjectName}</strong>, AI hướng dẫn bạn tư duy theo mô hình <strong>C.O.R.E</strong>:<br><br>
                 <ul>
-                    <li><strong>Control:</strong> Chia nhỏ vấn đề thành các phần có thể giải quyết trong 15 phút.</li>
-                    <li><strong>Ownership:</strong> Tập trung vào bước sửa lỗi thay vì lo lắng về điểm số.</li>
-                    <li><strong>Reach & Endurance:</strong> Giữ nhịp độ học tập đều đặn mỗi ngày.</li>
+                    <li><strong>1. Control (Kiểm soát):</strong> Đọc kỹ giả thiết, gạch chân từ khóa quan trọng, không để tâm lý lo lắng lấn át.</li>
+                    <li><strong>2. Ownership (Trách nhiệm):</strong> Tự mình viết ra công thức hoặc dàn ý, không xem ngay lời giải mẫu.</li>
+                    <li><strong>3. Reach (Khoanh vùng):</strong> Chia nhỏ bài toán thành các bước cơ bản để giải quyết từng phần.</li>
+                    <li><strong>4. Endurance (Bền bỉ):</strong> Luyện tập đều đặn 15-20 phút mỗi ngày để tạo phản xạ tư duy tốt nhất.</li>
                 </ul>`;
-                addChatMessage('AI Cố vấn', aiReply);
+                addChatMessage('AI Cố Vấn', aiReply);
                 adjustEnergy(5);
-            }, 800);
+            }, 500);
         }
 
         function clearChat() {
@@ -371,10 +688,33 @@
                     </div>
                     <div class="bg-navy-800/90 border border-slate-700 rounded-2xl rounded-tl-none p-4 text-sm text-slate-200 max-w-[88%] shadow">
                         <p class="font-bold text-gold-400 mb-1">Đã làm mới khung chat!</p>
-                        <p class="leading-relaxed">Bạn có thể tiếp tục đặt câu hỏi môn học hoặc cần tư vấn tâm lý vượt khó.</p>
+                        <p class="leading-relaxed">Bạn có thể đặt câu hỏi mới cho bất kỳ môn học nào.</p>
                     </div>
                 </div>
             `;
+        }
+
+        function updatePassportView() {
+            document.getElementById('card-name-view').innerText = document.getElementById('pass-name').value.toUpperCase();
+            document.getElementById('card-class-view').innerText = document.getElementById('pass-class').value;
+            document.getElementById('card-level-view').innerText = document.getElementById('pass-level').value;
+        }
+
+        function submitSurvey() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            const resDiv = document.getElementById('survey-result');
+
+            if (!q1 || !q2) {
+                alert('Vui lòng trả lời đầy đủ các câu hỏi khảo sát!');
+                return;
+            }
+
+            const totalScore = parseInt(q1.value) + parseInt(q2.value);
+            let rating = totalScore >= 5 ? "Nhà Leo Núi (Climber) - Chỉ số AQ rất cao, bản lĩnh vững vàng!" : "Cần rèn luyện thêm - Hãy áp dụng ngay bộ công cụ C.O.R.E để nâng cao ý chí.";
+            
+            resDiv.innerText = `Kết quả đánh giá AQ: ${rating} (Điểm: ${totalScore}/6)`;
+            resDiv.classList.remove('hidden');
         }
 
         let chartInitialized = false;
@@ -386,19 +726,21 @@
                 data: {
                     labels: ['Tuần 1 (Tiền khảo sát)', 'Tuần 2', 'Tuần 3', 'Tuần 4 (Hậu khảo sát)'],
                     datasets: [{
-                        label: 'Chỉ số Vượt khó AQ Trung bình',
-                        data: [52, 64, 78, 88],
+                        label: 'Chỉ số Vượt khó AQ Trung bình (Học sinh THPT)',
+                        data: [50, 65, 78, 92],
                         borderColor: '#F59E0B',
-                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.15)',
                         borderWidth: 3,
                         fill: true,
-                        tension: 0.3
+                        tension: 0.35,
+                        pointBackgroundColor: '#FCD34D',
+                        pointRadius: 5
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { labels: { color: '#F8FAFC' } } },
+                    plugins: { legend: { labels: { color: '#F8FAFC', font: { family: 'Inter' } } } },
                     scales: {
                         x: { ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
                         y: { ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,255,255,0.05)' }, min: 40, max: 100 }
