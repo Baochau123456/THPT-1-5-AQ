@@ -1,754 +1,496 @@
 <!DOCTYPE html>
-<html lang="vi" class="dark">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AQ – School Action Kit & Passport AI | NCKH THPT 2026</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        navy: {
-                            950: '#04070D',
-                            900: '#0B132B',
-                            800: '#1C2541',
-                            700: '#3A506B',
-                        },
-                        gold: {
-                            400: '#FCD34D',
-                            500: '#F59E0B',
-                            600: '#D97706',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Trợ Lý Đánh Giá & Nâng Cao Chỉ Số Vượt Khó (AQ - CORE)</title>
     <style>
-        body {
-            background-color: #0B132B;
-            color: #F8FAFC;
-            font-family: 'Inter', sans-serif;
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #0f766e;
+            --accent: #d97706;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
         }
-        .glass-card {
-            background: rgba(28, 37, 65, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(245, 158, 11, 0.25);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #172554 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
-        .glass-header {
-            background: rgba(4, 7, 13, 0.85);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+        header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
+        header p { font-size: 0.9rem; opacity: 0.9; }
+        .badge-disclaimer {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        .nav-btn.active {
-            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-            color: #04070D;
+        .container { max-width: 1100px; margin: 1.5rem auto; padding: 0 1rem; }
+        .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .tab-btn {
+            padding: 0.75rem 1.25rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 2px 4px rgba(30, 58, 138, 0.2);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        .card h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 1rem; border-bottom: 2px solid var(--bg); padding-bottom: 0.5rem; }
+        
+        /* Chat Interface */
+        .chat-box {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            background: #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .msg { max-width: 82%; padding: 0.85rem 1.1rem; border-radius: 12px; font-size: 0.95rem; }
+        .msg.bot { background: white; align-self: flex-start; border: 1px solid var(--border); box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+        .msg.user { background: var(--primary); color: white; align-self: flex-end; }
+        .msg-tag { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.3rem; color: var(--secondary); }
+        .quick-prompts { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .quick-btn {
+            background: #e0e7ff; color: var(--primary); border: none; padding: 0.4rem 0.8rem;
+            border-radius: 6px; font-size: 0.82rem; cursor: pointer; font-weight: 500;
+        }
+        .quick-btn:hover { background: #c7d2fe; }
+        .chat-input-row { display: flex; gap: 0.5rem; }
+        .chat-input-row input {
+            flex: 1; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem;
+        }
+        .btn-primary {
+            background: var(--primary); color: white; border: none; padding: 0.75rem 1.5rem;
+            border-radius: 8px; font-weight: 600; cursor: pointer;
+        }
+        .btn-primary:hover { background: #1e40af; }
+
+        /* CORE Assessment */
+        .question-item { padding: 1rem 0; border-bottom: 1px solid var(--border); }
+        .question-item p { font-weight: 500; margin-bottom: 0.6rem; }
+        .likert-group { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .likert-label {
+            display: flex; align-items: center; gap: 0.35rem; font-size: 0.85rem;
+            background: var(--bg); padding: 0.4rem 0.75rem; border-radius: 6px; cursor: pointer; border: 1px solid var(--border);
+        }
+        .likert-label:hover { border-color: var(--primary-light); }
+        .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .core-box { padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary); background: var(--bg); }
+        .core-box h4 { color: var(--primary); margin-bottom: 0.25rem; }
+        .score-val { font-size: 1.4rem; font-weight: 700; color: var(--secondary); }
+
+        /* Scenario Cards */
+        .scenario-card {
+            background: linear-gradient(to right, #fffbeb, #fef3c7);
+            border: 1px solid #fcd34d;
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .passport-stamp {
+            display: inline-block;
+            border: 2px dashed var(--secondary);
+            color: var(--secondary);
+            padding: 0.4rem 0.9rem;
             font-weight: 700;
-            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+            border-radius: 6px;
+            transform: rotate(-2deg);
+            margin-top: 0.75rem;
+            background: rgba(15, 118, 110, 0.05);
         }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0B132B; }
-        ::-webkit-scrollbar-thumb { background: #3A506B; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #F59E0B; }
+        textarea {
+            width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;
+            margin-top: 0.5rem; font-size: 0.95rem; resize: vertical;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-gold-500 selection:text-navy-950">
+<body>
 
-    <!-- HEADER & NĂNG LƯỢNG AQ -->
-    <header class="sticky top-0 z-50 glass-header">
-        <div class="max-w-7xl mx-auto px-4 py-3">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-gold-500 to-amber-300 flex items-center justify-center text-navy-950 shadow-xl font-bold">
-                        <i class="fa-solid fa-compass-drafting text-2xl"></i>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-[10px] uppercase tracking-[0.25em] text-gold-400 font-bold">NCKH THPT 2026</span>
-                            <span class="px-2 py-0.5 text-[9px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full font-semibold">AI v3.0 Pro</span>
-                        </div>
-                        <h1 class="text-lg md:text-xl font-extrabold tracking-tight text-white">
-                            AQ – SCHOOL ACTION KIT <span class="text-gold-400 font-serif italic">&amp; Passport AI</span>
-                        </h1>
-                    </div>
-                </div>
+<header>
+    <h1>HỆ THỐNG HỖ TRỢ NÂNG CAO CHỈ SỐ VƯỢT KHÓ (AQ - CORE)</h1>
+    <p>Ứng dụng mô hình CO₂RE (Stoltz) & Bộ công cụ thực hành trường học AQ – School Action Kit</p>
+    <span class="badge-disclaimer">Lưu ý khoa học: Công cụ sàng lọc giáo dục & rèn luyện kỹ năng, không phải chẩn đoán y khoa</span>
+</header>
 
-                <!-- Năng lượng AQ & Thói quen xấu -->
-                <div class="glass-card rounded-2xl p-3 flex flex-col sm:flex-row items-center gap-4">
-                    <div class="w-full sm:w-48">
-                        <div class="flex justify-between items-center text-xs mb-1">
-                            <span class="font-bold text-slate-300 flex items-center gap-1.5">
-                                <i class="fa-solid fa-bolt text-gold-400"></i> Năng Lượng AQ
-                            </span>
-                            <span id="energy-text" class="font-extrabold text-gold-400">80%</span>
-                        </div>
-                        <div class="w-full h-2.5 bg-navy-950 rounded-full overflow-hidden border border-slate-700">
-                            <div id="energy-bar" class="h-full rounded-full bg-gradient-to-r from-emerald-500 via-gold-400 to-amber-500 transition-all duration-500" style="width: 80%;"></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-                        <button onclick="adjustEnergy(5)" class="px-3 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/35 border border-emerald-500/40 text-emerald-300 text-xs font-bold transition flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-check"></i> +5% Hoàn thành việc
-                        </button>
-                        <button onclick="triggerBadHabit()" class="px-3 py-1.5 rounded-xl bg-rose-600/20 hover:bg-rose-600/35 border border-rose-500/40 text-rose-300 text-xs font-bold transition flex items-center gap-1.5">
-                            <i class="fa-solid fa-triangle-exclamation"></i> Dính thói quen xấu
-                        </button>
-                    </div>
+<div class="container">
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('tab-chat')">1. Trợ lý AI Phân luồng Thông minh</button>
+        <button class="tab-btn" onclick="switchTab('tab-core')">2. Khảo sát 4 chiều CORE (16 chỉ báo)</button>
+        <button class="tab-btn" onclick="switchTab('tab-passport')">3. Thẻ Tình huống & AQ Passport</button>
+    </div>
+
+    <!-- TAB 1: SMART ROUTING CHATBOT -->
+    <div id="tab-chat" class="tab-content active">
+        <div class="card">
+            <h2>Trợ lý Điều hướng Học tập & Ứng phó Nghịch cảnh (Khắc phục lỗi trả lời rập khuôn)</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                Hệ thống tự động nhận diện ý định câu hỏi: <b>Giải toán / Học thuật</b>, <b>Áp lực / Nghịch cảnh CORE</b>, hay <b>Lý thuyết Đề tài AQ</b> để đưa ra phản hồi chuyên biệt thay vì báo lỗi.
+            </p>
+            <div class="quick-prompts">
+                <button class="quick-btn" onclick="sendQuick('Giải phương trình bậc 2: 2x^2 - 5x + 2 = 0')">Thử hỏi Toán: 2x² - 5x + 2 = 0</button>
+                <button class="quick-btn" onclick="sendQuick('Tính đạo hàm của hàm số y = x^3 - 3x + 1')">Thử hỏi Toán: Đạo hàm y = x³ - 3x + 1</button>
+                <button class="quick-btn" onclick="sendQuick('Em vừa bị điểm kém môn Toán và thấy mình bất tài quá')">Tâm lý: Điểm kém & tự ti (Reach)</button>
+                <button class="quick-btn" onclick="sendQuick('Mô hình CORE trong đề tài AQ gồm những gì?')">Hỏi lý thuyết: Mô hình CORE</button>
+            </div>
+            <div class="chat-box" id="chatBox">
+                <div class="msg bot">
+                    <span class="msg-tag">Hệ thống CORE-AI</span>
+                    Chào bạn! Mình có thể hỗ trợ bạn theo 3 chế độ chuyên biệt:<br>
+                    1. <b>Hỗ trợ học thuật & Toán học:</b> Giải phương trình, tính đạo hàm, hướng dẫn tư duy từng bước.<br>
+                    2. <b>Đồng hành vượt khó (Mô hình CORE):</b> Phân tích áp lực thi cử, điểm kém theo 4 chiều Control - Ownership - Reach - Endurance.<br>
+                    3. <b>Tra cứu cơ sở lý luận đề tài:</b> Giải thích bộ công cụ AQ – School Action Kit và AQ Passport.<br>
+                    Bạn đang cần hỗ trợ nội dung nào?
                 </div>
             </div>
-
-            <!-- NAVIGATION TABS (9 Modules) -->
-            <nav class="mt-4 flex items-center gap-2 overflow-x-auto pb-2">
-                <button onclick="switchTab('ai-mentor')" id="tab-ai-mentor" class="nav-btn active whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
-                    <i class="fa-solid fa-robot"></i> 1. AI Đa Môn & C.O.R.E
-                </button>
-                <button onclick="switchTab('passport')" id="tab-passport" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
-                    <i class="fa-solid fa-passport"></i> 2. Hộ Chiếu AQ Passport
-                </button>
-                <button onclick="switchTab('guide')" id="tab-guide" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
-                    <i class="fa-solid fa-book-bookmark"></i> 3. Hướng Dẫn (HS &amp; GV)
-                </button>
-                <button onclick="switchTab('survey')" id="tab-survey" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
-                    <i class="fa-solid fa-clipboard-question"></i> 4. Khảo Sát AQ Mới
-                </button>
-                <button onclick="switchTab('dashboard')" id="tab-dashboard" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
-                    <i class="fa-solid fa-chart-pie"></i> 5. Báo Cáo Thực Nghiệm
-                </button>
-                <button onclick="switchTab('subjects')" id="tab-subjects" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
-                    <i class="fa-solid fa-graduation-cap"></i> 6. Kho Tri Thức THPT
-                </button>
-                <button onclick="switchTab('habits')" id="tab-habits" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
-                    <i class="fa-solid fa-shield-virus"></i> 7. 10 Thói Quen Xấu
-                </button>
-                <button onclick="switchTab('diary')" id="tab-diary" class="nav-btn whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 transition flex items-center gap-2">
-                    <i class="fa-solid fa-pen-nib"></i> 8. Nhật Ký 7 Ngày
-                </button>
-            </nav>
+            <div class="chat-input-row">
+                <input type="text" id="userInput" placeholder="Nhập bài toán, tình huống khó khăn hoặc câu hỏi về AQ..." onkeypress="if(event.key==='Enter') handleChat()">
+                <button class="btn-primary" onclick="handleChat()">Gửi câu hỏi</button>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+    <!-- TAB 2: CORE 16-ITEM ASSESSMENT -->
+    <div id="tab-core" class="tab-content">
+        <div class="card">
+            <h2>Hệ thống Chỉ báo Biểu hiện Ứng phó Nghịch cảnh (Thang Likert 1–5)</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                Đánh giá tách biệt 4 thành tố độc lập (không cộng gộp thành điểm số định danh cá nhân). Mức độ: <b>1</b> (Hoàn toàn không đúng) đến <b>5</b> (Hoàn toàn đúng).
+            </p>
+            <div id="questionsContainer"></div>
+            <button class="btn-primary" style="margin-top: 1.25rem;" onclick="calculateCORE()">Phân tích Hồ sơ CORE</button>
+            
+            <div id="coreResults" style="display: none; margin-top: 1.5rem; border-top: 2px solid var(--border); padding-top: 1rem;">
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Kết quả Phân tích Chuyên biệt 4 Thành tố CORE</h3>
+                <p id="coreAdvice" style="font-size: 0.95rem; margin-bottom: 1rem; background: #eff6ff; padding: 0.75rem; border-radius: 8px;"></p>
+                <div class="result-grid" id="resultGrid"></div>
+            </div>
+        </div>
+    </div>
 
-        <!-- ==================== MODULE 1: AI MENTOR ĐA MÔN ==================== -->
-        <section id="section-ai-mentor" class="tab-section space-y-6">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Chọn môn học nhanh -->
-                <div class="lg:col-span-4 space-y-4">
-                    <div class="glass-card rounded-2xl p-5">
-                        <h2 class="font-bold text-white text-base mb-3 flex items-center gap-2">
-                            <i class="fa-solid fa-layer-group text-gold-400"></i> Chọn Môn Học &amp; Chủ Đề
-                        </h2>
-                        <div class="space-y-2 text-xs">
-                            <button onclick="selectSubject('Toán Học (Đại số, Hình học, Giải tích)')" class="w-full text-left p-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-slate-200 font-medium transition flex items-center justify-between">
-                                <span><i class="fa-solid fa-calculator text-gold-400 mr-2"></i> Toán Học THPT</span>
-                                <i class="fa-solid fa-chevron-right text-slate-500"></i>
-                            </button>
-                            <button onclick="selectSubject('Vật Lý (Cơ, Nhiệt, Điện, Quang, Hạt nhân)')" class="w-full text-left p-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-slate-200 font-medium transition flex items-center justify-between">
-                                <span><i class="fa-solid fa-atom text-cyan-400 mr-2"></i> Vật Lý THPT</span>
-                                <i class="fa-solid fa-chevron-right text-slate-500"></i>
-                            </button>
-                            <button onclick="selectSubject('Hóa Học (Hữu cơ, Vô cơ, Thực nghiệm)')" class="w-full text-left p-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-slate-200 font-medium transition flex items-center justify-between">
-                                <span><i class="fa-solid fa-flask text-emerald-400 mr-2"></i> Hóa Học THPT</span>
-                                <i class="fa-solid fa-chevron-right text-slate-500"></i>
-                            </button>
-                            <button onclick="selectSubject('Ngữ Văn (Đọc hiểu, Nghị luận xã hội & văn học)')" class="w-full text-left p-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-slate-200 font-medium transition flex items-center justify-between">
-                                <span><i class="fa-solid fa-book-open text-rose-400 mr-2"></i> Ngữ Văn THPT</span>
-                                <i class="fa-solid fa-chevron-right text-slate-500"></i>
-                            </button>
-                            <button onclick="selectSubject('Tiếng Anh (Grammar, Reading, Speaking, IELTS)')" class="w-full text-left p-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-slate-200 font-medium transition flex items-center justify-between">
-                                <span><i class="fa-solid fa-language text-purple-400 mr-2"></i> Tiếng Anh THPT</span>
-                                <i class="fa-solid fa-chevron-right text-slate-500"></i>
-                            </button>
-                            <button onclick="selectSubject('Tâm lý & Kỹ năng vượt khó C.O.R.E')" class="w-full text-left p-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-gold-500/40 text-gold-300 font-medium transition flex items-center justify-between">
-                                <span><i class="fa-solid fa-brain text-gold-400 mr-2"></i> Tâm lý &amp; Chỉ số AQ</span>
-                                <i class="fa-solid fa-chevron-right text-slate-500"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+    <!-- TAB 3: SCENARIO CARDS & AQ PASSPORT -->
+    <div id="tab-passport" class="tab-content">
+        <div class="card">
+            <h2>Thực hành Thẻ Tình huống CORE & Ghi nhận Dấu vết Hành vi (AQ Passport)</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+                Rút ngẫu nhiên một tình huống thực tế học đường, thực hành chuyển hóa nhận thức và lưu dấu xác nhận vào Sổ tay AQ Passport.
+            </p>
+            <button class="btn-primary" onclick="drawScenario()" style="margin-bottom: 1rem; background: var(--secondary);">Rút Thẻ Tình huống Ngẫu nhiên</button>
+            
+            <div id="scenarioDisplay" class="scenario-card">
+                <strong id="scenTitle" style="color: #92400e;">Tình huống #01 (Áp lực kiểm tra định kỳ):</strong>
+                <p id="scenDesc" style="margin-top: 0.4rem;">Điểm kiểm tra giữa kỳ môn Toán của bạn thấp hơn kỳ vọng 2 điểm, trong khi kỳ thi cuối kỳ chỉ còn 3 tuần nữa.</p>
+                <p id="scenPrompt" style="margin-top: 0.5rem; font-size: 0.9rem; color: #78350f;"><b>Gợi ý thực hành Vòng tròn Kiểm soát (Control):</b> Liệt kê 2 việc nằm trong tầm kiểm soát của bạn ngay tối nay và 1 việc bạn cần buông bỏ vì không thể thay đổi.</p>
+            </div>
 
-                <!-- Giao diện Chat AI Thông Minh -->
-                <div class="lg:col-span-8 glass-card rounded-2xl flex flex-col h-[650px] shadow-2xl overflow-hidden">
-                    <div class="px-5 py-3.5 bg-navy-950/80 border-b border-gold-500/20 flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-gold-500 to-amber-400 text-navy-950 flex items-center justify-center font-bold">
-                                <i class="fa-solid fa-robot"></i>
-                            </div>
-                            <div>
-                                <div class="text-sm font-bold text-white flex items-center gap-2">
-                                    Cố Vấn AI Đa Môn &amp; Chuyên Gia AQ
-                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                                </div>
-                                <div id="active-subject-display" class="text-[11px] text-gold-400 font-medium">
-                                    Đang chọn: Toán Học THPT
-                                </div>
-                            </div>
-                        </div>
-                        <button onclick="clearChat()" class="text-xs text-slate-400 hover:text-white px-3 py-1.5 rounded-lg bg-navy-800 transition">
-                            <i class="fa-solid fa-rotate-right mr-1"></i> Làm mới
-                        </button>
-                    </div>
+            <label style="font-weight: 600; font-size: 0.95rem;">Nhật ký hành động của bạn (Minh chứng hành vi thực tế):</label>
+            <textarea id="actionLog" rows="3" placeholder="Ví dụ: Việc kiểm soát được: Làm lại 5 câu sai trong đề và hỏi thầy phần hàm số. Việc buông bỏ: Dằn vặt về điểm số đã chấm..."></textarea>
+            <button class="btn-primary" style="margin-top: 0.75rem;" onclick="stampPassport()">Xác nhận Hành động & Đóng dấu AQ Passport</button>
+            
+            <div id="passportLogList" style="margin-top: 1.25rem;"></div>
+        </div>
+    </div>
+</div>
 
-                    <div id="chat-messages" class="flex-1 overflow-y-auto p-5 space-y-4">
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-gold-500/20 border border-gold-500/40 text-gold-400 flex items-center justify-center shrink-0 mt-1">
-                                <i class="fa-solid fa-compass"></i>
-                            </div>
-                            <div class="bg-navy-800/90 border border-slate-700 rounded-2xl rounded-tl-none p-4 text-sm text-slate-200 max-w-[88%] shadow">
-                                <p class="font-bold text-gold-400 mb-1">Chào bạn! Mình là AI Cố Vấn THPT 2026.</p>
-                                <p class="leading-relaxed">Mình hỗ trợ giải đáp <strong>mọi bài tập, lý thuyết</strong> và <strong>gỡ rối tâm lý</strong> qua mô hình 4 trụ cột <strong>C.O.R.E</strong> (Kiểm soát, Trách nhiệm, Khoanh vùng, Bền bỉ). Hãy đặt câu hỏi cho mình nhé!</p>
-                            </div>
-                        </div>
-                    </div>
+<script>
+    // --- TAB NAVIGATION ---
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        event.target.classList.add('active');
+    }
 
-                    <form id="chat-form" onsubmit="handleChatSubmit(event)" class="p-4 bg-navy-950/80 border-t border-slate-800 flex items-center gap-3">
-                        <input type="text" id="chat-input" required placeholder="Nhập bài tập, công thức hoặc tâm sự áp lực học tập..." class="flex-1 bg-navy-900 border border-slate-700 focus:border-gold-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none">
-                        <button type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-gold-400 to-gold-600 hover:from-gold-500 hover:to-gold-600 text-navy-950 font-bold text-sm transition shadow-lg flex items-center gap-2">
-                            <span>Gửi</span> <i class="fa-solid fa-paper-plane"></i>
-                        </button>
-                    </form>
+    // --- 1. INTENT ROUTER & MATH/CORE SOLVER (FIXES GENERIC FALLBACK BUG) ---
+    function sendQuick(text) {
+        document.getElementById('userInput').value = text;
+        handleChat();
+    }
+
+    function handleChat() {
+        const inputEl = document.getElementById('userInput');
+        const query = inputEl.value.trim();
+        if (!query) return;
+
+        appendMessage('user', 'Bạn', query);
+        inputEl.value = '';
+
+        const response = routeAndGenerateResponse(query);
+        setTimeout(() => {
+            appendMessage('bot', response.tag, response.html);
+        }, 250);
+    }
+
+    function appendMessage(sender, tag, html) {
+        const box = document.getElementById('chatBox');
+        const div = document.createElement('div');
+        div.className = `msg ${sender}`;
+        div.innerHTML = `<span class="msg-tag">${tag}</span>${html}`;
+        box.appendChild(div);
+        box.scrollTop = box.scrollHeight;
+    }
+
+    function routeAndGenerateResponse(q) {
+        const lower = q.toLowerCase();
+
+        // ROUTE A: MATH & ACADEMIC INTENT
+        if (lower.includes('phương trình') || lower.includes('x^2') || lower.includes('x²')) {
+            return {
+                tag: 'Chế độ Học thuật & Giải Toán (Bước 1: Kiểm soát nhận thức)',
+                html: solveQuadraticFromText(q)
+            };
+        }
+        if (lower.includes('đạo hàm')) {
+            return {
+                tag: 'Chế độ Học thuật & Giải Toán',
+                html: `<b>Hướng dẫn tính đạo hàm từng bước:</b><br>
+                Với hàm đa thức dạng $y = ax^n + bx + c$, ta áp dụng quy tắc $(x^n)' = n \cdot x^{n-1}$:<br>
+                • Ví dụ với $y = x^3 - 3x + 1$:<br>
+                1. $(x^3)' = 3x^2$<br>
+                2. $(-3x)' = -3$<br>
+                3. $(1)' = 0$<br>
+                <b>Kết quả:</b> $y' = 3x^2 - 3$.<br>
+                <i>Mẹo AQ khi gặp bài toán khó:</i> Hãy tách bài toán lớn thành từng phép tính nhỏ trong tầm kiểm soát (Control) thay vì nhìn toàn bộ đề bài rồi hoảng sợ.`
+            };
+        }
+        if (/[\d\+\-\*\/\=]/.test(lower) && (lower.includes('tính') || lower.includes('giải') || lower.includes('toán') || lower.includes('='))) {
+            return {
+                tag: 'Chế độ Hỗ trợ Tư duy Toán học',
+                html: `Mình đã nhận diện đây là câu hỏi thuộc lĩnh vực <b>Toán học</b> (không dùng câu trả lời mẫu chung chung).<br>
+                • <b>Bước 1 (Xác định dữ kiện - Control):</b> Ghi rõ giả thiết đề bài cho và đại lượng cần tìm.<br>
+                • <b>Bước 2 (Khoanh vùng công thức - Reach):</b> Bài toán này thuộc chuyên đề nào (Đại số, Giải tích hay Hình học)? Không để một bài khó làm ảnh hưởng tâm lý cả đề thi.<br>
+                • Bạn hãy nhập cụ thể biểu thức (ví dụ: <code>2x^2 - 5x + 2 = 0</code>), mình sẽ giải chi tiết từng bước ngay!`
+            };
+        }
+
+        // ROUTE B: ADVERSITY / STRESS / CORE MODEL INTENT
+        if (lower.includes('điểm kém') || lower.includes('áp lực') || lower.includes('buồn') || lower.includes('nản') || lower.includes('bất tài') || lower.includes('thất bại') || lower.includes('thi')) {
+            return {
+                tag: 'Phân tích Ứng phó Nghịch cảnh theo Mô hình CORE',
+                html: `Cảm giác thất vọng khi điểm số chưa như ý là phản ứng tự nhiên. Hãy cùng phân tách tình huống này qua lăng kính <b>CORE</b> để không bị cảm xúc lấn át:<br>
+                • <b>1. Khoanh vùng ảnh hưởng (Reach):</b> Điểm kém ở <i>một bài kiểm tra</i> chỉ phản ánh lỗ hổng kiến thức ở chương đó tại thời điểm hiện tại — <b>không</b> có nghĩa là bạn "bất tài" ở mọi môn học hay tương lai.<br>
+                • <b>2. Vòng tròn kiểm soát (Control):</b> Điểm số đã chấm không đổi được, nhưng việc <i>xem lại lỗi sai trong 15 phút tối nay</i> nằm 100% trong tay bạn.<br>
+                • <b>3. Trách nhiệm hành động (Ownership):</b> Bạn có thể chuyển sang tab <b>Thẻ Tình huống & AQ Passport</b> để ghi lại 1 hành động khắc phục cụ thể ngay bây giờ.`
+            };
+        }
+
+        // ROUTE C: AQ THEORY & RESEARCH FRAMEWORK
+        if (lower.includes('core') || lower.includes('aq') || lower.includes('nghiên cứu') || lower.includes('passport') || lower.includes('chỉ số')) {
+            return {
+                tag: 'Cơ sở Lý luận Đề tài Nghiên cứu AQ',
+                html: `Theo khung lý thuyết của <b>Paul G. Stoltz</b> được vận dụng trong đề tài:<br>
+                • <b>C - Control (Kiểm soát):</b> Mức độ nhận thức khả năng tác động lên tình huống nghịch cảnh.<br>
+                • <b>O - Ownership (Làm chủ/Trách nhiệm):</b> Mức độ chủ động nhận trách nhiệm cải thiện kết quả thay vì đổ lỗi.<br>
+                • <b>R - Reach (Phạm vi ảnh hưởng):</b> Khả năng giới hạn nghịch cảnh ở đúng phạm vi của nó, không để lan sang các mặt khác của cuộc sống.<br>
+                • <b>E - Endurance (Sức bền/Tính bền bỉ):</b> Nhận thức rằng khó khăn chỉ là tạm thời và có thể vượt qua.<br>
+                <i>Lưu ý khoa học:</i> Đề tài đánh giá 4 thành tố này qua 16 chỉ báo kết hợp minh chứng hành vi thực tế trong <b>AQ Passport</b>.`
+            };
+        }
+
+        // ROUTE D: SMART CLARIFICATION (NO DEAD-END FALLBACK)
+        return {
+            tag: 'Trợ lý Điều hướng Thông minh',
+            html: `Mình đã ghi nhận nội dung: <i>"${escapeHtml(q)}"</i>. Để hỗ trợ chính xác nhất thay vì trả lời rập khuôn, bạn hãy chọn hướng xử lý phù hợp:<br>
+            1. Nếu đây là <b>bài tập môn học (Toán, Lý, Hóa...)</b>: Hãy gõ kèm yêu cầu cụ thể (ví dụ: <i>"Giải phương trình..."</i> hoặc <i>"Tìm điều kiện xác định..."</i>).<br>
+            2. Nếu đây là <b>khó khăn tâm lý / áp lực học đường</b>: Hãy chia sẻ điều khiến bạn lo lắng nhất, mình sẽ giúp bạn phân tích theo 4 bước <b>CORE</b>.<br>
+            3. Bạn cũng có thể chuyển sang <b>Tab 2</b> để tự đánh giá 16 chỉ báo CORE của bản thân.`
+        };
+    }
+
+    function solveQuadraticFromText(text) {
+        // Parse ax^2 + bx + c = 0
+        const cleaned = text.replace(/\s+/g, '').replace(/x²/g, 'x^2');
+        const match = cleaned.match(/([+-]?\d*)x\^2([+-]\d*)x([+-]\d+)=0/);
+        if (match) {
+            let a = match[1] === '' || match[1] === '+' ? 1 : (match[1] === '-' ? -1 : parseFloat(match[1]));
+            let b = match[2] === '' || match[2] === '+' ? 1 : (match[2] === '-' ? -1 : parseFloat(match[2]));
+            let c = parseFloat(match[3]);
+            const delta = b * b - 4 * a * c;
+            let steps = `<b>Giải phương trình bậc hai:</b> ${a}x² ${b >= 0 ? '+ ' + b : '- ' + Math.abs(b)}x ${c >= 0 ? '+ ' + c : '- ' + Math.abs(c)} = 0<br>`;
+            steps += `• <b>Bước 1 (Xác định hệ số):</b> a = ${a}, b = ${b}, c = ${c}<br>`;
+            steps += `• <b>Bước 2 (Tính biệt thức Δ):</b> Δ = b² - 4ac = (${b})² - 4·(${a})·(${c}) = <b>${delta}</b><br>`;
+            if (delta < 0) {
+                steps += `• <b>Bước 3 (Kết luận):</b> Vì Δ < 0 nên phương trình vô nghiệm thực.`;
+            } else if (delta === 0) {
+                const x = -b / (2 * a);
+                steps += `• <b>Bước 3 (Kết luận):</b> Vì Δ = 0 nên phương trình có nghiệm kép: <b>x₁ = x₂ = ${x}</b>.`;
+            } else {
+                const x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                const x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                steps += `• <b>Bước 3 (Kết luận):</b> Vì Δ > 0 nên phương trình có 2 nghiệm phân biệt:<br>
+                &nbsp;&nbsp;x₁ = (-b + √Δ) / 2a = <b>${Number(x1.toFixed(4))}</b><br>
+                &nbsp;&nbsp;x₂ = (-b - √Δ) / 2a = <b>${Number(x2.toFixed(4))}</b>`;
+            }
+            return steps;
+        }
+        return `Để giải tự động phương trình bậc hai, bạn hãy nhập đúng định dạng chuẩn <code>ax^2 + bx + c = 0</code> (ví dụ: <code>2x^2 - 5x + 2 = 0</code> hoặc <code>1x^2 - 4x + 3 = 0</code>).`;
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+    // --- 2. 16-ITEM CORE ASSESSMENT ---
+    const coreQuestions = [
+        // Control (C1 - C4)
+        { id: 'C1', dim: 'Control', text: '1. Khi gặp một đề kiểm tra khó bất ngờ, tôi vẫn giữ được bình tĩnh để tìm câu dễ làm trước.' },
+        { id: 'C2', dim: 'Control', text: '2. Tôi phân biệt được đâu là yếu tố mình có thể thay đổi (thời gian ôn tập) và đâu là yếu tố ngoài tầm kiểm soát (độ khó đề thi).' },
+        { id: 'C3', dim: 'Control', text: '3. Khi kế hoạch học tập bị xáo trộn, tôi nhanh chóng điều chỉnh lại lịch trình thay vì bỏ cuộc.' },
+        { id: 'C4', dim: 'Control', text: '4. Tôi tin rằng nỗ lực phương pháp đúng đắn của mình có thể cải thiện kết quả hiện tại.' },
+        // Ownership (O1 - O4)
+        { id: 'O1', dim: 'Ownership', text: '5. Khi nhận điểm thấp, tôi chủ động rà soát lỗi sai của bản thân trước khi nghĩ đến các lý do khách quan.' },
+        { id: 'O2', dim: 'Ownership', text: '6. Tôi sẵn sàng chủ động hỏi thầy cô hoặc bạn bè về phần kiến thức mình chưa hiểu.' },
+        { id: 'O3', dim: 'Ownership', text: '7. Khi làm việc nhóm gặp trục trặc, tôi tập trung tìm giải pháp cho phần việc của mình thay vì đổ lỗi.' },
+        { id: 'O4', dim: 'Ownership', text: '8. Tôi tự đặt ra hành động khắc phục cụ thể sau mỗi lần chưa đạt mục tiêu.' },
+        // Reach (R1 - R4) - Reverse scored items handled logically via positive phrasing for clarity
+        { id: 'R1', dim: 'Reach', text: '9. Việc bị điểm kém ở một môn học không làm tôi mất tự tin vào năng lực của bản thân ở các môn khác.' },
+        { id: 'R2', dim: 'Reach', text: '10. Khi gặp chuyện buồn ở trường, tôi vẫn giữ được sự tập trung cho các sinh hoạt tích cực khác trong ngày.' },
+        { id: 'R3', dim: 'Reach', text: '11. Tôi hiểu rằng một thất bại cụ thể chỉ là một sự việc riêng lẻ, không quyết định toàn bộ tương lai của tôi.' },
+        { id: 'R4', dim: 'Reach', text: '12. Tôi biết cách tách biệt cảm xúc tiêu cực nhất thời khỏi giá trị bản thân.' },
+        // Endurance (E1 - E4)
+        { id: 'E1', dim: 'Endurance', text: '13. Tôi tin rằng giai đoạn áp lực thi cử căng thẳng hiện tại chỉ là tạm thời và sẽ sớm qua đi.' },
+        { id: 'E2', dim: 'Endurance', text: '14. Dù phải ôn luyện lại nhiều lần một dạng bài khó, tôi vẫn kiên trì theo đuổi đến khi hiểu bản chất.' },
+        { id: 'E3', dim: 'Endurance', text: '15. Tôi nhìn nhận những lần vấp ngã trong học tập như dữ liệu giúp mình trưởng thành hơn.' },
+        { id: 'E4', dim: 'Endurance', text: '16. Khi gặp trở ngại kéo dài, tôi vẫn duy trì được thói quen học tập đều đặn mỗi ngày.' }
+    ];
+
+    function renderQuestions() {
+        const container = document.getElementById('questionsContainer');
+        container.innerHTML = coreQuestions.map(q => `
+            <div class="question-item">
+                <p>${q.text} <span style="font-size:0.75rem; color:var(--text-muted);">[${q.dim}]</span></p>
+                <div class="likert-group">
+                    ${[1,2,3,4,5].map(val => `
+                        <label class="likert-label">
+                            <input type="radio" name="${q.id}" value="${val}" ${val===3?'checked':''}> Mức ${val}
+                        </label>
+                    `).join('')}
                 </div>
             </div>
-        </section>
+        `).join('');
+    }
+    renderQuestions();
 
-        <!-- ==================== MODULE 2: HỘ CHIẾU AQ PASSPORT ==================== -->
-        <section id="section-passport" class="tab-section hidden space-y-6">
-            <div class="glass-card rounded-2xl p-6 md:p-8 relative overflow-hidden">
-                <div class="absolute -right-10 -bottom-10 text-gold-500/5 text-9xl pointer-events-none">
-                    <i class="fa-solid fa-passport"></i>
-                </div>
-                <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8 border-b border-gold-500/30 pb-6">
-                    <div>
-                        <span class="text-xs uppercase tracking-[0.3em] text-gold-400 font-bold">Hộ Chiếu Vượt Khó Cá Nhân</span>
-                        <h2 class="text-2xl md:text-3xl font-extrabold text-white mt-1">AQ PASSPORT – SỔ TAY SỐ CLIMBER</h2>
-                    </div>
-                    <div class="flex gap-3">
-                        <button onclick="alert('Đã lưu Hộ chiếu AQ vào thiết bị!')" class="px-4 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-navy-950 font-bold text-xs transition shadow-lg flex items-center gap-2">
-                            <i class="fa-solid fa-download"></i> Tải PDF Passport
-                        </button>
-                    </div>
-                </div>
+    function calculateCORE() {
+        const scores = { Control: 0, Ownership: 0, Reach: 0, Endurance: 0 };
+        coreQuestions.forEach(q => {
+            const selected = document.querySelector(`input[name="${q.id}"]:checked`);
+            scores[q.dim] += parseInt(selected.value, 10);
+        });
 
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                    <div class="md:col-span-5 space-y-4">
-                        <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-3">
-                            <h3 class="font-bold text-gold-400 text-sm"><i class="fa-solid fa-user-pen mr-1"></i> Cập Nhật Hồ Sơ Climber</h3>
-                            <div>
-                                <label class="text-xs text-slate-400 block mb-1">Họ và tên học sinh</label>
-                                <input type="text" id="pass-name" oninput="updatePassportView()" value="Nguyễn Hoàng Nam" class="w-full bg-navy-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="text-xs text-slate-400 block mb-1">Lớp &amp; Trường THPT</label>
-                                <input type="text" id="pass-class" oninput="updatePassportView()" value="Lớp 11A2 - THPT Chuyên" class="w-full bg-navy-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
-                            </div>
-                            <div>
-                                <label class="text-xs text-slate-400 block mb-1">Cấp độ Vượt khó (Archetype)</label>
-                                <select id="pass-level" onchange="updatePassportView()" class="w-full bg-navy-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
-                                    <option value="Nhà Leo Núi (Climber) - Xuất sắc">Nhà Leo Núi (Climber) - Quyết tâm cao</option>
-                                    <option value="Người Cắm Trại (Camper) - Cần bứt phá">Người Cắm Trại (Camper) - An toàn</option>
-                                    <option value="Người Bứt Phá (Challenger)">Người Bứt Phá (Challenger)</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Thẻ Hộ chiếu Digital -->
-                    <div class="md:col-span-7 flex justify-center">
-                        <div class="w-full max-w-lg rounded-2xl bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 border-2 border-gold-500/50 p-6 shadow-2xl relative">
-                            <div class="flex justify-between items-start border-b border-gold-500/30 pb-3 mb-4">
-                                <div>
-                                    <div class="text-[9px] tracking-[0.25em] text-gold-400 uppercase font-bold">Socialist Republic of Vietnam</div>
-                                    <div class="text-base font-serif font-bold text-white">VIETNAM HIGH SCHOOL R&amp;D 2026</div>
-                                </div>
-                                <i class="fa-solid fa-shield-halved text-2xl text-gold-400"></i>
-                            </div>
-                            <div class="flex gap-4 items-center">
-                                <div class="w-20 h-24 rounded-xl bg-navy-950 border border-gold-500/40 flex flex-col items-center justify-center text-gold-400 shrink-0">
-                                    <i class="fa-solid fa-user-astronaut text-3xl mb-1"></i>
-                                    <span class="text-[8px] uppercase tracking-wider font-bold">CLIMBER ID</span>
-                                </div>
-                                <div class="space-y-1.5 text-xs flex-1">
-                                    <div>
-                                        <span class="text-slate-400 text-[9px] uppercase block">Họ và Tên</span>
-                                        <span id="card-name-view" class="text-sm font-extrabold text-white uppercase">NGUYỄN HOÀNG NAM</span>
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <div>
-                                            <span class="text-slate-400 text-[9px] uppercase block">Đơn vị</span>
-                                            <span id="card-class-view" class="font-bold text-gold-300">11A2 - THPT Chuyên</span>
-                                        </div>
-                                        <div>
-                                            <span class="text-slate-400 text-[9px] uppercase block">Mã Hộ Chiếu</span>
-                                            <span class="font-mono font-bold text-emerald-400">VN-AQ-2026</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <span class="text-slate-400 text-[9px] uppercase block">Trạng thái</span>
-                                        <span id="card-level-view" class="font-bold text-amber-300">Nhà Leo Núi (Climber) - Xuất sắc</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-4 p-2.5 rounded-lg bg-gold-500/10 border border-gold-500/30 text-[11px] text-gold-200 italic text-center">
-                                "Cam kết kiểm soát nghịch cảnh, chịu trách nhiệm 100% và bền bỉ chinh phục mọi kỳ thi THPT!"
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== MODULE 3: HƯỚNG DẪN CHI TIẾT (HS & GV) ==================== -->
-        <section id="section-guide" class="tab-section hidden space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Hướng dẫn cho Học sinh -->
-                <div class="glass-card rounded-2xl p-6 space-y-4">
-                    <div class="flex items-center gap-3 text-gold-400">
-                        <i class="fa-solid fa-graduation-cap text-2xl"></i>
-                        <h2 class="text-lg font-bold text-white">Cẩm Nang Dành Cho Học Sinh</h2>
-                    </div>
-                    <p class="text-xs text-slate-300 leading-relaxed">Hướng dẫn từng bước giúp học sinh THPT khai thác tối đa ứng dụng để vượt qua áp lực học tập.</p>
-                    <ul class="space-y-3 text-xs text-slate-200">
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-circle-check text-gold-400 mt-0.5"></i>
-                            <span><strong>Bước 1:</strong> Khi gặp điểm kém hoặc nản chí, hãy chọn đúng môn học tại Module 1 để trò chuyện cùng AI Cố Vấn.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-circle-check text-gold-400 mt-0.5"></i>
-                            <span><strong>Bước 2:</strong> Cập nhật thông tin cá nhân vào Hộ chiếu AQ Passport để ghi nhận tinh thần chiến đấu.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-circle-check text-gold-400 mt-0.5"></i>
-                            <span><strong>Bước 3:</strong> Tránh xa 10 thói quen xấu (lướt mạng xã hội, thức khuya, trì hoãn) để giữ vững năng lượng AQ trên 80%.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-circle-check text-gold-400 mt-0.5"></i>
-                            <span><strong>Bước 4:</strong> Viết nhật ký 7 ngày đều đặn để tự đánh giá sự tiến bộ của bản thân qua từng tuần.</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Hướng dẫn cho Giáo viên -->
-                <div class="glass-card rounded-2xl p-6 space-y-4">
-                    <div class="flex items-center gap-3 text-cyan-400">
-                        <i class="fa-solid fa-chalkboard-user text-2xl"></i>
-                        <h2 class="text-lg font-bold text-white">Cẩm Nang Dành Cho Giáo Viên</h2>
-                    </div>
-                    <p class="text-xs text-slate-300 leading-relaxed">Tài liệu hỗ trợ giáo viên chủ nhiệm và tư vấn tâm lý tổ chức các buổi sinh hoạt lớp/ngoại khóa.</p>
-                    <ul class="space-y-3 text-xs text-slate-200">
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-circle-check text-cyan-400 mt-0.5"></i>
-                            <span><strong>Tổ chức Workshop:</strong> Sử dụng Module Báo cáo thực nghiệm để minh họa sự tiến bộ của học sinh trước hội đồng trường.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-circle-check text-cyan-400 mt-0.5"></i>
-                            <span><strong>Đánh giá định kỳ:</strong> Cho học sinh thực hiện Khảo sát AQ (Module 4) đầu năm và cuối kỳ để đo lường chỉ số vượt khó.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fa-solid fa-circle-check text-cyan-400 mt-0.5"></i>
-                            <span><strong>Sử dụng Action Kit:</strong> Giao nhiệm vụ viết Nhật ký 7 ngày (Module 8) làm bài tập rèn luyện kỹ năng sống cho lớp chủ nhiệm.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== MODULE 4: KHẢO SÁT AQ MỚI ==================== -->
-        <section id="section-survey" class="tab-section hidden space-y-6">
-            <div class="glass-card rounded-2xl p-6 md:p-8 max-w-3xl mx-auto space-y-6">
-                <div class="text-center space-y-2">
-                    <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Đánh Giá Tâm Lý Học Đường</span>
-                    <h2 class="text-2xl font-extrabold text-white">Bộ Câu Hỏi Khảo Sát Chỉ Số AQ (AQ01 / AQ02 / AQ07)</h2>
-                    <p class="text-xs text-slate-300">Hãy chọn mức độ phản ánh đúng nhất với bạn khi gặp bài kiểm tra khó hoặc áp lực điểm số.</p>
-                </div>
-
-                <div id="survey-container" class="space-y-4 text-xs">
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
-                        <p class="font-bold text-white text-sm">Câu 1: Khi nhận điểm 4 môn Toán hoặc Lý, phản ứng đầu tiên của bạn là gì?</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <label class="p-2.5 rounded-lg bg-navy-950 border border-slate-800 hover:border-gold-500 cursor-pointer flex items-center gap-2">
-                                <input type="radio" name="q1" value="1" class="text-gold-500">
-                                <span>Hoảng loạn, buồn chán và muốn bỏ bê môn đó luôn.</span>
-                            </label>
-                            <label class="p-2.5 rounded-lg bg-navy-950 border border-slate-800 hover:border-gold-500 cursor-pointer flex items-center gap-2">
-                                <input type="radio" name="q1" value="3" class="text-gold-500">
-                                <span>Bình tĩnh tìm nguyên nhân sai sót và hỏi thầy cô/bạn bè để sửa.</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
-                        <p class="font-bold text-white text-sm">Câu 2: Khi đứng trước kỳ thi THPT quốc gia với lượng kiến thức rất lớn, bạn thường làm gì?</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <label class="p-2.5 rounded-lg bg-navy-950 border border-slate-800 hover:border-gold-500 cursor-pointer flex items-center gap-2">
-                                <input type="radio" name="q2" value="1" class="text-gold-500">
-                                <span>Lướt điện thoại, xem TikTok/Reels để trốn tránh thực tế.</span>
-                            </label>
-                            <label class="p-2.5 rounded-lg bg-navy-950 border border-slate-800 hover:border-gold-500 cursor-pointer flex items-center gap-2">
-                                <input type="radio" name="q2" value="3" class="text-gold-500">
-                                <span>Lập lộ trình ôn tập từng phần nhỏ mỗi ngày theo phương pháp khoa học.</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center pt-2">
-                    <button onclick="submitSurvey()" class="px-8 py-3 rounded-xl bg-gradient-to-r from-gold-400 to-gold-600 hover:from-gold-500 hover:to-gold-600 text-navy-950 font-bold text-sm transition shadow-lg">
-                        Xem Kết Quả Đánh Giá AQ
-                    </button>
-                    <div id="survey-result" class="mt-4 text-sm font-bold text-emerald-400 hidden"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== MODULE 5: BÁO CÁO THỰC NGHIỆM ==================== -->
-        <section id="section-dashboard" class="tab-section hidden space-y-6">
-            <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6">
-                <div>
-                    <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Nghiên Cứu Khoa Học 2026</span>
-                    <h2 class="text-2xl font-extrabold text-white">Báo Cáo Kết Quả Thực Nghiệm NCKH</h2>
-                    <p class="text-xs text-slate-300">Biểu đồ thể hiện sự cải thiện chỉ số vượt khó (AQ) của học sinh sau 4 tuần áp dụng AQ School Action Kit.</p>
-                </div>
-                <div class="bg-navy-950/80 p-5 rounded-2xl border border-slate-800 h-80 flex items-center justify-center">
-                    <canvas id="researchChart"></canvas>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== MODULE 6: KHO TRI THỨC THPT ĐA MÔN ==================== -->
-        <section id="section-subjects" class="tab-section hidden space-y-6">
-            <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6">
-                <div>
-                    <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Toàn Diện Mọi Môn Học</span>
-                    <h2 class="text-2xl font-extrabold text-white">Kho Tri Thức &amp; Bài Tập THPT</h2>
-                    <p class="text-xs text-slate-300">Hệ thống tóm tắt kiến thức cốt lõi và phương pháp bóc tách đề thi THPT.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
-                        <div class="text-gold-400 font-bold text-sm"><i class="fa-solid fa-square-root-variable mr-1.5"></i> Toán Học</div>
-                        <p class="text-slate-300">Khảo sát hàm số, Hình học không gian Oxyz, Xác suất thống kê, Tích phân và ứng dụng.</p>
-                        <button onclick="askPreset('Hãy tóm tắt công thức Đạo hàm và Khảo sát hàm số lớp 12')" class="text-gold-400 hover:underline font-semibold pt-1 block">Hỏi AI ngay &rarr;</button>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
-                        <div class="text-cyan-400 font-bold text-sm"><i class="fa-solid fa-bolt mr-1.5"></i> Vật Lý</div>
-                        <p class="text-slate-300">Dao động cơ, Sóng cơ, Dòng điện xoay chiều, Vật lý hạt nhân và các bài toán vận dụng cao.</p>
-                        <button onclick="askPreset('Hướng dẫn phương pháp giải nhanh bài toán Dao động điều hòa')" class="text-cyan-400 hover:underline font-semibold pt-1 block">Hỏi AI ngay &rarr;</button>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
-                        <div class="text-emerald-400 font-bold text-sm"><i class="fa-solid fa-flask mr-1.5"></i> Hóa Học</div>
-                        <p class="text-slate-300">Ester - Lipit, Carbohydrate, Amin - Amino axit - Protein, Kim loại kiềm/kiềm thổ/nhôm.</p>
-                        <button onclick="askPreset('Mẹo nhớ nhanh dãy hoạt động hóa học của kim loại và bài toán Este')" class="text-emerald-400 hover:underline font-semibold pt-1 block">Hỏi AI ngay &rarr;</button>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
-                        <div class="text-rose-400 font-bold text-sm"><i class="fa-solid fa-feather mr-1.5"></i> Ngữ Văn</div>
-                        <p class="text-slate-300">Nghị luận xã hội 200 chữ, Nghị luận văn học (Tây Tiến, Sóng, Vợ chồng A Phủ, Chiếc thuyền ngoài xa).</p>
-                        <button onclick="askPreset('Hướng dẫn lập dàn ý Nghị luận xã hội về tinh thần vượt khó')" class="text-rose-400 hover:underline font-semibold pt-1 block">Hỏi AI ngay &rarr;</button>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
-                        <div class="text-purple-400 font-bold text-sm"><i class="fa-solid fa-language mr-1.5"></i> Tiếng Anh</div>
-                        <p class="text-slate-300">Ngữ pháp nâng cao, Câu điều kiện, Mệnh đề quan hệ, Đọc hiểu (Reading Comprehension) & Từ vựng.</p>
-                        <button onclick="askPreset('Mẹo làm bài Đọc hiểu Tiếng Anh THPT đạt điểm cao')" class="text-purple-400 hover:underline font-semibold pt-1 block">Hỏi AI ngay &rarr;</button>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
-                        <div class="text-amber-400 font-bold text-sm"><i class="fa-solid fa-landmark mr-1.5"></i> Lịch Sử &amp; Địa Lý</div>
-                        <p class="text-slate-300">Lịch sử thế giới & Việt Nam từ 1945 đến nay. Địa lý tự nhiên, kinh tế vùng và biểu đồ kỹ năng.</p>
-                        <button onclick="askPreset('Mẹo nhớ các mốc sự kiện Lịch sử trọng tâm 1945 - 1975')" class="text-amber-400 hover:underline font-semibold pt-1 block">Hỏi AI ngay &rarr;</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== MODULE 7: 10 THÓI QUEN XẤU (THAY THẾ TIKTOK) ==================== -->
-        <section id="section-habits" class="tab-section hidden space-y-6">
-            <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6">
-                <div>
-                    <span class="text-xs uppercase tracking-widest text-rose-400 font-bold">Phá Vỡ Trì Hoãn</span>
-                    <h2 class="text-2xl font-extrabold text-white">Tổng Hợp 10 Thói Quen Xấu Của Học Sinh &amp; Cách Khắc Phục</h2>
-                    <p class="text-xs text-slate-300">Mỗi khi bạn vô tình vướng phải một thói quen xấu dưới đây, năng lượng AQ sẽ bị trừ điểm để nhắc nhở bạn quay lại vùng kiểm soát.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
-                        <div class="font-bold text-rose-400 text-sm">1. Trì hoãn việc học (Procrastination)</div>
-                        <p class="text-slate-300">"Để mai tính", đợi nước đến chân mới nhảy khiến tinh thần hoảng loạn.</p>
-                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Áp dụng quy tắc 5 phút khởi động ngay.</span>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
-                        <div class="font-bold text-rose-400 text-sm">2. Lướt Reels / Shorts / TikTok quá đà</div>
-                        <p class="text-slate-300">Sa đà vào video ngắn làm sụt giảm nghiêm trọng khả năng tập trung sâu.</p>
-                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Để điện thoại ở phòng khác khi học bài.</span>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
-                        <div class="font-bold text-rose-400 text-sm">3. Thức khuya cày game / phim</div>
-                        <p class="text-slate-300">Làm đảo lộn đồng hồ sinh học, khiến giờ học trên lớp uể oải, mất ngủ.</p>
-                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Đặt giờ giới nghiêm thiết bị lúc 22:30.</span>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
-                        <div class="font-bold text-rose-400 text-sm">4. Học vẹt, không hiểu bản chất</div>
-                        <p class="text-slate-300">Chỉ nhớ máy móc công thức mà không biết áp dụng vào bài toán thực tế.</p>
-                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Yêu cầu AI giải thích bản chất tư duy.</span>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
-                        <div class="font-bold text-rose-400 text-sm">5. Sợ sai và ngại hỏi thầy cô</div>
-                        <p class="text-slate-300">Giấu dốt, không dám hỏi những phần kiến thức mình bị hổng.</p>
-                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Sai lầm là bằng chứng cho thấy bạn đang tư duy.</span>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
-                        <div class="font-bold text-rose-400 text-sm">6. So sánh bản thân với người khác</div>
-                        <p class="text-slate-300">Tự ti khi thấy bạn bè giải được bài khó còn mình thì chưa.</p>
-                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Chỉ so sánh bản thân với chính mình của ngày hôm qua.</span>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
-                        <div class="font-bold text-rose-400 text-sm">7. Bỏ cuộc ngay khi gặp bài toán khó</div>
-                        <p class="text-slate-300">Mới đọc đề thấy dài hoặc khó là chép luôn lời giải mà không suy nghĩ.</p>
-                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Bóc tách giả thiết từng bước nhỏ.</span>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
-                        <div class="font-bold text-rose-400 text-sm">8. Ôn thi dồn dập trước ngày kiểm tra</div>
-                        <p class="text-slate-300">Học dồn gây stress nặng, chữ bay sạch sau khi thi xong.</p>
-                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Ôn tập ngắt quãng (Spaced Repetition).</span>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
-                        <div class="font-bold text-rose-400 text-sm">9. Môi trường học tập bừa bộn</div>
-                        <p class="text-slate-300">Bàn học lộn xộn làm phân tán năng lượng và sự tập trung.</p>
-                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Dọn sạch bàn học trước khi bắt đầu ôn tập.</span>
-                    </div>
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-rose-500/30 space-y-2">
-                        <div class="font-bold text-rose-400 text-sm">10. Thiếu ngủ và lười vận động</div>
-                        <p class="text-slate-300">Ngồi ì một chỗ khiến não bộ trì trệ, không linh hoạt.</p>
-                        <span class="text-emerald-400 font-semibold block">&rarr; Giải pháp: Dành 15 phút vận động thể thao mỗi ngày.</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== MODULE 8: NHẬT KÝ 7 NGÀY VƯỢT KHÓ ==================== -->
-        <section id="section-diary" class="tab-section hidden space-y-6">
-            <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6 max-w-3xl mx-auto">
-                <div class="text-center space-y-2">
-                    <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Hành Trình Chinh Phục</span>
-                    <h2 class="text-2xl font-extrabold text-white">Nhật Ký Leo Núi 7 Ngày</h2>
-                    <p class="text-xs text-slate-300">Ghi lại cảm xúc, thử thách đã vượt qua và cam kết hành động mỗi ngày của bạn.</p>
-                </div>
-
-                <div class="space-y-4 text-xs">
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
-                        <div class="flex justify-between items-center font-bold text-white text-sm">
-                            <span>Ngày 1: Nhận diện điểm yếu &amp; Lập vùng kiểm soát</span>
-                            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px]">Đã hoàn thành</span>
-                        </div>
-                        <textarea class="w-full bg-navy-950 border border-slate-800 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500" rows="2" placeholder="Hôm nay tôi đã vượt qua sự trì hoãn như thế nào?...">Hôm nay mình đã tự giác giải quyết 5 bài tập Toán hàm số mà không lướt điện thoại giữa chừng.</textarea>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
-                        <div class="flex justify-between items-center font-bold text-white text-sm">
-                            <span>Ngày 2: Chinh phục bài toán khó môn Lý / Hóa</span>
-                            <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px]">Đang thực hiện</span>
-                        </div>
-                        <textarea class="w-full bg-navy-950 border border-slate-800 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-gold-500" rows="2" placeholder="Cảm xúc và kết quả học tập của bạn hôm nay..."></textarea>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-navy-900/80 border border-slate-700 space-y-2">
-                        <div class="flex justify-between items-center font-bold text-slate-400 text-sm">
-                            <span>Ngày 3 đến Ngày 7: Duy trì phong độ Climber</span>
-                            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px]">Sắp mở khóa</span>
-                        </div>
-                        <p class="text-slate-400 italic">Tiếp tục duy trì thói quen tích cực và ghi chép nhật ký đều đặn để nhận huy hiệu "Nhà Leo Núi Vàng" vào cuối tuần.</p>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <button onclick="alert('Đã lưu Nhật ký 7 ngày thành công! Cố gắng phát huy nhé!')" class="px-6 py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-navy-950 font-bold text-sm transition shadow-lg">
-                        Lưu Nhật Ký Hành Trình
-                    </button>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="bg-navy-950 border-t border-gold-500/20 py-4 text-center text-xs text-slate-400 mt-12">
-        <p>AQ – School Action Kit &amp; Passport AI | Nghiên Cứu Khoa Học THPT 2026</p>
-    </footer>
-
-    <!-- JAVASCRIPT LOGIC NÂNG CAO -->
-    <script>
-        let currentEnergy = 80;
-        let selectedSubjectName = 'Toán Học (Đại số, Hình học, Giải tích)';
-
-        const badHabitsList = [
-            "⚠️ Dính thói quen: Lướt TikTok/Reels quá 30 phút! (-10% năng lượng)",
-            "⚠️ Dính thói quen: Trì hoãn bài tập về nhà đến nửa đêm! (-10% năng lượng)",
-            "⚠️ Dính thói quen: Thức khuya cày phim/game làm mất tập trung! (-10% năng lượng)",
-            "⚠️ Dính thói quen: Bỏ cuộc ngay khi gặp bài toán khó! (-10% năng lượng)",
-            "⚠️ Dính thói quen: Ôn thi dồn dập gây stress nặng! (-10% năng lượng)"
+        const dims = [
+            { key: 'Control', name: 'C - Kiểm soát (Control)', desc: 'Khả năng giữ bình tĩnh và nhận diện vùng tác động được.' },
+            { key: 'Ownership', name: 'O - Làm chủ (Ownership)', desc: 'Tinh thần chủ động nhận trách nhiệm và tìm giải pháp.' },
+            { key: 'Reach', name: 'R - Khoanh vùng (Reach)', desc: 'Ngăn chặn khó khăn lan rộng sang các lĩnh vực khác.' },
+            { key: 'Endurance', name: 'E - Sức bền (Endurance)', desc: 'Nhận thức tính tạm thời của nghịch cảnh và sự kiên trì.' }
         ];
 
-        function adjustEnergy(amount) {
-            currentEnergy = Math.min(100, Math.max(0, currentEnergy + amount));
-            document.getElementById('energy-text').innerText = currentEnergy + '%';
-            document.getElementById('energy-bar').style.width = currentEnergy + '%';
+        // Find lowest dimension to recommend targeted intervention
+        let lowest = dims[0];
+        dims.forEach(d => { if (scores[d.key] < scores[lowest.key]) lowest = d; });
+
+        document.getElementById('coreAdvice').innerHTML = `
+            <b>Phân tích định hướng can thiệp (Không gộp điểm số định danh):</b> Thành tố cần ưu tiên rèn luyện nhất hiện tại của bạn là <b>${lowest.name} (${scores[lowest.key]}/20 điểm)</b>. Bạn nên thực hành các thẻ tình huống thuộc nhóm này trong Sổ tay <i>AQ Passport</i>.
+        `;
+
+        document.getElementById('resultGrid').innerHTML = dims.map(d => `
+            <div class="core-box">
+                <h4>${d.name}</h4>
+                <div class="score-val">${scores[d.key]} / 20</div>
+                <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.25rem;">${d.desc}</p>
+            </div>
+        `).join('');
+
+        document.getElementById('coreResults').style.display = 'block';
+    }
+
+    // --- 3. SCENARIO CARDS & AQ PASSPORT ---
+    const scenarios = [
+        {
+            title: 'Tình huống #01 (Áp lực kiểm tra định kỳ - Control)',
+            desc: 'Điểm kiểm tra giữa kỳ môn Toán của bạn thấp hơn kỳ vọng 2 điểm, trong khi kỳ thi cuối kỳ chỉ còn 3 tuần nữa.',
+            prompt: 'Gợi ý Vòng tròn Kiểm soát: Liệt kê 2 việc nằm trong tầm kiểm soát của bạn ngay tối nay và 1 việc bạn cần buông bỏ.'
+        },
+        {
+            title: 'Tình huống #02 (Phản ứng dây chuyền tâm lý - Reach)',
+            desc: 'Buổi sáng bạn bị phê bình vì quên bài tập, khiến cả ngày hôm đó bạn chán nản và không muốn học các môn yêu thích khác.',
+            prompt: 'Gợi ý Khoanh vùng Ảnh hưởng: Viết ra ranh giới rõ ràng giữa "một thiếu sót buổi sáng" và "năng lực cả ngày của bạn".'
+        },
+        {
+            title: 'Tình huống #03 (Xung đột làm việc nhóm - Ownership)',
+            desc: 'Nhóm thuyết trình của bạn chuẩn bị chậm tiến độ vì các thành viên đùn đẩy trách nhiệm cho nhau.',
+            prompt: 'Gợi ý Làm chủ Hành động: Bạn có thể chủ động đề xuất giải pháp cụ thể nào cho phần việc của mình trong 24 giờ tới?'
+        },
+        {
+            title: 'Tình huống #04 (Nản lòng khi ôn luyện dài hạn - Endurance)',
+            desc: 'Bạn đã ôn luyện chuyên đề hàm số suốt 2 tuần nhưng vẫn hay mắc lỗi tính toán nhỏ khi làm đề tổng hợp.',
+            prompt: 'Gợi ý Sức bền Tinh thần: Hãy ghi nhận 1 tiến bộ nhỏ bạn đã đạt được so với 2 tuần trước và 1 bước điều chỉnh kỹ thuật làm bài.'
         }
+    ];
 
-        function triggerBadHabit() {
-            const randomHabit = badHabitsList[Math.floor(Math.random() * badHabitsList.length)];
-            adjustEnergy(-10);
-            alert(randomHabit + "\nHãy hít thở sâu, bật chế độ tập trung và lấy lại năng lượng AQ nhé!");
+    function drawScenario() {
+        const s = scenarios[Math.floor(Math.random() * scenarios.length)];
+        document.getElementById('scenTitle').textContent = s.title;
+        document.getElementById('scenDesc').textContent = s.desc;
+        document.getElementById('scenPrompt').innerHTML = `<b>${s.prompt.split(':')[0]}:</b>${s.prompt.split(':')[1]}`;
+    }
+
+    function stampPassport() {
+        const logText = document.getElementById('actionLog').value.trim();
+        if (!logText) {
+            alert('Vui lòng ghi lại hành động thực tế của bạn trước khi đóng dấu AQ Passport!');
+            return;
         }
+        const scenTitle = document.getElementById('scenTitle').textContent;
+        const time = new Date().toLocaleString('vi-VN');
+        const list = document.getElementById('passportLogList');
+        
+        const entry = document.createElement('div');
+        entry.className = 'card';
+        entry.style.borderLeft = '4px solid var(--secondary)';
+        entry.innerHTML = `
+            <div style="font-size:0.8rem; color:var(--text-muted);">${time} • ${scenTitle}</div>
+            <p style="margin-top:0.35rem;"><b>Cam kết hành vi:</b> ${escapeHtml(logText)}</p>
+            <div class="passport-stamp">✓ ĐÃ XÁC NHẬN DẤU VẾT HÀNH VI (AQ PASSPORT)</div>
+        `;
+        list.prepend(entry);
+        document.getElementById('actionLog').value = '';
+    }
+</script>
 
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-section').forEach(sec => sec.classList.add('hidden'));
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-
-            document.getElementById('section-' + tabId).classList.remove('hidden');
-            document.getElementById('tab-' + tabId).classList.add('active');
-
-            if (tabId === 'dashboard') {
-                renderChart();
-            }
-        }
-
-        function selectSubject(subject) {
-            selectedSubjectName = subject;
-            document.getElementById('active-subject-display').innerText = 'Đang chọn: ' + subject;
-            switchTab('ai-mentor');
-            addChatMessage('AI Cố Vấn', `Đã kích hoạt cố vấn chuyên sâu cho môn <strong>${subject}</strong>. Bạn cần giải bài tập hay tháo gỡ phần nào?`);
-        }
-
-        function askPreset(question) {
-            switchTab('ai-mentor');
-            document.getElementById('chat-input').value = question;
-        }
-
-        function addChatMessage(sender, htmlContent) {
-            const container = document.getElementById('chat-messages');
-            const isUser = sender === 'Bạn';
-            const div = document.createElement('div');
-            div.className = `flex items-start gap-3 ${isUser ? 'flex-row-reverse' : ''}`;
-            div.innerHTML = `
-                <div class="w-8 h-8 rounded-lg ${isUser ? 'bg-sky-500/20 text-sky-400 border-sky-500/40' : 'bg-gold-500/20 text-gold-400 border-gold-500/40'} border flex items-center justify-center shrink-0 mt-1">
-                    <i class="fa-solid ${isUser ? 'fa-user' : 'fa-robot'}"></i>
-                </div>
-                <div class="${isUser ? 'bg-sky-950/80 border-sky-800/60 rounded-tr-none' : 'bg-navy-800/90 border-slate-700 rounded-tl-none'} border rounded-2xl p-4 text-sm text-slate-200 max-w-[88%] shadow">
-                    <p class="font-bold ${isUser ? 'text-sky-400' : 'text-gold-400'} mb-1">${sender}</p>
-                    <div class="leading-relaxed">${htmlContent}</div>
-                </div>
-            `;
-            container.appendChild(div);
-            container.scrollTop = container.scrollHeight;
-        }
-
-        function handleChatSubmit(e) {
-            e.preventDefault();
-            const input = document.getElementById('chat-input');
-            const text = input.value.trim();
-            if (!text) return;
-
-            addChatMessage('Bạn', text);
-            input.value = '';
-
-            // Tốc độ phản hồi cực nhanh & thông minh
-            setTimeout(() => {
-                let aiReply = `Tuyệt vời! Đối với câu hỏi về môn <strong>${selectedSubjectName}</strong>, AI hướng dẫn bạn tư duy theo mô hình <strong>C.O.R.E</strong>:<br><br>
-                <ul>
-                    <li><strong>1. Control (Kiểm soát):</strong> Đọc kỹ giả thiết, gạch chân từ khóa quan trọng, không để tâm lý lo lắng lấn át.</li>
-                    <li><strong>2. Ownership (Trách nhiệm):</strong> Tự mình viết ra công thức hoặc dàn ý, không xem ngay lời giải mẫu.</li>
-                    <li><strong>3. Reach (Khoanh vùng):</strong> Chia nhỏ bài toán thành các bước cơ bản để giải quyết từng phần.</li>
-                    <li><strong>4. Endurance (Bền bỉ):</strong> Luyện tập đều đặn 15-20 phút mỗi ngày để tạo phản xạ tư duy tốt nhất.</li>
-                </ul>`;
-                addChatMessage('AI Cố Vấn', aiReply);
-                adjustEnergy(5);
-            }, 500);
-        }
-
-        function clearChat() {
-            document.getElementById('chat-messages').innerHTML = `
-                <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-gold-500/20 border border-gold-500/40 text-gold-400 flex items-center justify-center shrink-0 mt-1">
-                        <i class="fa-solid fa-compass"></i>
-                    </div>
-                    <div class="bg-navy-800/90 border border-slate-700 rounded-2xl rounded-tl-none p-4 text-sm text-slate-200 max-w-[88%] shadow">
-                        <p class="font-bold text-gold-400 mb-1">Đã làm mới khung chat!</p>
-                        <p class="leading-relaxed">Bạn có thể đặt câu hỏi mới cho bất kỳ môn học nào.</p>
-                    </div>
-                </div>
-            `;
-        }
-
-        function updatePassportView() {
-            document.getElementById('card-name-view').innerText = document.getElementById('pass-name').value.toUpperCase();
-            document.getElementById('card-class-view').innerText = document.getElementById('pass-class').value;
-            document.getElementById('card-level-view').innerText = document.getElementById('pass-level').value;
-        }
-
-        function submitSurvey() {
-            const q1 = document.querySelector('input[name="q1"]:checked');
-            const q2 = document.querySelector('input[name="q2"]:checked');
-            const resDiv = document.getElementById('survey-result');
-
-            if (!q1 || !q2) {
-                alert('Vui lòng trả lời đầy đủ các câu hỏi khảo sát!');
-                return;
-            }
-
-            const totalScore = parseInt(q1.value) + parseInt(q2.value);
-            let rating = totalScore >= 5 ? "Nhà Leo Núi (Climber) - Chỉ số AQ rất cao, bản lĩnh vững vàng!" : "Cần rèn luyện thêm - Hãy áp dụng ngay bộ công cụ C.O.R.E để nâng cao ý chí.";
-            
-            resDiv.innerText = `Kết quả đánh giá AQ: ${rating} (Điểm: ${totalScore}/6)`;
-            resDiv.classList.remove('hidden');
-        }
-
-        let chartInitialized = false;
-        function renderChart() {
-            if (chartInitialized) return;
-            const ctx = document.getElementById('researchChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Tuần 1 (Tiền khảo sát)', 'Tuần 2', 'Tuần 3', 'Tuần 4 (Hậu khảo sát)'],
-                    datasets: [{
-                        label: 'Chỉ số Vượt khó AQ Trung bình (Học sinh THPT)',
-                        data: [50, 65, 78, 92],
-                        borderColor: '#F59E0B',
-                        backgroundColor: 'rgba(245, 158, 11, 0.15)',
-                        borderWidth: 3,
-                        fill: true,
-                        tension: 0.35,
-                        pointBackgroundColor: '#FCD34D',
-                        pointRadius: 5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { labels: { color: '#F8FAFC', font: { family: 'Inter' } } } },
-                    scales: {
-                        x: { ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                        y: { ticks: { color: '#94A3B8' }, grid: { color: 'rgba(255,255,255,0.05)' }, min: 40, max: 100 }
-                    }
-                }
-            });
-            chartInitialized = true;
-        }
-    </script>
 </body>
 </html>
