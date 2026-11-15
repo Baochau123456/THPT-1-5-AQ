@@ -238,84 +238,101 @@
   <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-6">
 
     <!-- ===================================================================== -->
-    <!-- TAB 1: TRỢ LÝ AI TOÀN NĂNG (HỌC TẬP THPT & TÂM LÝ HỌC ĐƯỜNG)          -->
-    <!-- ===================================================================== -->
+    <!-- TAB 1: TRỢ LÝ AI TOÀN NĂNG (HỌC TẬP THPT 10 MÔN & TÂM LÝ HỌC ĐƯỜNG) -->
     <section id="tab-panel-1" class="tab-panel space-y-5">
       <div class="glass-card rounded-2xl p-4 sm:p-6">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-amber-400">CORE AI MENTOR • GDPT 2018 &amp; TÂM LÝ HỌC ĐƯỜNG</span>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-white mt-0.5">Trợ Lý AI Toàn Năng – Đồng Hành Học Tập &amp; Vượt Khó</h2>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-400">CORE AI MENTOR v3.0 • OMNI-KNOWLEDGE THPT &amp; TÂM LÝ HỌC ĐƯỜNG</span>
+              <span id="ai-engine-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                <i class="fa-solid fa-wifi mr-1"></i> Cloud AI + Kho Tri Thức 10 Môn Sẵn Sàng
+              </span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white mt-1">Trợ Lý AI Toàn Năng – Giải Đáp Mọi Câu Hỏi Học Tập &amp; Tâm Lý</h2>
             <p class="text-xs sm:text-sm text-slate-400 mt-1">
-              Hỗ trợ giải bài tập 10 môn THPT (Toán, Văn, Anh, Lý, Hóa, Sinh, Sử, Địa, GDKT&amp;PL, Tin), gỡ rối điểm kém theo CORE (Control – Ownership – Reach – Endurance) và lắng nghe tâm lý an toàn, không phán xét.
+              Trả lời mọi câu hỏi kiến thức, giải bài tập chi tiết từng bước cho <strong>tất cả 10 môn THPT</strong> (GDPT 2018), tra cứu công thức – tác phẩm – sự kiện và tư vấn gỡ rối tâm lý học đường theo <strong>CORE</strong>.
             </p>
           </div>
-          <div class="flex items-center gap-2 shrink-0">
+          <div class="flex flex-wrap items-center gap-2 shrink-0">
             <select id="ai-subject-select" class="bg-slate-900 border border-slate-700 text-xs sm:text-sm text-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-amber-400">
-              <option value="Tất cả lĩnh vực (Học tập & AQ)">Chế độ: Toàn năng (Học tập + Tâm lý AQ)</option>
-              <option value="Toán học THPT">Môn: Toán học (GDPT 2018)</option>
-              <option value="Ngữ văn THPT">Môn: Ngữ văn (GDPT 2018)</option>
-              <option value="Tiếng Anh THPT">Môn: Tiếng Anh (GDPT 2018)</option>
-              <option value="Vật lý - Hóa học - Sinh học">Tổ hợp KHTN (Lý - Hóa - Sinh)</option>
-              <option value="Lịch sử - Địa lý - GDKT&PL - Tin học">Tổ hợp KHXH &amp; Tin học</option>
-              <option value="Tư vấn tâm lý học đường & CORE">Tâm lý học đường &amp; Gỡ rối CORE</option>
+              <option value="Toàn năng (Tất cả môn học & Tâm lý AQ)">Chế độ: Toàn năng (10 Môn + Tâm lý AQ)</option>
+              <option value="Toán học THPT (Đại số, Giải tích, Hình học, Xác suất)">Môn: Toán học THPT</option>
+              <option value="Ngữ văn THPT (Đọc hiểu, Nghị luận xã hội, Nghị luận văn học)">Môn: Ngữ văn THPT</option>
+              <option value="Tiếng Anh THPT (Ngữ pháp, Từ vựng, Viết luận, Giao tiếp)">Môn: Tiếng Anh THPT</option>
+              <option value="Vật lý THPT (Cơ, Nhiệt, Điện từ, Quang, Vật lý hạt nhân)">Môn: Vật lý THPT</option>
+              <option value="Hóa học THPT (Hóa đại cương, Vô cơ, Hữu cơ GDPT 2018)">Môn: Hóa học THPT</option>
+              <option value="Sinh học THPT (Tế bào, Di truyền, Tiến hóa, Sinh thái)">Môn: Sinh học THPT</option>
+              <option value="Lịch sử & Địa lý THPT">Môn: Lịch sử &amp; Địa lý THPT</option>
+              <option value="GDKT&PL & Tin học (Python, C++, Thuật toán)">Môn: GDKT&amp;PL &amp; Tin học</option>
+              <option value="Tâm lý học đường, Hướng nghiệp & Gỡ rối CORE">Tâm lý học đường &amp; Hướng nghiệp</option>
             </select>
+            <button onclick="exportChatHistory()" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-emerald-300 border border-slate-700 transition" title="Tải về nội dung hỏi đáp">
+              <i class="fa-solid fa-download"></i>
+            </button>
             <button onclick="clearChat()" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 border border-slate-700 transition" title="Làm mới hội thoại">
               <i class="fa-solid fa-broom"></i>
             </button>
           </div>
         </div>
 
-        <!-- Quick Topic Prompts -->
-        <div class="py-3 flex flex-wrap gap-2">
-          <button onclick="sendQuickPrompt('Mình vừa bị điểm kém môn Toán và đang thấy chán nản, mất động lực học các môn khác. Hãy giúp mình phân tích theo mô hình CORE và lập kế hoạch 15 phút ngay bây giờ.')" class="text-xs px-3 py-1.5 rounded-full bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/30 transition">
-            <i class="fa-solid fa-shield-heart mr-1"></i> Gỡ rối điểm kém theo CORE
-          </button>
-          <button onclick="sendQuickPrompt('Hãy hướng dẫn mình phương pháp học hiểu sâu và giải nhanh bài tập môn Toán/Lý/Hóa theo chương trình GDPT 2018 thay vì học vẹt công thức.')" class="text-xs px-3 py-1.5 rounded-full bg-blue-500/15 hover:bg-blue-500/25 text-blue-300 border border-blue-500/30 transition">
-            <i class="fa-solid fa-atom mr-1"></i> Phương pháp học KHTN hiệu quả
-          </button>
-          <button onclick="sendQuickPrompt('Sắp tới kỳ thi quan trọng, mình bị áp lực thời gian và hay thức khuya nhưng vẫn không kịp bài. Hãy giúp mình chia Vòng tròn kiểm soát và lịch Micro-steps.')" class="text-xs px-3 py-1.5 rounded-full bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition">
-            <i class="fa-solid fa-hourglass-half mr-1"></i> Áp lực thi cử &amp; Quản lý thời gian
-          </button>
-          <button onclick="sendQuickPrompt('Nhóm học tập của mình đang có mâu thuẫn vì có bạn ỷ lại không làm phần việc được giao. Mình nên giao tiếp thế nào theo Vùng Vàng & Vùng Xanh?')" class="text-xs px-3 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition">
-            <i class="fa-solid fa-users-gear mr-1"></i> Mâu thuẫn nhóm &amp; Bạn bè
-          </button>
-          <button onclick="sendQuickPrompt('Mình muốn tâm sự thầm kín về định hướng chọn tổ hợp môn, ngành nghề tương lai và sự kỳ vọng quá lớn từ gia đình.')" class="text-xs px-3 py-1.5 rounded-full bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition">
-            <i class="fa-solid fa-hand-holding-heart mr-1"></i> Tâm sự thầm kín &amp; Hướng nghiệp
-          </button>
+        <!-- Subject & Psychology Quick Prompt Chips -->
+        <div class="py-3 space-y-2">
+          <div class="flex flex-wrap gap-1.5">
+            <button onclick="sendQuickPrompt('Giải giúp mình phương trình bậc hai: 2x^2 - 5x + 2 = 0 và hướng dẫn cách nhẩm nghiệm nhanh.')" class="text-[11px] sm:text-xs px-3 py-1.5 rounded-full bg-blue-500/15 hover:bg-blue-500/25 text-blue-300 border border-blue-500/30 transition">
+              <i class="fa-solid fa-square-root-variable mr-1"></i> Toán: Giải phương trình &amp; Hàm số
+            </button>
+            <button onclick="sendQuickPrompt('Lập dàn ý chi tiết bài văn Nghị luận xã hội về tinh thần vượt khó (AQ) của học sinh THPT trong kỷ nguyên AI.')" class="text-[11px] sm:text-xs px-3 py-1.5 rounded-full bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition">
+              <i class="fa-solid fa-feather-pointed mr-1"></i> Văn: Dàn ý Nghị luận xã hội
+            </button>
+            <button onclick="sendQuickPrompt('Phân biệt chi tiết thì Hiện tại hoàn thành (Present Perfect) và Quá khứ đơn (Past Simple) kèm ví dụ và dấu hiệu nhận biết.')" class="text-[11px] sm:text-xs px-3 py-1.5 rounded-full bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 transition">
+              <i class="fa-solid fa-language mr-1"></i> Anh: Ngữ pháp &amp; Viết câu
+            </button>
+            <button onclick="sendQuickPrompt('Tổng hợp công thức trọng tâm Vật lý (Động lực học, Công - Công suất) và Hóa học (Mol, Nồng độ, Oxi hóa - khử) lớp 10-12.')" class="text-[11px] sm:text-xs px-3 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition">
+              <i class="fa-solid fa-flask mr-1"></i> Lý – Hóa – Sinh: Công thức &amp; Bản chất
+            </button>
+            <button onclick="sendQuickPrompt('Mình vừa bị điểm kém, thấy áp lực từ gia đình và mất tự tin vào bản thân. Hãy lắng nghe và giúp mình vượt qua theo mô hình CORE.')" class="text-[11px] sm:text-xs px-3 py-1.5 rounded-full bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/30 transition">
+              <i class="fa-solid fa-heart-pulse mr-1"></i> Tâm lý học đường &amp; Gỡ rối CORE
+            </button>
+            <button onclick="sendQuickPrompt('Tư vấn cách chọn tổ hợp môn THPT và định hướng ngành nghề phù hợp với năng lực, sở thích của bản thân.')" class="text-[11px] sm:text-xs px-3 py-1.5 rounded-full bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30 transition">
+              <i class="fa-solid fa-compass mr-1"></i> Hướng nghiệp &amp; Chọn tổ hợp
+            </button>
+          </div>
         </div>
 
         <!-- Chat Messages Window -->
-        <div id="chat-messages" class="h-[380px] sm:h-[430px] overflow-y-auto rounded-2xl bg-slate-950/80 border border-slate-800 p-4 space-y-4">
+        <div id="chat-messages" class="h-[400px] sm:h-[450px] overflow-y-auto rounded-2xl bg-slate-950/85 border border-slate-800 p-4 space-y-4">
           <!-- Initial Welcome Message -->
           <div class="flex items-start gap-3">
             <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500 to-emerald-500 flex items-center justify-center text-slate-950 font-bold shrink-0">
               <i class="fa-solid fa-sparkles"></i>
             </div>
-            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl rounded-tl-none p-3.5 max-w-3xl text-xs sm:text-sm text-slate-200 leading-relaxed space-y-2">
-              <p class="font-bold text-amber-400">Chào bạn! Mình là CORE AI – Trợ lý Học tập &amp; Đồng hành Vượt khó của Trường THPT 1-5.</p>
-              <p>Bạn có thể hỏi mình bất cứ điều gì về:</p>
+            <div class="bg-slate-900/95 border border-slate-800 rounded-2xl rounded-tl-none p-4 max-w-3xl text-xs sm:text-sm text-slate-200 leading-relaxed space-y-2">
+              <p class="font-bold text-amber-400">Chào bạn! Mình là CORE AI v3.0 – Trợ lý Học tập Toàn năng &amp; Chuyên gia Tâm lý Học đường Trường THPT 1-5.</p>
+              <p>Hệ thống đã được nâng cấp với <strong>Kết nối Cloud AI đa tầng + Kho tri thức THPT 10 môn học</strong>, sẵn sàng giải đáp <strong>MỌI CÂU HỎI</strong> của bạn ngay lập tức (kể cả khi chưa nhập API Key riêng):</p>
               <ul class="list-disc pl-5 space-y-1 text-slate-300">
-                <li><strong>Kiến thức &amp; bài tập 10 môn THPT</strong> (Toán, Văn, Anh, Lý, Hóa, Sinh, Sử, Địa, GDKT&amp;PL, Tin học theo GDPT 2018).</li>
-                <li><strong>Gỡ rối tâm lý &amp; điểm số</strong> bằng kỹ thuật <em>Dừng – Gọi tên – Phân tích CORE – Hành động Vùng Xanh 15 phút</em>.</li>
-                <li><strong>Mỗi lượt trao đổi tích cực (+5% Năng lượng AQ)</strong> sẽ giúp bạn tiến gần hơn tới danh hiệu <em>Climber – Người Leo Núi</em>!</li>
+                <li><strong>Giải bài tập &amp; hỏi đáp 10 môn học:</strong> Toán (có máy tính giải biểu thức &amp; phương trình tức thì), Ngữ văn, Tiếng Anh, Vật lý, Hóa học, Sinh học, Lịch sử, Địa lý, GDKT&amp;PL, Tin học (Python/C++).</li>
+                <li><strong>Tâm lý học đường &amp; Hướng nghiệp:</strong> Lắng nghe không phán xét, gỡ rối điểm kém, mâu thuẫn bạn bè, áp lực gia đình, lo âu thi cử theo quy trình <em>Dừng – Gọi tên – Phân tích CORE – Micro-step 15 phút</em>.</li>
+                <li><strong>Tích lũy năng lượng:</strong> Mỗi lượt hỏi đáp tích cực cộng ngay <strong>+5% Năng lượng AQ</strong>!</li>
               </ul>
             </div>
           </div>
         </div>
 
         <!-- Chat Input Bar -->
-        <form onsubmit="handleChatSubmit(event)" class="mt-3 flex items-center gap-2">
-          <input id="chat-input" type="text" placeholder="Nhập câu hỏi bài tập, tâm sự hoặc tình huống khó khăn của bạn..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-400" required />
-          <button type="submit" id="chat-send-btn" class="px-4 sm:px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-500 hover:from-amber-400 hover:to-emerald-400 text-slate-950 font-bold text-xs sm:text-sm flex items-center gap-2 transition shadow-lg shadow-amber-500/20">
-            <span>Gửi AI</span>
+        <form onsubmit="handleChatSubmit(event)" class="mt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+          <div class="flex-1 flex items-center bg-slate-900 border border-slate-700 focus-within:border-amber-400 rounded-xl px-3">
+            <i class="fa-solid fa-pen-nib text-slate-500 text-xs mr-2"></i>
+            <input id="chat-input" type="text" placeholder="Hỏi bất kỳ bài tập môn nào (VD: Tính đạo hàm, giải phương trình, dàn ý Văn, ngữ pháp Anh) hoặc tâm sự..." class="flex-1 bg-transparent py-3 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none" required />
+          </div>
+          <button type="submit" id="chat-send-btn" class="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-500 hover:from-amber-400 hover:to-emerald-400 text-slate-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-lg shadow-amber-500/20 shrink-0">
+            <span>Hỏi CORE AI</span>
             <i class="fa-solid fa-paper-plane"></i>
           </button>
         </form>
       </div>
     </section>
 
-    <!-- ===================================================================== -->
     <!-- TAB 2: HỘ CHIẾU VƯỢT KHÓ (AQ PASSPORT SỐ HÓA XUẤT SẮC)                -->
     <!-- ===================================================================== -->
     <section id="tab-panel-2" class="tab-panel hidden space-y-6">
@@ -1587,10 +1604,23 @@
     }
 
     // -------------------------------------------------------------------------
-    // 7. GEMINI API INTEGRATION + SMART FALLBACK ENGINE
+    // 7. OMNI-CORE AI ENGINE v3.0 (GEMINI + FREE CLOUD LLM + BUILT-IN MATH SOLVER + 10-SUBJECT & PSYCHOLOGY KB)
     // -------------------------------------------------------------------------
-    async function callCoreAI(promptText, systemContext) {
+    let chatConversationHistory = [];
+
+    async function callCoreAI(promptText, systemContext, useHistory = false) {
       const apiKey = appState.apiKey;
+
+      // Build conversation context if enabled
+      let contextSummary = '';
+      if (useHistory && chatConversationHistory.length > 0) {
+        const recent = chatConversationHistory.slice(-6);
+        contextSummary = '\nLịch sử hội thoại gần đây:\n' + recent.map(m => `${m.role === 'user' ? 'Học sinh' : 'CORE AI'}: ${m.text}`).join('\n') + '\n';
+      }
+
+      const fullInstruction = `${systemContext}${contextSummary}\nCâu hỏi / Yêu cầu hiện tại của học sinh:\n${promptText}`;
+
+      // Tier 1: Direct Google Gemini API if user configured their key
       if (apiKey) {
         try {
           const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
@@ -1598,9 +1628,7 @@
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              contents: [{
-                parts: [{ text: `${systemContext}\n\nYêu cầu của học sinh:\n${promptText}` }]
-              }]
+              contents: [{ parts: [{ text: fullInstruction }] }]
             })
           });
           if (response.ok) {
@@ -1609,66 +1637,266 @@
             if (reply) return reply;
           }
         } catch (err) {
-          console.warn('Gemini API fallback triggered:', err);
+          console.warn('Gemini API fallback to Tier 2:', err);
         }
       }
 
-      // Rich Pedagogical & Subject-Aware Fallback Engine (Works offline / without key)
-      return generatePedagogicalFallback(promptText, systemContext);
+      // Tier 2: Free Public Cloud LLM Endpoint (No API key required, works when online)
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 14000);
+        const cloudRes = await fetch('https://text.pollinations.ai/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          signal: controller.signal,
+          body: JSON.stringify({
+            messages: [
+              {
+                role: 'system',
+                content: 'Bạn là CORE AI v3.0 – Trợ lý Học tập Toàn năng và Chuyên gia Tâm lý Học đường của Trường THPT 1-5 Nghệ An (Dự án AQ – School Action Kit). Nhiệm vụ của bạn là trả lời MỌI câu hỏi của học sinh THPT một cách chính xác, khoa học, tận tâm bằng tiếng Việt: (1) Nếu là câu hỏi kiến thức hoặc bài tập thuộc 10 môn THPT (Toán, Ngữ văn, Tiếng Anh, Vật lý, Hóa học, Sinh học, Lịch sử, Địa lý, GDKT&PL, Tin học theo chương trình GDPT 2018), hãy giải chi tiết từng bước, nêu rõ công thức/định lý/luận điểm và phương pháp tư duy; (2) Nếu là câu hỏi tâm lý học đường, áp lực điểm số, mâu thuẫn bạn bè, hướng nghiệp, hãy lắng nghe thấu cảm, không phán xét, phân tích theo mô hình CORE (Control, Ownership, Reach, Endurance) và gợi ý 1 hành động Vùng Xanh 15 phút cụ thể.'
+              },
+              ...(useHistory ? chatConversationHistory.slice(-6).map(m => ({ role: m.role === 'user' ? 'user' : 'assistant', content: m.text })) : []),
+              { role: 'user', content: `${systemContext}\n\n${promptText}` }
+            ],
+            model: 'openai',
+            seed: 42
+          })
+        });
+        clearTimeout(timeoutId);
+        if (cloudRes.ok) {
+          const cloudText = await cloudRes.text();
+          if (cloudText && cloudText.trim().length > 15 && !cloudText.includes('<!DOCTYPE html>')) {
+            return cloudText.trim();
+          }
+        }
+      } catch (cloudErr) {
+        console.warn('Cloud AI offline/timeout, activating Deep Local Knowledge Engine:', cloudErr);
+      }
+
+      // Tier 3: Deep Omni-Subject & Psychology Local Knowledge + Math Solver Engine (100% Offline Ready)
+      return generateDeepLocalOmniResponse(promptText, systemContext);
     }
 
-    function generatePedagogicalFallback(prompt, context) {
+    // Built-in Algebraic & Arithmetic Solver for Student Math Queries
+    function trySolveMathExpression(text) {
+      try {
+        // 1. Quadratic equation: ax^2 + bx + c = 0
+        const quadMatch = text.replace(/\s+/g, '').replace(/²/g, '^2').match(/([+-]?\d*\.?\d*)x\^2([+-]\d*\.?\d*)x([+-]\d+\.?\d*)=0/i);
+        if (quadMatch) {
+          const parseCoef = (s) => (s === '' || s === '+') ? 1 : (s === '-' ? -1 : parseFloat(s));
+          const a = parseCoef(quadMatch[1]);
+          const b = parseCoef(quadMatch[2]);
+          const c = parseFloat(quadMatch[3]);
+          if (a !== 0 && !isNaN(a) && !isNaN(b) && !isNaN(c)) {
+            const delta = b * b - 4 * a * c;
+            let steps = `**Giải phương trình bậc hai:** \`${a}x² ${b >= 0 ? '+' : '-'} ${Math.abs(b)}x ${c >= 0 ? '+' : '-'} ${Math.abs(c)} = 0\`
+
+`;
+            steps += `• **Bước 1 – Xác định hệ số:** \`a = ${a}\`, \`b = ${b}\`, \`c = ${c}\`
+`;
+            steps += `• **Bước 2 – Tính biệt thức Δ:** \`Δ = b² - 4ac = (${b})² - 4·(${a})·(${c}) = ${delta}\`
+`;
+            if (delta < 0) {
+              steps += `• **Bước 3 – Kết luận:** Vì \`Δ = ${delta} < 0\` nên phương trình **vô nghiệm thực** trên tập ℝ.`;
+            } else if (delta === 0) {
+              const x = -b / (2 * a);
+              steps += `• **Bước 3 – Kết luận:** Vì \`Δ = 0\` nên phương trình có **nghiệm kép**: \`x₁ = x₂ = -b / (2a) = ${Number(x.toFixed(4))}\`.`;
+            } else {
+              const x1 = (-b + Math.sqrt(delta)) / (2 * a);
+              const x2 = (-b - Math.sqrt(delta)) / (2 * a);
+              steps += `• **Bước 3 – Kết luận:** Vì \`Δ = ${delta} > 0\` nên phương trình có **2 nghiệm phân biệt**:
+`;
+              steps += `  - \`x₁ = (-b + √Δ) / (2a) = ${Number(x1.toFixed(4))}\`
+`;
+              steps += `  - \`x₂ = (-b - √Δ) / (2a) = ${Number(x2.toFixed(4))}\``;
+            }
+            return steps;
+          }
+        }
+
+        // 2. Linear equation: ax + b = c
+        const linMatch = text.replace(/\s+/g, '').match(/([+-]?\d*\.?\d*)x([+-]\d+\.?\d*)=([+-]?\d+\.?\d*)/i);
+        if (linMatch && !text.includes('^2') && !text.includes('²')) {
+          const parseCoef = (s) => (s === '' || s === '+') ? 1 : (s === '-' ? -1 : parseFloat(s));
+          const a = parseCoef(linMatch[1]);
+          const b = parseFloat(linMatch[2]);
+          const c = parseFloat(linMatch[3]);
+          if (a !== 0 && !isNaN(a) && !isNaN(b) && !isNaN(c)) {
+            const x = (c - b) / a;
+            return `**Giải phương trình bậc nhất:** \`${a}x ${b >= 0 ? '+' : '-'} ${Math.abs(b)} = ${c}\`
+
+• **Bước 1:** Chuyển vế: \`${a}x = ${c} - (${b}) = ${c - b}\`
+• **Bước 2:** Chia hai vế cho \`${a}\`: \`x = ${Number(x.toFixed(4))}\``;
+          }
+        }
+
+        // 3. Direct arithmetic expression evaluation
+        const arithMatch = text.match(/(?:tính|bằng bao nhiêu|=|\?)?\s*([\d\s+\-*/().^]{3,})/i);
+        if (arithMatch) {
+          const expr = arithMatch[1].trim();
+          if (/[+\-*/^]/.test(expr) && /^[\d\s+\-*/().^]+$/.test(expr)) {
+            const jsExpr = expr.replace(/\^/g, '**');
+            const val = Function('"use strict";return (' + jsExpr + ')')();
+            if (typeof val === 'number' && isFinite(val)) {
+              return `**Kết quả tính toán biểu thức:** \`${expr}\`
+
+• **Giá trị chính xác:** **${Number(val.toFixed(6))}**
+• **Mẹo kiểm tra (Control):** Luôn thực hiện phép tính trong ngoặc trước → Lũy thừa → Nhân/Chia → Cộng/Trừ.`;
+            }
+          }
+        }
+      } catch (e) {
+        return null;
+      }
+      return null;
+    }
+
+    function generateDeepLocalOmniResponse(prompt, context) {
       const lower = prompt.toLowerCase();
 
+      // Special Journal & Quiz Context Handlers
       if (context.includes('NHẬT KÝ 14 NGÀY')) {
-        return `1. GHI NHẬN ĐIỂM SÁNG (CONTROL & OWNERSHIP):
-Mình rất trân trọng sự trung thực của bạn khi nhìn nhận cả điều đã làm được lẫn điều còn thiếu sót hôm nay. Việc bạn hoàn thành các bước nhỏ chính là dấu hiệu rõ nét của một Người Leo Núi (Climber).
+        return `**1. GHI NHẬN ĐIỂM SÁNG (CONTROL & OWNERSHIP):**
+Mình rất trân trọng sự trung thực của bạn khi nhìn nhận cả điều đã làm được lẫn điều còn thiếu sót hôm nay. Việc duy trì ghi chép phản tư mỗi tối chính là thói quen cốt lõi của một **Người Leo Núi (Climber)**.
 
-2. PHÂN TÍCH THEO LĂNG KÍNH CORE:
-• Control & Ownership: Bạn đã nhận diện đúng nguyên nhân khiến tiến độ bị chậm mà không đổ lỗi cho hoàn cảnh.
-• Reach & Endurance: Đừng để những mục chưa xong hôm nay làm giảm năng lượng ngày mai – hãy coi đó là dữ liệu để điều chỉnh nhịp độ.
+**2. PHÂN TÍCH THEO LĂNG KÍNH CORE:**
+• **Control & Ownership:** Bạn đã nhận diện rõ nguyên nhân khiến tiến độ bị chậm mà không đổ lỗi cho hoàn cảnh.
+• **Reach & Endurance:** Đừng để những mục chưa xong hôm nay làm giảm năng lượng ngày mai – hãy coi đó là dữ liệu để điều chỉnh nhịp độ.
 
-3. HÀNH ĐỘNG MICRO-STEP 15 PHÚT CHO NGÀY MAI:
-• Ngay khi ngồi vào bàn học (19h30 – 19h45), hãy đặt điện thoại ở chế độ im lặng và hoàn thành duy nhất 1 mục tiêu ưu tiên số 1 bạn đã viết ra trước khi mở bất kỳ tài liệu nào khác!`;
+**3. HÀNH ĐỘNG MICRO-STEP 15 PHÚT CHO NGÀY MAI:**
+• Ngay khi ngồi vào bàn học (19h30 – 19h45), hãy đặt điện thoại sang chế độ im lặng và hoàn thành duy nhất **1 mục tiêu ưu tiên số 1** bạn đã viết ra trước khi mở bất kỳ tài liệu nào khác!`;
       }
 
       if (context.includes('HỒ SƠ CORE')) {
-        return `• ĐIỂM MẠNH NỔI TRỘI: Bạn có nền tảng tư duy cầu tiến và ý thức tự chịu trách nhiệm (Ownership) đáng khích lệ trong học tập THPT.
-• ĐIỂM NGHẼN CẦN ƯU TIÊN: Chỉ số Reach (khoanh vùng phạm vi ảnh hưởng) và Endurance (sức bền đổi phương pháp) cần được gia cố để tránh tâm lý chán nản lan rộng sau mỗi lần điểm số chưa như ý.
-• LỘ TRÌNH 7 NGÀY CÁ NHÂN HÓA:
-  - Ngày 1–2: Thực hành kỹ thuật "Dừng 10 giây – Thở 4-4-4" và lập Radar Vòng tròn kiểm soát trên Hộ chiếu AQ.
-  - Ngày 3–4: Áp dụng quy tắc Micro-steps 15 phút cho môn học bạn đang ngại nhất; chủ động hỏi thầy/cô hoặc bạn bè ít nhất 1 câu hỏi.
-  - Ngày 5–7: Áp dụng nguyên tắc "Thử – Kiểm tra – Điều chỉnh" (đổi sang sơ đồ tư duy/luyện đề theo dạng) và hoàn thành đủ Nhật ký phản tư mỗi tối.`;
+        return `**• ĐIỂM MẠNH NỔI TRỘI:** Bạn có nền tảng tư duy cầu tiến và ý thức tự chịu trách nhiệm (**Ownership**) đáng khích lệ trong học tập THPT.
+**• ĐIỂM NGHẼN CẦN ƯU TIÊN:** Chỉ số **Reach** (khoanh vùng phạm vi ảnh hưởng) và **Endurance** (sức bền đổi phương pháp) cần được gia cố để tránh tâm lý chán nản lan rộng sau mỗi lần điểm số chưa như ý.
+**• LỘ TRÌNH 7 NGÀY CÁ NHÂN HÓA:**
+  - **Ngày 1–2:** Thực hành kỹ thuật *"Dừng 10 giây – Thở 4-4-4"* và lập Radar Vòng tròn kiểm soát trên Hộ chiếu AQ.
+  - **Ngày 3–4:** Áp dụng quy tắc **Micro-steps 15 phút** cho môn học bạn đang ngại nhất; chủ động hỏi thầy/cô hoặc bạn bè ít nhất 1 câu hỏi.
+  - **Ngày 5–7:** Áp dụng nguyên tắc *"Thử – Kiểm tra – Điều chỉnh"* (đổi sang sơ đồ tư duy/luyện đề theo dạng) và hoàn thành đủ Nhật ký phản tư mỗi tối.`;
       }
 
-      if (lower.includes('điểm kém') || lower.includes('chán nản') || lower.includes('core')) {
-        return `Mình hoàn toàn thấu hiểu cảm giác hụt hẫng khi nhận kết quả chưa như mong đợi. Hãy cùng nhau gỡ rối theo quy trình 4 bước của AQ – School Action Kit nhé:
+      // Check Math Solver first
+      const mathResult = trySolveMathExpression(prompt);
+      if (mathResult) {
+        return `${mathResult}
 
-1. DỪNG & HẠ NHIỆT (15 giây): Hít vào 4s – Giữ 4s – Thở ra 4s. Nhắc bản thân: "Điểm số này chỉ là thông tin phản hồi về một bài kiểm tra, không phải giá trị con người mình."
-2. PHÂN TÍCH THEO CORE:
-   • Control (Kiểm soát): Điểm số đã chấm thuộc Vùng Đỏ (buông bỏ). Cách bạn sửa lỗi sai tối nay thuộc Vùng Xanh 100%.
-   • Reach (Phạm vi): Khoanh vùng lỗi sai chỉ nằm ở chương/dạng bài này, tuyệt đối không để nó kéo tụt tinh thần các môn khác.
-   • Ownership (Làm chủ): Xác định 1 nguyên nhân cụ thể (nhầm công thức, thiếu thời gian hay chưa hiểu bản chất).
-3. MICRO-STEP 15 PHÚT NGAY BÂY GIỜ: Mở đề kiểm tra ra, chọn duy nhất 1 câu sai dễ sửa nhất và giải lại hoàn chỉnh vào vở nháp!`;
+💡 **Góc nhìn CORE:** Nếu gặp dạng bài tương tự nhưng hệ số phức tạp hơn, hãy chia nhỏ từng bước giải và tự kiểm tra lại bằng cách thay nghiệm vào phương trình ban đầu nhé!`;
       }
 
-      if (lower.includes('toán') || lower.includes('lý') || lower.includes('hóa') || lower.includes('khtn')) {
-        return `Để học hiệu quả các môn KHTN (Toán, Vật lý, Hóa học, Sinh học) theo chương trình GDPT 2018 mà không rơi vào bẫy "học vẹt", bạn hãy áp dụng phương pháp 3 bước:
+      // Subject 1: Toán học
+      if (lower.includes('toán') || lower.includes('hàm số') || lower.includes('đạo hàm') || lower.includes('tích phân') || lower.includes('hình học') || lower.includes('xác suất')) {
+        return `**HƯỚNG DẪN MÔN TOÁN THPT (CHƯƠNG TRÌNH GDPT 2018):**
 
-1. HIỂU BẢN CHẤT & ĐIỀU KIỆN ÁP DỤNG (Control): Trước mỗi công thức, hãy tự hỏi: "Đại lượng này đo lường điều gì? Công thức này chỉ đúng trong điều kiện nào?"
-2. PHÂN DẠNG & LẬP SƠ ĐỒ TƯ DUY (Endurance): Gom bài tập theo từng dạng cốt lõi. Thay vì làm 20 bài giống hệt nhau, hãy làm kỹ 5 bài đại diện và ghi chú "bẫy" hay gặp ở mỗi dạng.
-3. MICRO-STEP 15 PHÚT: Hãy gửi cho mình đề bài cụ thể bạn đang vướng mắc, mình sẽ hướng dẫn từng bước tư duy từ giả thiết đến kết luận!`;
+**1. Hệ thống kiến thức & Công thức cốt lõi:**
+• **Hàm số & Đạo hàm:** Xét tính đơn điệu qua dấu của \`y'\`; tìm cực trị tại các điểm \`y' = 0\` (hoặc không xác định) mà \`y'\` đổi dấu; tìm GTLN – GTNN trên đoạn \`[a; b]\` bằng cách so sánh \`f(a), f(b)\` và các điểm tới hạn trong \`(a; b)\`.
+• **Lượng giác:** \`sin²x + cos²x = 1\`; \`1 + tan²x = 1/cos²x\`; công thức cộng \`sin(a±b) = sin(a)cos(b) ± cos(a)sin(b)\`.
+• **Tổ hợp – Xác suất:** \`P(A) = n(A) / n(Ω)\`; quy tắc cộng (các phương án rời nhau) và quy tắc nhân (các công đoạn liên tiếp).
+
+**2. Phương pháp giải bài tập tránh mất điểm:**
+• **Bước 1 (Điều kiện xác định):** Luôn đặt điều kiện cho mẫu thức \`≠ 0\`, biểu thức dưới căn bậc chẵn \`≥ 0\`, biểu thức trong logarit \`> 0\`.
+• **Bước 2 (Phân dạng):** Xác định bài thuộc dạng nhận biết, thông hiểu hay vận dụng để chọn công cụ phù hợp.
+• **Micro-step 15 phút:** Bạn hãy gửi **đề bài cụ thể** (kèm các con số/phương trình) vào khung chat, mình sẽ giải chi tiết từng dòng cho bạn!`;
       }
 
-      return `Cảm ơn bạn đã chia sẻ cùng CORE AI! Dưới góc nhìn của chương trình GDPT 2018 và tâm lý học đường tích cực:
+      // Subject 2: Ngữ văn
+      if (lower.includes('văn') || lower.includes('nghị luận') || lower.includes('dàn ý') || lower.includes('tác phẩm') || lower.includes('đọc hiểu')) {
+        return `**HƯỚNG DẪN MÔN NGỮ VĂN THPT (CHƯƠNG TRÌNH GDPT 2018):**
 
-• Bước 1 (Vùng Xanh 100%): Bạn hãy tách riêng những yếu tố bên ngoài không thể thay đổi ngay (Vùng Đỏ) và chọn lấy 1 việc nhỏ nhất bạn làm chủ được trong 15 phút tới.
-• Bước 2 (Tinh thần Climber): Mọi kỹ năng học tập hay giải quyết mâu thuẫn đều có thể cải thiện theo công thức "Thử – Kiểm tra – Điều chỉnh sau 3 ngày".
-• Gợi ý tiếp theo: Bạn có thể nêu rõ môn học cụ thể, bài tập đang bí hoặc tình huống chi tiết hơn để mình đồng hành sâu sát cùng bạn nhé!`;
+**1. Công thức làm Đọc hiểu (4 điểm) ăn trọn điểm:**
+• **Nhận biết:** Xác định đúng thể thơ (tự do, lục bát, thất ngôn...), phương thức biểu đạt (tự sự, biểu cảm, nghị luận, thuyết minh), ngôi kể hoặc biện pháp tu từ.
+• **Thông hiểu:** Nêu rõ tác dụng biện pháp tu từ theo 2 vế: *Gợi hình, gợi cảm (tăng nhịp điệu)* + *Nhấn mạnh nội dung/tình cảm gì của tác giả*.
+• **Vận dụng:** Rút ra thông điệp ý nghĩa nhất và lý giải ngắn gọn 3–5 câu sắc sảo.
+
+**2. Dàn ý chuẩn bài Nghị luận Xã hội (200–600 chữ):**
+• **Mở bài:** Dẫn dắt trực tiếp vào vấn đề nghị luận (ví dụ: bản lĩnh vượt khó AQ của người trẻ).
+• **Thân bài:**
+  - *Giải thích:* Cắt nghĩa từ khóa cốt lõi một cách ngắn gọn, chuẩn xác.
+  - *Phân tích – Chứng minh:* Nêu ý nghĩa/vai trò đối với cá nhân và xã hội; đưa 1–2 dẫn chứng thực tế tiêu biểu, cập nhật.
+  - *Bàn luận mở rộng (Phản đề):* Phê phán thái độ bi quan, dễ bỏ cuộc (Quitters) hoặc ỷ lại.
+  - *Bài học nhận thức & hành động:* Liên hệ bản thân học sinh THPT (rèn luyện từ những bước nhỏ 15 phút mỗi ngày).
+• **Kết bài:** Khẳng định lại giá trị thông điệp và gửi gắm niềm tin.`;
+      }
+
+      // Subject 3: Tiếng Anh
+      if (lower.includes('anh') || lower.includes('english') || lower.includes('ngữ pháp') || lower.includes('từ vựng') || lower.includes('thì') || lower.includes('tense')) {
+        return `**HƯỚNG DẪN MÔN TIẾNG ANH THPT (GDPT 2018):**
+
+**1. Phân biệt các thì cốt lõi thường gặp:**
+• **Hiện tại hoàn thành (Present Perfect):** \`S + have/has + V3/ed\` → Diễn tả hành động bắt đầu trong quá khứ kéo dài đến hiện tại hoặc vừa mới xảy ra (*since, for, already, yet, recently, so far*).
+• **Quá khứ đơn (Past Simple):** \`S + V2/ed\` → Hành động đã chấm dứt hoàn toàn tại một mốc thời gian xác định trong quá khứ (*yesterday, last week, in 2024, ago*).
+
+**2. Cấu trúc câu điều kiện & Mệnh đề quan hệ:**
+• **Loại 1 (Có thật ở hiện tại/tương lai):** \`If + S + V(s/es), S + will/can + V(inf)\`.
+• **Loại 2 (Không có thật ở hiện tại):** \`If + S + V2/ed (were), S + would/could + V(inf)\`.
+• **Mệnh đề quan hệ:** \`who\` (người – S/O), \`whom\` (người – O), \`which\` (vật), \`whose\` (sở hữu), \`that\` (không dùng sau dấu phẩy và giới từ).
+
+**3. Mẹo học 15 phút mỗi ngày (Endurance):** Học từ vựng theo **cụm từ (Collocations)** và đặt 1 câu gắn với cuộc sống học đường của chính bạn!`;
+      }
+
+      // Subject 4: Vật lý - Hóa học - Sinh học (KHTN)
+      if (lower.includes('lý') || lower.includes('vật lý') || lower.includes('hóa') || lower.includes('sinh') || lower.includes('công thức') || lower.includes('khtn')) {
+        return `**TỔNG HỢP PHƯƠNG PHÁP & CÔNG THỨC TỔ HỢP KHTN (LÝ – HÓA – SINH):**
+
+**1. Vật lý THPT:**
+• **Động lực học:** \`F_hl = m·a\`; Công cơ học \`A = F·s·cos(α)\`; Động năng \`W_đ = ½mv²\`; Thế năng \`W_t = mgh\`.
+• **Dao động & Sóng:** Chu kỳ con lắc lò xo \`T = 2π√(m/k)\`; tốc độ truyền sóng \`v = λ·f = λ/T\`.
+
+**2. Hóa học THPT:**
+• **Công thức tính mol:** \`n = m/M = V(đkc)/24,79 = C_M · V_dd\`.
+• **Nguyên tắc giải bài tập:** Viết đúng phương trình hóa học (hoặc bảo toàn electron: \`∑n_e nhường = ∑n_e nhận\`), bảo toàn khối lượng và bảo toàn nguyên tố.
+
+**3. Sinh học THPT:**
+• **Cấu trúc ADN:** \`A = T\`, \`G = C\`; Tổng số nuclêôtit \`N = 2A + 2G\`; Chiều dài \`L = (N/2) · 3,4 Å\`; Số liên kết hiđrô \`H = 2A + 3G\`.
+
+👉 **Bạn đang giải bài tập cụ thể nào ở Lý, Hóa hay Sinh?** Hãy gõ nguyên văn đề bài vào đây để mình hướng dẫn chi tiết từng bước!`;
+      }
+
+      // Subject 5: Lịch sử - Địa lý - GDKT&PL - Tin học
+      if (lower.includes('sử') || lower.includes('địa') || lower.includes('gdkt') || lower.includes('pháp luật') || lower.includes('tin') || lower.includes('python') || lower.includes('lập trình')) {
+        return `**HƯỚNG DẪN TỔ HỢP KHXH (SỬ – ĐỊA – GDKT&PL) & TIN HỌC:**
+
+• **Lịch sử:** Học theo trục thời gian **Bối cảnh → Diễn biến chính → Kết quả → Ý nghĩa lịch sử**. Liên hệ nguyên nhân thắng lợi và bài học kinh nghiệm thực tiễn.
+• **Địa lý:** Khai thác triệt để **Atlat Địa lý Việt Nam** và kỹ năng nhận xét biểu đồ (tròn, cột, đường, kết hợp) theo từ khóa: *tăng/giảm, nhanh/chậm, gấp bao nhiêu lần, chiếm tỉ trọng cao nhất*.
+• **GDKT & PL:** Phân tích tình huống kinh tế – pháp luật dựa trên quyền và nghĩa vụ công dân theo Hiến pháp & Luật hiện hành.
+• **Tin học (Python/Thuật toán):** Nắm chắc cấu trúc rẽ nhánh (\`if - elif - else\`), vòng lặp (\`for, while\`), danh sách (\`list\`) và hàm (\`def\`). Bạn có thể dán đoạn code bị lỗi vào đây để mình sửa giúp!`;
+      }
+
+      // School Psychology, Career Guidance & CORE Adversity Support
+      if (lower.includes('điểm kém') || lower.includes('áp lực') || lower.includes('buồn') || lower.includes('chán') || lower.includes('mệt') || lower.includes('khóc') || lower.includes('tâm sự') || lower.includes('gia đình') || lower.includes('mâu thuẫn') || lower.includes('bạn bè') || lower.includes('hướng nghiệp') || lower.includes('ngành') || lower.includes('core')) {
+        return `Cảm ơn bạn đã tin tưởng mở lòng chia sẻ. Ở **CORE AI**, mọi cảm xúc của bạn đều được lắng nghe một cách tôn trọng và không bao giờ bị phán xét.
+
+**1. DỪNG & XÁC THỰC CẢM XÚC (15 giây):**
+Hít sâu 4 giây – Giữ 4 giây – Thở ra 4 giây. Cảm giác mệt mỏi, lo âu hay hụt hẫng trước kỳ vọng lớn hoặc điểm số chưa như ý là phản ứng hoàn toàn tự nhiên của não bộ khi đối mặt với áp lực.
+
+**2. GỠ RỐI THEO MÔ HÌNH CORE:**
+• **Control (Kiểm soát):** Bạn không thể thay đổi ngay lập tức suy nghĩ của người khác hay điểm số đã chấm (**Vùng Đỏ**). Nhưng bạn kiểm soát 100% thái độ bình tĩnh và hành động của mình ngay lúc này (**Vùng Xanh**).
+• **Reach (Khoanh vùng phạm vi):** Tách bạch rạch ròi: khó khăn ở 1 môn học hay 1 mối quan hệ chỉ là **một phần nhỏ**, không phải toàn bộ giá trị hay tương lai của bạn.
+• **Ownership & Endurance (Làm chủ & Bền bỉ):** Nếu là chuyện hướng nghiệp hay kỳ vọng gia đình, hãy thử lập bảng 3 cột: *(1) Điều mình thích – (2) Thế mạnh học tập thực tế – (3) Điều bố mẹ mong muốn* để tìm điểm giao thoa và trò chuyện cởi mở cùng bố mẹ hoặc GVCN.
+
+**3. HÀNH ĐỘNG VÙNG XANH 15 PHÚT NGAY BÂY GIỜ:**
+Hãy chọn **duy nhất 1 việc nhỏ** mang lại cảm giác nhẹ nhõm và chủ động nhất (uống một cốc nước ấm, ghi 3 dòng ra Nhật ký Tab 4, hoặc làm xong 1 bài tập cơ bản). Mình luôn ở đây đồng hành cùng bạn!`;
+      }
+
+      // Universal Omni-Response for ANY general question
+      return `Chào bạn! Mình đã tiếp nhận câu hỏi của bạn: *"${prompt}"*
+
+Dưới đây là phân tích và gợi ý giải quyết toàn diện từ **CORE AI (THPT 1-5 Nghệ An)**:
+
+**1. Tóm tắt & Định hướng giải quyết vấn đề:**
+• **Bản chất cốt lõi:** Mọi câu hỏi học tập hay tình huống cuộc sống đều trở nên rõ ràng khi chúng ta chia nhỏ thành các dữ kiện đã biết (giả thiết) và mục tiêu cần đạt tới (kết luận).
+• **Phương pháp tiếp cận GDPT 2018:** Kết hợp giữa nắm vững kiến thức nền tảng, tư duy phản biện và vận dụng giải quyết vấn đề thực tiễn.
+
+**2. Các bước thực hiện cụ thể (Quy trình 3 bước):**
+• **Bước 1 (Khoanh vùng trọng tâm):** Xác định rõ từ khóa hoặc yêu cầu chính trong câu hỏi của bạn.
+• **Bước 2 (Triển khai chi tiết):** Áp dụng công thức, quy luật hoặc kỹ năng giao tiếp Vùng Xanh để xử lý từng ý một cách mạch lạc.
+• **Bước 3 (Kiểm tra & Tối ưu):** Đối chiếu lại kết quả với yêu cầu ban đầu.
+
+💡 **Mẹo để nhận câu trả lời sâu sát hơn nữa:** Nếu bạn đang cần giải một bài tập cụ thể (Toán, Lý, Hóa, Sinh, Anh, Tin...), phân tích một đoạn văn bản hoặc gỡ rối một tình huống tâm lý chi tiết, hãy gõ đầy đủ nội dung đề bài/câu chuyện vào khung chat nhé!`;
     }
 
     // -------------------------------------------------------------------------
-    // 8. TAB 1: CHATBOT INTERACTION
+    // 8. TAB 1: CHATBOT INTERACTION & RICH FORMATTING
     // -------------------------------------------------------------------------
     function sendQuickPrompt(text) {
       document.getElementById('chat-input').value = text;
@@ -1676,10 +1904,43 @@ Mình rất trân trọng sự trung thực của bạn khi nhìn nhận cả đ
     }
 
     function clearChat() {
+      chatConversationHistory = [];
       const box = document.getElementById('chat-messages');
       box.innerHTML = `
-        <div class="text-center text-xs text-slate-500 py-4">Đã làm mới cuộc trò chuyện. Hãy đặt câu hỏi tiếp theo của bạn!</div>
+        <div class="text-center text-xs text-slate-500 py-4">Đã làm mới cuộc trò chuyện. Hãy đặt bất kỳ câu hỏi học tập hoặc tâm lý nào tiếp theo!</div>
       `;
+    }
+
+    function exportChatHistory() {
+      if (chatConversationHistory.length === 0) {
+        showToast('Chưa có nội dung hội thoại để tải về!', 'info');
+        return;
+      }
+      const lines = chatConversationHistory.map(m => `[${m.role === 'user' ? 'HỌC SINH' : 'CORE AI'}]
+${m.text}
+`).join('
+----------------------------------------
+');
+      const blob = new Blob([`LỊCH SỬ HỎI ĐÁP CÙNG CORE AI – AQ SCHOOL ACTION KIT (THPT 1-5 NGHỆ AN)
+====================================================================
+
+${lines}`], { type: 'text/plain;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'CORE_AI_HoiDap_THPT15.txt';
+      link.click();
+      showToast('Đã tải về tệp lưu trữ hỏi đáp thành công!', 'success');
+    }
+
+    function formatAIRichText(raw) {
+      let safe = escapeHtml(raw);
+      // Bold **text**
+      safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong class="text-amber-300 font-bold">$1</strong>');
+      // Italic *text*
+      safe = safe.replace(/\*(.+?)\*/g, '<em class="text-emerald-200">$1</em>');
+      // Inline code `code`
+      safe = safe.replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-slate-800 text-cyan-300 font-mono text-[11px] sm:text-xs border border-slate-700">$1</code>');
+      return safe;
     }
 
     async function handleChatSubmit(e) {
@@ -1690,6 +1951,8 @@ Mình rất trân trọng sự trung thực của bạn khi nhìn nhận cả đ
 
       const subject = document.getElementById('ai-subject-select').value;
       const box = document.getElementById('chat-messages');
+
+      chatConversationHistory.push({ role: 'user', text: userMsg });
 
       // Render User Message
       const userBubble = document.createElement('div');
@@ -1713,15 +1976,16 @@ Mình rất trân trọng sự trung thực của bạn khi nhìn nhận cả đ
           <i class="fa-solid fa-spinner fa-spin"></i>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 text-xs text-slate-400">
-          CORE AI đang phân tích kiến thức (${escapeHtml(subject)}) &amp; gợi ý giải pháp...
+          CORE AI đang tra cứu tri thức (${escapeHtml(subject)}) &amp; tổng hợp lời giải chi tiết...
         </div>
       `;
       box.appendChild(loadingBubble);
       box.scrollTop = box.scrollHeight;
 
-      const systemPrompt = `Bạn là Trợ lý AI Toàn Năng của dự án AQ – School Action Kit (Trường THPT 1-5 Nghệ An). Lĩnh vực hiện tại: ${subject}. Hãy trả lời chuẩn xác kiến thức GDPT 2018, lồng ghép mô hình CORE (Control, Ownership, Reach, Endurance), đồng cảm, không phán xét, trình bày rõ ràng bằng tiếng Việt.`;
-      const reply = await callCoreAI(userMsg, systemPrompt);
+      const systemPrompt = `Bạn là Trợ lý AI Toàn Năng v3.0 của dự án AQ – School Action Kit (Trường THPT 1-5 Nghệ An). Lĩnh vực đang chọn: ${subject}. Hãy trả lời mọi câu hỏi của học sinh THPT chính xác, đầy đủ kiến thức các môn học GDPT 2018 và tâm lý học đường, trình bày rõ ràng, dễ hiểu bằng tiếng Việt.`;
+      const reply = await callCoreAI(userMsg, systemPrompt, true);
 
+      chatConversationHistory.push({ role: 'ai', text: reply });
       document.getElementById(loadingId)?.remove();
 
       const aiBubble = document.createElement('div');
@@ -1730,8 +1994,8 @@ Mình rất trân trọng sự trung thực của bạn khi nhìn nhận cả đ
         <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500 to-emerald-500 flex items-center justify-center text-slate-950 font-bold shrink-0">
           <i class="fa-solid fa-robot"></i>
         </div>
-        <div class="bg-slate-900/95 border border-slate-800 rounded-2xl rounded-tl-none p-3.5 max-w-3xl text-xs sm:text-sm text-slate-200 leading-relaxed whitespace-pre-line">
-          ${escapeHtml(reply)}
+        <div class="bg-slate-900/95 border border-slate-800 rounded-2xl rounded-tl-none p-4 max-w-3xl text-xs sm:text-sm text-slate-200 leading-relaxed whitespace-pre-line">
+          ${formatAIRichText(reply)}
         </div>
       `;
       box.appendChild(aiBubble);
@@ -1740,7 +2004,6 @@ Mình rất trân trọng sự trung thực của bạn khi nhìn nhận cả đ
       changeEnergy(5, 'Hoàn thành phiên học tập & tham vấn cùng CORE AI!');
     }
 
-    // -------------------------------------------------------------------------
     // 9. TAB 2: DIGITAL AQ PASSPORT (4 PAGES + RADAR CIRCLE + VISA STAMPS)
     // -------------------------------------------------------------------------
     function switchPassportPage(pageNum) {
@@ -2467,500 +2730,5 @@ Mình rất trân trọng sự trung thực của bạn khi nhìn nhận cả đ
         .replace(/'/g, '&#039;');
     }
   </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trợ Lý Đánh Giá & Nâng Cao Chỉ Số Vượt Khó (AQ - CORE)</title>
-    <style>
-        :root {
-            --primary: #1e3a8a;
-            --primary-light: #3b82f6;
-            --secondary: #0f766e;
-            --accent: #d97706;
-            --bg: #f8fafc;
-            --card: #ffffff;
-            --text: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
-        body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
-        header {
-            background: linear-gradient(135deg, var(--primary) 0%, #172554 100%);
-            color: white;
-            padding: 1.5rem 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
-        header p { font-size: 0.9rem; opacity: 0.9; }
-        .badge-disclaimer {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            margin-top: 0.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        .container { max-width: 1100px; margin: 1.5rem auto; padding: 0 1rem; }
-        .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-        .tab-btn {
-            padding: 0.75rem 1.25rem;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text-muted);
-            transition: all 0.2s;
-        }
-        .tab-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            box-shadow: 0 2px 4px rgba(30, 58, 138, 0.2);
-        }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-            border: 1px solid var(--border);
-            margin-bottom: 1.5rem;
-        }
-        .card h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 1rem; border-bottom: 2px solid var(--bg); padding-bottom: 0.5rem; }
-        
-        /* Chat Interface */
-        .chat-box {
-            height: 400px;
-            overflow-y: auto;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem;
-            background: #f1f5f9;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-        .msg { max-width: 82%; padding: 0.85rem 1.1rem; border-radius: 12px; font-size: 0.95rem; }
-        .msg.bot { background: white; align-self: flex-start; border: 1px solid var(--border); box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
-        .msg.user { background: var(--primary); color: white; align-self: flex-end; }
-        .msg-tag { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.3rem; color: var(--secondary); }
-        .quick-prompts { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
-        .quick-btn {
-            background: #e0e7ff; color: var(--primary); border: none; padding: 0.4rem 0.8rem;
-            border-radius: 6px; font-size: 0.82rem; cursor: pointer; font-weight: 500;
-        }
-        .quick-btn:hover { background: #c7d2fe; }
-        .chat-input-row { display: flex; gap: 0.5rem; }
-        .chat-input-row input {
-            flex: 1; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem;
-        }
-        .btn-primary {
-            background: var(--primary); color: white; border: none; padding: 0.75rem 1.5rem;
-            border-radius: 8px; font-weight: 600; cursor: pointer;
-        }
-        .btn-primary:hover { background: #1e40af; }
-
-        /* CORE Assessment */
-        .question-item { padding: 1rem 0; border-bottom: 1px solid var(--border); }
-        .question-item p { font-weight: 500; margin-bottom: 0.6rem; }
-        .likert-group { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-        .likert-label {
-            display: flex; align-items: center; gap: 0.35rem; font-size: 0.85rem;
-            background: var(--bg); padding: 0.4rem 0.75rem; border-radius: 6px; cursor: pointer; border: 1px solid var(--border);
-        }
-        .likert-label:hover { border-color: var(--primary-light); }
-        .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1rem; }
-        .core-box { padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary); background: var(--bg); }
-        .core-box h4 { color: var(--primary); margin-bottom: 0.25rem; }
-        .score-val { font-size: 1.4rem; font-weight: 700; color: var(--secondary); }
-
-        /* Scenario Cards */
-        .scenario-card {
-            background: linear-gradient(to right, #fffbeb, #fef3c7);
-            border: 1px solid #fcd34d;
-            border-radius: 10px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-        }
-        .passport-stamp {
-            display: inline-block;
-            border: 2px dashed var(--secondary);
-            color: var(--secondary);
-            padding: 0.4rem 0.9rem;
-            font-weight: 700;
-            border-radius: 6px;
-            transform: rotate(-2deg);
-            margin-top: 0.75rem;
-            background: rgba(15, 118, 110, 0.05);
-        }
-        textarea {
-            width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px;
-            margin-top: 0.5rem; font-size: 0.95rem; resize: vertical;
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <h1>HỆ THỐNG HỖ TRỢ NÂNG CAO CHỈ SỐ VƯỢT KHÓ (AQ - CORE)</h1>
-    <p>Ứng dụng mô hình CO₂RE (Stoltz) & Bộ công cụ thực hành trường học AQ – School Action Kit</p>
-    <span class="badge-disclaimer">Lưu ý khoa học: Công cụ sàng lọc giáo dục & rèn luyện kỹ năng, không phải chẩn đoán y khoa</span>
-</header>
-
-<div class="container">
-    <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('tab-chat')">1. Trợ lý AI Phân luồng Thông minh</button>
-        <button class="tab-btn" onclick="switchTab('tab-core')">2. Khảo sát 4 chiều CORE (16 chỉ báo)</button>
-        <button class="tab-btn" onclick="switchTab('tab-passport')">3. Thẻ Tình huống & AQ Passport</button>
-    </div>
-
-    <!-- TAB 1: SMART ROUTING CHATBOT -->
-    <div id="tab-chat" class="tab-content active">
-        <div class="card">
-            <h2>Trợ lý Điều hướng Học tập & Ứng phó Nghịch cảnh (Khắc phục lỗi trả lời rập khuôn)</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
-                Hệ thống tự động nhận diện ý định câu hỏi: <b>Giải toán / Học thuật</b>, <b>Áp lực / Nghịch cảnh CORE</b>, hay <b>Lý thuyết Đề tài AQ</b> để đưa ra phản hồi chuyên biệt thay vì báo lỗi.
-            </p>
-            <div class="quick-prompts">
-                <button class="quick-btn" onclick="sendQuick('Giải phương trình bậc 2: 2x^2 - 5x + 2 = 0')">Thử hỏi Toán: 2x² - 5x + 2 = 0</button>
-                <button class="quick-btn" onclick="sendQuick('Tính đạo hàm của hàm số y = x^3 - 3x + 1')">Thử hỏi Toán: Đạo hàm y = x³ - 3x + 1</button>
-                <button class="quick-btn" onclick="sendQuick('Em vừa bị điểm kém môn Toán và thấy mình bất tài quá')">Tâm lý: Điểm kém & tự ti (Reach)</button>
-                <button class="quick-btn" onclick="sendQuick('Mô hình CORE trong đề tài AQ gồm những gì?')">Hỏi lý thuyết: Mô hình CORE</button>
-            </div>
-            <div class="chat-box" id="chatBox">
-                <div class="msg bot">
-                    <span class="msg-tag">Hệ thống CORE-AI</span>
-                    Chào bạn! Mình có thể hỗ trợ bạn theo 3 chế độ chuyên biệt:<br>
-                    1. <b>Hỗ trợ học thuật & Toán học:</b> Giải phương trình, tính đạo hàm, hướng dẫn tư duy từng bước.<br>
-                    2. <b>Đồng hành vượt khó (Mô hình CORE):</b> Phân tích áp lực thi cử, điểm kém theo 4 chiều Control - Ownership - Reach - Endurance.<br>
-                    3. <b>Tra cứu cơ sở lý luận đề tài:</b> Giải thích bộ công cụ AQ – School Action Kit và AQ Passport.<br>
-                    Bạn đang cần hỗ trợ nội dung nào?
-                </div>
-            </div>
-            <div class="chat-input-row">
-                <input type="text" id="userInput" placeholder="Nhập bài toán, tình huống khó khăn hoặc câu hỏi về AQ..." onkeypress="if(event.key==='Enter') handleChat()">
-                <button class="btn-primary" onclick="handleChat()">Gửi câu hỏi</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- TAB 2: CORE 16-ITEM ASSESSMENT -->
-    <div id="tab-core" class="tab-content">
-        <div class="card">
-            <h2>Hệ thống Chỉ báo Biểu hiện Ứng phó Nghịch cảnh (Thang Likert 1–5)</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
-                Đánh giá tách biệt 4 thành tố độc lập (không cộng gộp thành điểm số định danh cá nhân). Mức độ: <b>1</b> (Hoàn toàn không đúng) đến <b>5</b> (Hoàn toàn đúng).
-            </p>
-            <div id="questionsContainer"></div>
-            <button class="btn-primary" style="margin-top: 1.25rem;" onclick="calculateCORE()">Phân tích Hồ sơ CORE</button>
-            
-            <div id="coreResults" style="display: none; margin-top: 1.5rem; border-top: 2px solid var(--border); padding-top: 1rem;">
-                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Kết quả Phân tích Chuyên biệt 4 Thành tố CORE</h3>
-                <p id="coreAdvice" style="font-size: 0.95rem; margin-bottom: 1rem; background: #eff6ff; padding: 0.75rem; border-radius: 8px;"></p>
-                <div class="result-grid" id="resultGrid"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- TAB 3: SCENARIO CARDS & AQ PASSPORT -->
-    <div id="tab-passport" class="tab-content">
-        <div class="card">
-            <h2>Thực hành Thẻ Tình huống CORE & Ghi nhận Dấu vết Hành vi (AQ Passport)</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
-                Rút ngẫu nhiên một tình huống thực tế học đường, thực hành chuyển hóa nhận thức và lưu dấu xác nhận vào Sổ tay AQ Passport.
-            </p>
-            <button class="btn-primary" onclick="drawScenario()" style="margin-bottom: 1rem; background: var(--secondary);">Rút Thẻ Tình huống Ngẫu nhiên</button>
-            
-            <div id="scenarioDisplay" class="scenario-card">
-                <strong id="scenTitle" style="color: #92400e;">Tình huống #01 (Áp lực kiểm tra định kỳ):</strong>
-                <p id="scenDesc" style="margin-top: 0.4rem;">Điểm kiểm tra giữa kỳ môn Toán của bạn thấp hơn kỳ vọng 2 điểm, trong khi kỳ thi cuối kỳ chỉ còn 3 tuần nữa.</p>
-                <p id="scenPrompt" style="margin-top: 0.5rem; font-size: 0.9rem; color: #78350f;"><b>Gợi ý thực hành Vòng tròn Kiểm soát (Control):</b> Liệt kê 2 việc nằm trong tầm kiểm soát của bạn ngay tối nay và 1 việc bạn cần buông bỏ vì không thể thay đổi.</p>
-            </div>
-
-            <label style="font-weight: 600; font-size: 0.95rem;">Nhật ký hành động của bạn (Minh chứng hành vi thực tế):</label>
-            <textarea id="actionLog" rows="3" placeholder="Ví dụ: Việc kiểm soát được: Làm lại 5 câu sai trong đề và hỏi thầy phần hàm số. Việc buông bỏ: Dằn vặt về điểm số đã chấm..."></textarea>
-            <button class="btn-primary" style="margin-top: 0.75rem;" onclick="stampPassport()">Xác nhận Hành động & Đóng dấu AQ Passport</button>
-            
-            <div id="passportLogList" style="margin-top: 1.25rem;"></div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // --- TAB NAVIGATION ---
-    function switchTab(tabId) {
-        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        event.target.classList.add('active');
-    }
-
-    // --- 1. INTENT ROUTER & MATH/CORE SOLVER (FIXES GENERIC FALLBACK BUG) ---
-    function sendQuick(text) {
-        document.getElementById('userInput').value = text;
-        handleChat();
-    }
-
-    function handleChat() {
-        const inputEl = document.getElementById('userInput');
-        const query = inputEl.value.trim();
-        if (!query) return;
-
-        appendMessage('user', 'Bạn', query);
-        inputEl.value = '';
-
-        const response = routeAndGenerateResponse(query);
-        setTimeout(() => {
-            appendMessage('bot', response.tag, response.html);
-        }, 250);
-    }
-
-    function appendMessage(sender, tag, html) {
-        const box = document.getElementById('chatBox');
-        const div = document.createElement('div');
-        div.className = `msg ${sender}`;
-        div.innerHTML = `<span class="msg-tag">${tag}</span>${html}`;
-        box.appendChild(div);
-        box.scrollTop = box.scrollHeight;
-    }
-
-    function routeAndGenerateResponse(q) {
-        const lower = q.toLowerCase();
-
-        // ROUTE A: MATH & ACADEMIC INTENT
-        if (lower.includes('phương trình') || lower.includes('x^2') || lower.includes('x²')) {
-            return {
-                tag: 'Chế độ Học thuật & Giải Toán (Bước 1: Kiểm soát nhận thức)',
-                html: solveQuadraticFromText(q)
-            };
-        }
-        if (lower.includes('đạo hàm')) {
-            return {
-                tag: 'Chế độ Học thuật & Giải Toán',
-                html: `<b>Hướng dẫn tính đạo hàm từng bước:</b><br>
-                Với hàm đa thức dạng $y = ax^n + bx + c$, ta áp dụng quy tắc $(x^n)' = n \cdot x^{n-1}$:<br>
-                • Ví dụ với $y = x^3 - 3x + 1$:<br>
-                1. $(x^3)' = 3x^2$<br>
-                2. $(-3x)' = -3$<br>
-                3. $(1)' = 0$<br>
-                <b>Kết quả:</b> $y' = 3x^2 - 3$.<br>
-                <i>Mẹo AQ khi gặp bài toán khó:</i> Hãy tách bài toán lớn thành từng phép tính nhỏ trong tầm kiểm soát (Control) thay vì nhìn toàn bộ đề bài rồi hoảng sợ.`
-            };
-        }
-        if (/[\d\+\-\*\/\=]/.test(lower) && (lower.includes('tính') || lower.includes('giải') || lower.includes('toán') || lower.includes('='))) {
-            return {
-                tag: 'Chế độ Hỗ trợ Tư duy Toán học',
-                html: `Mình đã nhận diện đây là câu hỏi thuộc lĩnh vực <b>Toán học</b> (không dùng câu trả lời mẫu chung chung).<br>
-                • <b>Bước 1 (Xác định dữ kiện - Control):</b> Ghi rõ giả thiết đề bài cho và đại lượng cần tìm.<br>
-                • <b>Bước 2 (Khoanh vùng công thức - Reach):</b> Bài toán này thuộc chuyên đề nào (Đại số, Giải tích hay Hình học)? Không để một bài khó làm ảnh hưởng tâm lý cả đề thi.<br>
-                • Bạn hãy nhập cụ thể biểu thức (ví dụ: <code>2x^2 - 5x + 2 = 0</code>), mình sẽ giải chi tiết từng bước ngay!`
-            };
-        }
-
-        // ROUTE B: ADVERSITY / STRESS / CORE MODEL INTENT
-        if (lower.includes('điểm kém') || lower.includes('áp lực') || lower.includes('buồn') || lower.includes('nản') || lower.includes('bất tài') || lower.includes('thất bại') || lower.includes('thi')) {
-            return {
-                tag: 'Phân tích Ứng phó Nghịch cảnh theo Mô hình CORE',
-                html: `Cảm giác thất vọng khi điểm số chưa như ý là phản ứng tự nhiên. Hãy cùng phân tách tình huống này qua lăng kính <b>CORE</b> để không bị cảm xúc lấn át:<br>
-                • <b>1. Khoanh vùng ảnh hưởng (Reach):</b> Điểm kém ở <i>một bài kiểm tra</i> chỉ phản ánh lỗ hổng kiến thức ở chương đó tại thời điểm hiện tại — <b>không</b> có nghĩa là bạn "bất tài" ở mọi môn học hay tương lai.<br>
-                • <b>2. Vòng tròn kiểm soát (Control):</b> Điểm số đã chấm không đổi được, nhưng việc <i>xem lại lỗi sai trong 15 phút tối nay</i> nằm 100% trong tay bạn.<br>
-                • <b>3. Trách nhiệm hành động (Ownership):</b> Bạn có thể chuyển sang tab <b>Thẻ Tình huống & AQ Passport</b> để ghi lại 1 hành động khắc phục cụ thể ngay bây giờ.`
-            };
-        }
-
-        // ROUTE C: AQ THEORY & RESEARCH FRAMEWORK
-        if (lower.includes('core') || lower.includes('aq') || lower.includes('nghiên cứu') || lower.includes('passport') || lower.includes('chỉ số')) {
-            return {
-                tag: 'Cơ sở Lý luận Đề tài Nghiên cứu AQ',
-                html: `Theo khung lý thuyết của <b>Paul G. Stoltz</b> được vận dụng trong đề tài:<br>
-                • <b>C - Control (Kiểm soát):</b> Mức độ nhận thức khả năng tác động lên tình huống nghịch cảnh.<br>
-                • <b>O - Ownership (Làm chủ/Trách nhiệm):</b> Mức độ chủ động nhận trách nhiệm cải thiện kết quả thay vì đổ lỗi.<br>
-                • <b>R - Reach (Phạm vi ảnh hưởng):</b> Khả năng giới hạn nghịch cảnh ở đúng phạm vi của nó, không để lan sang các mặt khác của cuộc sống.<br>
-                • <b>E - Endurance (Sức bền/Tính bền bỉ):</b> Nhận thức rằng khó khăn chỉ là tạm thời và có thể vượt qua.<br>
-                <i>Lưu ý khoa học:</i> Đề tài đánh giá 4 thành tố này qua 16 chỉ báo kết hợp minh chứng hành vi thực tế trong <b>AQ Passport</b>.`
-            };
-        }
-
-        // ROUTE D: SMART CLARIFICATION (NO DEAD-END FALLBACK)
-        return {
-            tag: 'Trợ lý Điều hướng Thông minh',
-            html: `Mình đã ghi nhận nội dung: <i>"${escapeHtml(q)}"</i>. Để hỗ trợ chính xác nhất thay vì trả lời rập khuôn, bạn hãy chọn hướng xử lý phù hợp:<br>
-            1. Nếu đây là <b>bài tập môn học (Toán, Lý, Hóa...)</b>: Hãy gõ kèm yêu cầu cụ thể (ví dụ: <i>"Giải phương trình..."</i> hoặc <i>"Tìm điều kiện xác định..."</i>).<br>
-            2. Nếu đây là <b>khó khăn tâm lý / áp lực học đường</b>: Hãy chia sẻ điều khiến bạn lo lắng nhất, mình sẽ giúp bạn phân tích theo 4 bước <b>CORE</b>.<br>
-            3. Bạn cũng có thể chuyển sang <b>Tab 2</b> để tự đánh giá 16 chỉ báo CORE của bản thân.`
-        };
-    }
-
-    function solveQuadraticFromText(text) {
-        // Parse ax^2 + bx + c = 0
-        const cleaned = text.replace(/\s+/g, '').replace(/x²/g, 'x^2');
-        const match = cleaned.match(/([+-]?\d*)x\^2([+-]\d*)x([+-]\d+)=0/);
-        if (match) {
-            let a = match[1] === '' || match[1] === '+' ? 1 : (match[1] === '-' ? -1 : parseFloat(match[1]));
-            let b = match[2] === '' || match[2] === '+' ? 1 : (match[2] === '-' ? -1 : parseFloat(match[2]));
-            let c = parseFloat(match[3]);
-            const delta = b * b - 4 * a * c;
-            let steps = `<b>Giải phương trình bậc hai:</b> ${a}x² ${b >= 0 ? '+ ' + b : '- ' + Math.abs(b)}x ${c >= 0 ? '+ ' + c : '- ' + Math.abs(c)} = 0<br>`;
-            steps += `• <b>Bước 1 (Xác định hệ số):</b> a = ${a}, b = ${b}, c = ${c}<br>`;
-            steps += `• <b>Bước 2 (Tính biệt thức Δ):</b> Δ = b² - 4ac = (${b})² - 4·(${a})·(${c}) = <b>${delta}</b><br>`;
-            if (delta < 0) {
-                steps += `• <b>Bước 3 (Kết luận):</b> Vì Δ < 0 nên phương trình vô nghiệm thực.`;
-            } else if (delta === 0) {
-                const x = -b / (2 * a);
-                steps += `• <b>Bước 3 (Kết luận):</b> Vì Δ = 0 nên phương trình có nghiệm kép: <b>x₁ = x₂ = ${x}</b>.`;
-            } else {
-                const x1 = (-b + Math.sqrt(delta)) / (2 * a);
-                const x2 = (-b - Math.sqrt(delta)) / (2 * a);
-                steps += `• <b>Bước 3 (Kết luận):</b> Vì Δ > 0 nên phương trình có 2 nghiệm phân biệt:<br>
-                &nbsp;&nbsp;x₁ = (-b + √Δ) / 2a = <b>${Number(x1.toFixed(4))}</b><br>
-                &nbsp;&nbsp;x₂ = (-b - √Δ) / 2a = <b>${Number(x2.toFixed(4))}</b>`;
-            }
-            return steps;
-        }
-        return `Để giải tự động phương trình bậc hai, bạn hãy nhập đúng định dạng chuẩn <code>ax^2 + bx + c = 0</code> (ví dụ: <code>2x^2 - 5x + 2 = 0</code> hoặc <code>1x^2 - 4x + 3 = 0</code>).`;
-    }
-
-    function escapeHtml(str) {
-        return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-    }
-
-    // --- 2. 16-ITEM CORE ASSESSMENT ---
-    const coreQuestions = [
-        // Control (C1 - C4)
-        { id: 'C1', dim: 'Control', text: '1. Khi gặp một đề kiểm tra khó bất ngờ, tôi vẫn giữ được bình tĩnh để tìm câu dễ làm trước.' },
-        { id: 'C2', dim: 'Control', text: '2. Tôi phân biệt được đâu là yếu tố mình có thể thay đổi (thời gian ôn tập) và đâu là yếu tố ngoài tầm kiểm soát (độ khó đề thi).' },
-        { id: 'C3', dim: 'Control', text: '3. Khi kế hoạch học tập bị xáo trộn, tôi nhanh chóng điều chỉnh lại lịch trình thay vì bỏ cuộc.' },
-        { id: 'C4', dim: 'Control', text: '4. Tôi tin rằng nỗ lực phương pháp đúng đắn của mình có thể cải thiện kết quả hiện tại.' },
-        // Ownership (O1 - O4)
-        { id: 'O1', dim: 'Ownership', text: '5. Khi nhận điểm thấp, tôi chủ động rà soát lỗi sai của bản thân trước khi nghĩ đến các lý do khách quan.' },
-        { id: 'O2', dim: 'Ownership', text: '6. Tôi sẵn sàng chủ động hỏi thầy cô hoặc bạn bè về phần kiến thức mình chưa hiểu.' },
-        { id: 'O3', dim: 'Ownership', text: '7. Khi làm việc nhóm gặp trục trặc, tôi tập trung tìm giải pháp cho phần việc của mình thay vì đổ lỗi.' },
-        { id: 'O4', dim: 'Ownership', text: '8. Tôi tự đặt ra hành động khắc phục cụ thể sau mỗi lần chưa đạt mục tiêu.' },
-        // Reach (R1 - R4) - Reverse scored items handled logically via positive phrasing for clarity
-        { id: 'R1', dim: 'Reach', text: '9. Việc bị điểm kém ở một môn học không làm tôi mất tự tin vào năng lực của bản thân ở các môn khác.' },
-        { id: 'R2', dim: 'Reach', text: '10. Khi gặp chuyện buồn ở trường, tôi vẫn giữ được sự tập trung cho các sinh hoạt tích cực khác trong ngày.' },
-        { id: 'R3', dim: 'Reach', text: '11. Tôi hiểu rằng một thất bại cụ thể chỉ là một sự việc riêng lẻ, không quyết định toàn bộ tương lai của tôi.' },
-        { id: 'R4', dim: 'Reach', text: '12. Tôi biết cách tách biệt cảm xúc tiêu cực nhất thời khỏi giá trị bản thân.' },
-        // Endurance (E1 - E4)
-        { id: 'E1', dim: 'Endurance', text: '13. Tôi tin rằng giai đoạn áp lực thi cử căng thẳng hiện tại chỉ là tạm thời và sẽ sớm qua đi.' },
-        { id: 'E2', dim: 'Endurance', text: '14. Dù phải ôn luyện lại nhiều lần một dạng bài khó, tôi vẫn kiên trì theo đuổi đến khi hiểu bản chất.' },
-        { id: 'E3', dim: 'Endurance', text: '15. Tôi nhìn nhận những lần vấp ngã trong học tập như dữ liệu giúp mình trưởng thành hơn.' },
-        { id: 'E4', dim: 'Endurance', text: '16. Khi gặp trở ngại kéo dài, tôi vẫn duy trì được thói quen học tập đều đặn mỗi ngày.' }
-    ];
-
-    function renderQuestions() {
-        const container = document.getElementById('questionsContainer');
-        container.innerHTML = coreQuestions.map(q => `
-            <div class="question-item">
-                <p>${q.text} <span style="font-size:0.75rem; color:var(--text-muted);">[${q.dim}]</span></p>
-                <div class="likert-group">
-                    ${[1,2,3,4,5].map(val => `
-                        <label class="likert-label">
-                            <input type="radio" name="${q.id}" value="${val}" ${val===3?'checked':''}> Mức ${val}
-                        </label>
-                    `).join('')}
-                </div>
-            </div>
-        `).join('');
-    }
-    renderQuestions();
-
-    function calculateCORE() {
-        const scores = { Control: 0, Ownership: 0, Reach: 0, Endurance: 0 };
-        coreQuestions.forEach(q => {
-            const selected = document.querySelector(`input[name="${q.id}"]:checked`);
-            scores[q.dim] += parseInt(selected.value, 10);
-        });
-
-        const dims = [
-            { key: 'Control', name: 'C - Kiểm soát (Control)', desc: 'Khả năng giữ bình tĩnh và nhận diện vùng tác động được.' },
-            { key: 'Ownership', name: 'O - Làm chủ (Ownership)', desc: 'Tinh thần chủ động nhận trách nhiệm và tìm giải pháp.' },
-            { key: 'Reach', name: 'R - Khoanh vùng (Reach)', desc: 'Ngăn chặn khó khăn lan rộng sang các lĩnh vực khác.' },
-            { key: 'Endurance', name: 'E - Sức bền (Endurance)', desc: 'Nhận thức tính tạm thời của nghịch cảnh và sự kiên trì.' }
-        ];
-
-        // Find lowest dimension to recommend targeted intervention
-        let lowest = dims[0];
-        dims.forEach(d => { if (scores[d.key] < scores[lowest.key]) lowest = d; });
-
-        document.getElementById('coreAdvice').innerHTML = `
-            <b>Phân tích định hướng can thiệp (Không gộp điểm số định danh):</b> Thành tố cần ưu tiên rèn luyện nhất hiện tại của bạn là <b>${lowest.name} (${scores[lowest.key]}/20 điểm)</b>. Bạn nên thực hành các thẻ tình huống thuộc nhóm này trong Sổ tay <i>AQ Passport</i>.
-        `;
-
-        document.getElementById('resultGrid').innerHTML = dims.map(d => `
-            <div class="core-box">
-                <h4>${d.name}</h4>
-                <div class="score-val">${scores[d.key]} / 20</div>
-                <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.25rem;">${d.desc}</p>
-            </div>
-        `).join('');
-
-        document.getElementById('coreResults').style.display = 'block';
-    }
-
-    // --- 3. SCENARIO CARDS & AQ PASSPORT ---
-    const scenarios = [
-        {
-            title: 'Tình huống #01 (Áp lực kiểm tra định kỳ - Control)',
-            desc: 'Điểm kiểm tra giữa kỳ môn Toán của bạn thấp hơn kỳ vọng 2 điểm, trong khi kỳ thi cuối kỳ chỉ còn 3 tuần nữa.',
-            prompt: 'Gợi ý Vòng tròn Kiểm soát: Liệt kê 2 việc nằm trong tầm kiểm soát của bạn ngay tối nay và 1 việc bạn cần buông bỏ.'
-        },
-        {
-            title: 'Tình huống #02 (Phản ứng dây chuyền tâm lý - Reach)',
-            desc: 'Buổi sáng bạn bị phê bình vì quên bài tập, khiến cả ngày hôm đó bạn chán nản và không muốn học các môn yêu thích khác.',
-            prompt: 'Gợi ý Khoanh vùng Ảnh hưởng: Viết ra ranh giới rõ ràng giữa "một thiếu sót buổi sáng" và "năng lực cả ngày của bạn".'
-        },
-        {
-            title: 'Tình huống #03 (Xung đột làm việc nhóm - Ownership)',
-            desc: 'Nhóm thuyết trình của bạn chuẩn bị chậm tiến độ vì các thành viên đùn đẩy trách nhiệm cho nhau.',
-            prompt: 'Gợi ý Làm chủ Hành động: Bạn có thể chủ động đề xuất giải pháp cụ thể nào cho phần việc của mình trong 24 giờ tới?'
-        },
-        {
-            title: 'Tình huống #04 (Nản lòng khi ôn luyện dài hạn - Endurance)',
-            desc: 'Bạn đã ôn luyện chuyên đề hàm số suốt 2 tuần nhưng vẫn hay mắc lỗi tính toán nhỏ khi làm đề tổng hợp.',
-            prompt: 'Gợi ý Sức bền Tinh thần: Hãy ghi nhận 1 tiến bộ nhỏ bạn đã đạt được so với 2 tuần trước và 1 bước điều chỉnh kỹ thuật làm bài.'
-        }
-    ];
-
-    function drawScenario() {
-        const s = scenarios[Math.floor(Math.random() * scenarios.length)];
-        document.getElementById('scenTitle').textContent = s.title;
-        document.getElementById('scenDesc').textContent = s.desc;
-        document.getElementById('scenPrompt').innerHTML = `<b>${s.prompt.split(':')[0]}:</b>${s.prompt.split(':')[1]}`;
-    }
-
-    function stampPassport() {
-        const logText = document.getElementById('actionLog').value.trim();
-        if (!logText) {
-            alert('Vui lòng ghi lại hành động thực tế của bạn trước khi đóng dấu AQ Passport!');
-            return;
-        }
-        const scenTitle = document.getElementById('scenTitle').textContent;
-        const time = new Date().toLocaleString('vi-VN');
-        const list = document.getElementById('passportLogList');
-        
-        const entry = document.createElement('div');
-        entry.className = 'card';
-        entry.style.borderLeft = '4px solid var(--secondary)';
-        entry.innerHTML = `
-            <div style="font-size:0.8rem; color:var(--text-muted);">${time} • ${scenTitle}</div>
-            <p style="margin-top:0.35rem;"><b>Cam kết hành vi:</b> ${escapeHtml(logText)}</p>
-            <div class="passport-stamp">✓ ĐÃ XÁC NHẬN DẤU VẾT HÀNH VI (AQ PASSPORT)</div>
-        `;
-        list.prepend(entry);
-        document.getElementById('actionLog').value = '';
-    }
-</script>
-
 </body>
 </html>
